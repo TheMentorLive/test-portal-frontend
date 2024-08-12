@@ -1,6 +1,4 @@
 'use client'
-
-
 import { useState } from 'react';
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
@@ -9,22 +7,30 @@ import Link from "next/link";
 import { Label } from "@/public/ui/label";
 import { Input } from "@/public/ui/input";
 import { Button } from "@/public/ui/button";
+import axios from "axios";
 
 export default function Signup() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [name, setName] = useState('');
 
-  const handleRegister = (e) => {
+  const handleRegister = async(e) => {
     e.preventDefault();
-    // Add your custom registration logic here
+    try{
+      const response = await axios.post("https://test-platform-backend.onrender.com/api/v1/users/signup", {email,password,name})
+      console.log("Signup success",response)
+    }
+    catch(error){
+      console.log("Error",error)
+    }
+   
     toast.success('Registration logic to be implemented', { position: 'top-center' });
   };
 
   return (
     <div className="flex min-h-screen items-center justify-center">
        <div className="h-4 w-4">
-       <Image src="/placeholder.svg"  alt="Logo" /> 
+       <Image src="/placeholder.svg"  width={600} height={600} alt="Logo" /> 
       </div>
       <div className="w-full md:w-1/2 bg-card p-8 space-y-6 flex items-center justify-center">
         <div className="space-y-2 text-left">

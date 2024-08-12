@@ -5,6 +5,7 @@ import { Label } from "@/public/ui/label";
 import { Input } from "@/public/ui/input";
 import { Button } from "@/public/ui/button";
 import Image from 'next/image';
+import axios from "axios";
 
 export default function Signin() {
   const [email, setEmail] = useState("");
@@ -12,14 +13,20 @@ export default function Signin() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    // Add your custom sign-in logic here
-    toast.success("Sign-In logic to be implemented", { position: "top-center" });
+    try{
+      const response = axios.post("https://test-platform-backend.onrender.com/api/v1/users/signup")
+      console.log("Signup success",response)
+    }
+    catch(error){
+      console.log("Error",error)
+    }
+   
   };
 
   return (
     <div className="flex min-h-screen items-center justify-center">
       <div className="h-4 w-4">
-      <Image src="/placeholder.svg" alt="Logo" /> 
+      <Image src="/placeholder.svg"  width={600} height={600} alt="Logo" /> 
       </div>
       <div className="w-full md:w-1/2 bg-card p-8 space-y-6 flex items-center justify-center">
         <div className="space-y-2 text-left">
