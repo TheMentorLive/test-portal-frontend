@@ -11,14 +11,21 @@ export default function Signin() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async(e) => {
     e.preventDefault();
-    try{
-      const response = axios.post("https://test-platform-backend.onrender.com/api/v1/users/signup")
-      console.log("Signup success",response)
-    }
-    catch(error){
-      console.log("Error",error)
+    const url="https://test-platform-backend.onrender.com/api/v1/users/signin"
+    const data={email,password}
+    try {
+      const response = await axios.post(url, data);
+      console.log('Response:', response.data);
+      if ( response.data.statusCode == 200 ) {
+        toast.success("Logined")
+        window.location.href = "/";
+      }
+      
+     
+    } catch (error) {
+      console.error('Error:', error.response ? error.response.data : error.message);
     }
    
   };

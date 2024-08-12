@@ -16,15 +16,18 @@ export default function Signup() {
 
   const handleRegister = async(e) => {
     e.preventDefault();
-    try{
-      const response = await axios.post("https://test-platform-backend.onrender.com/api/v1/users/signup", {email,password,name})
-      console.log("Signup success",response)
-    }
-    catch(error){
-      console.log("Error",error)
+    const url="https://test-platform-backend.onrender.com/api/v1/users/signup"
+    const data={name,email,password}
+    try {
+      const response = await axios.post(url, data);
+      console.log('Response:', response.data.statusCode);
+      if (response.data.statusCode == 201){
+         window.location.href = "/Main/signin";
+      toast.success("User Registration successful")}
+    } catch (error) {
+      console.error('Error:', error.response ? error.response.data : error.message);
     }
    
-    toast.success('Registration logic to be implemented', { position: 'top-center' });
   };
 
   return (
