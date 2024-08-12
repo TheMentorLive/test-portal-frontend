@@ -1,4 +1,5 @@
 import Link from "next/link"
+import Image from 'next/image';
 
 export default function Navbar() {
   return (
@@ -6,8 +7,13 @@ export default function Navbar() {
   <header
       className="flex h-16 w-full items-center justify-between bg-background px-4 md:px-6">
       <Link href="#" className="flex items-center ml-14 gap-2" prefetch={false}>
-        
-        <span className="text-lg font-bold">Gen AI</span>
+      <Image
+        src="/logo.png" // Path to your image file
+        alt="Description of image"
+        width={140} // Adjust width as needed
+        height={129} // Adjust height as needed
+        className="mx-2" // Optional: add margin if needed
+      />
       </Link>
       <nav className="hidden md:flex">
         <ul className="flex items-center gap-6 text-sm font-medium">
