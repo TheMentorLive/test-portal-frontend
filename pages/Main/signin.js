@@ -11,29 +11,39 @@ export default function Signin() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
-  const handleSubmit = async(e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    const url="https://test-platform-backend.onrender.com/api/v1/users/signin"
-    const data={email,password}
+    const url = "https://test-platform-backend.onrender.com/api/v1/users/signin";
+    const data = { email, password };
+
     try {
       const response = await axios.post(url, data);
       console.log('Response:', response.data);
-      if ( response.data.statusCode == 200 ) {
-        toast.success("Logined")
-        window.location.href = "/";
+      if (response.data.statusCode === 200) {
+        toast.success("Logged in successfully!");
+        window.location.href = "/Main/dash";
+      } else if (response.data.statusCode === 401) {
+        toast.error("Invalid credentials. Please try again.");
+      } else {
+        toast.error("An unexpected error occurred. Please try again later.");
       }
-      
-     
     } catch (error) {
       console.error('Error:', error.response ? error.response.data : error.message);
+      
+      if (error.response && error.response.status === 404) {
+        toast.error("User not registered. Please sign up first.");
+      } else if (error.response && error.response.status === 401) {
+        toast.error("Incorrect email or password. Please try again.");
+      } else {
+        toast.error("Something went wrong, try again later.");
+      }
     }
-   
   };
 
   return (
     <div className="flex min-h-screen items-center justify-center">
       <div className="h-4 w-4">
-      <Image src="/placeholder.svg"  width={600} height={600} alt="Logo" /> 
+        <Image src="/placeholder.svg" width={600} height={600} alt="Logo" />
       </div>
       <div className="w-full md:w-1/2 bg-card p-8 space-y-6 flex items-center justify-center">
         <div className="space-y-2 text-left">
@@ -54,7 +64,7 @@ export default function Signin() {
           </Link>
           <h1 className="text-3xl font-bold">Sign In</h1>
           <p className="text-muted-foreground">
-          Don&apos;t have an account?{" "}
+            Don&apos;t have an account?{" "}
             <Link href="/Main/signup" className="text-primary underline" prefetch={false}>
               Create one
             </Link>

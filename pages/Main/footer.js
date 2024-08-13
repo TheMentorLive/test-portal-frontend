@@ -9,15 +9,17 @@ import Link from "next/link"
 export default function Component() {
   return (
     <footer className="grid grid-cols-4 items-start py-6 bg-[#e3e6f1] flex-1  justify-center text-black px-10 gap-x-8">
-      <div className="flex flex-col ml-40 items-center space-y-6">
-        <Image
-          src="/placeholder.svg"
-          height="100"
-          width="200"
-          alt="Company Logo"
-          style={{ aspectRatio: "200/100", objectFit: "cover" }}
-        />
-        <div className="flex space-x-4">
+      <div className="flex flex-col items-center ml-32 space-y-6">
+      <Link href="#" className="flex items-center ml-14 gap-2" prefetch={false}>
+      <Image
+        src="/logo.png" // Path to your image file
+        alt="Description of image"
+        width={150} // Width in pixels
+        height={150} // Adjust height as needed
+        className="mx-2" // Optional: add margin if needed
+      />
+      </Link>
+        <div className="flex ml-14 space-x-4">
           <Link href="#" prefetch={false}>
             <FacebookIcon className="h-6 w-6 text-black" />
           </Link>
