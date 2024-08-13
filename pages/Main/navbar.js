@@ -3,7 +3,7 @@ import Image from 'next/image';
 
 export default function Navbar() {
   return (
-  <div className="flex-1 ml-20 mr-20 items-center justify-center">
+  <div className="flex-1 ml-36 mr-48 items-center justify-center">
   <header
       className="flex h-16 w-full items-center justify-between bg-background px-4 md:px-6">
       <Link href="#" className="flex items-center ml-14 gap-2" prefetch={false}>
@@ -48,13 +48,13 @@ export default function Navbar() {
           href="/Main/signin"
           className="rounded-md bg-primary px-4 py-2 text-sm font-medium text-primary-foreground shadow-sm transition-colors hover:bg-primary/90 focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2"
           prefetch={false}>
-          Login
+          SignIn
         </Link>
         <Link
           href="/Main/signup"
-          className="rounded-md bg-background px-4 py-2 text-sm font-medium text-foreground shadow-sm transition-colors hover:bg-muted focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2"
+          className="rounded-md bg-background px-4 py-2 text-sm font-medium text-foreground shadow-sm transition-colors hover:bg-muted focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 border border-primary"
           prefetch={false}>
-          Sign Up
+          SignUp
         </Link>
       </div>
     </header>
