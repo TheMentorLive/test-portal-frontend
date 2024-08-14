@@ -43,7 +43,9 @@ export const login = createAsyncThunk('/auth/signin', async (data, { rejectWithV
 
 export const googleSinup = createAsyncThunk('/auth/google', async () => {
   try {
-    window.location.href = "http://localhost:8000/api/v1/users/auth/google";
+    // window.location.href = "http://localhost:8000/api/v1/users/auth/google";
+    window.location.href = "https://test-platform-backend.onrender.com/api/v1/users/auth/google";
+
   } catch (e) {
     toast.error("An error occurred");
   }
@@ -51,7 +53,8 @@ export const googleSinup = createAsyncThunk('/auth/google', async () => {
 
 export const linkedinSignup = createAsyncThunk('/auth/linkedin', async () => {
   try {
-    window.location.href = "http://localhost:8000/api/v1/users/auth/linkedin";
+    // window.location.href = "http://localhost:8000/api/v1/users/auth/linkedin";
+    window.location.href = "https://test-platform-backend.onrender.com/api/v1/users/auth/linkedin";
   } catch (e) {
     toast.error("An error occurred");
   }

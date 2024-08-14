@@ -2,21 +2,21 @@ import Image from 'next/image';
 
 export default function Exams() {
   return (
-    <div className="flex flex-col items-center ml-16 ml16 p-6 space-y-6">
+    <div className="flex flex-col items-center px-4 py-6 space-y-6">
       <div className="text-center">
-        <h1 className="text-4xl font-bold">We cover all Exams and Classes</h1>
-        <p className="mt-2 text-lg text-muted-foreground">
+        <h1 className="text-3xl md:text-4xl font-bold">We cover all Exams and Classes</h1>
+        <p className="mt-2 text-base md:text-lg text-muted-foreground">
           From videos to notes to tests, providing all you need to learn and practice in one place
         </p>
       </div>
       <div className="w-full max-w-4xl p-6 bg-white rounded-lg shadow">
-        <div className="flex items-center mb-14 justify-between">
-          <h2 className="text-2xl font-semibold">50+ Entrance Exams</h2>
-          <a href="#" className="text-blue-500">
+        <div className="flex items-center mb-6 md:mb-8 justify-between">
+          <h2 className="text-xl md:text-2xl font-semibold">50+ Entrance Exams</h2>
+          <a href="#" className="text-blue-500 hover:underline">
             Explore all Exams &gt;
           </a>
         </div>
-        <div className="grid grid-cols-3 gap-4 mt-4 md:grid-cols-4 lg:grid-cols-6">
+        <div className="grid grid-cols-2 gap-4 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-6">
           {[
             { name: "UPSC", icon: "/icons/upsc.png" },
             { name: "CAT", icon: "/icons/cat.png" },
@@ -58,13 +58,13 @@ export default function Exams() {
         </div>
       </div>
       <div className="w-full max-w-4xl p-6 mt-6 bg-white rounded-lg shadow">
-        <div className="flex items-center justify-between mb-14 mt-20">
-          <h2 className="text-2xl font-semibold">All School Classes</h2>
-          <a href="#" className="text-blue-500">
+        <div className="flex items-center justify-between mb-6 md:mb-8">
+          <h2 className="text-xl md:text-2xl font-semibold">All School Classes</h2>
+          <a href="#" className="text-blue-500 hover:underline">
             Explore all Classes &gt;
           </a>
         </div>
-        <div className="grid grid-cols-4 gap-4 mt-4">
+        <div className="grid grid-cols-2 gap-4 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-6">
           {[
             { name: "Class 1", icon: "/icons/class1.png" },
             { name: "Class 2", icon: "/icons/class2.png" },
