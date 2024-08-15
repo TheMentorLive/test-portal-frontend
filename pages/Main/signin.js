@@ -21,7 +21,7 @@ export default function Signin() {
       console.log('Response:', response.data);
       if (response.data.statusCode === 200) {
         toast.success("Logged in successfully!");
-        window.location.href = "/Main/dash";
+        window.location.href = "/dash-user/dash";
       } else if (response.data.statusCode === 401) {
         toast.error("Invalid credentials. Please try again.");
       } else {

@@ -40,6 +40,13 @@ export default function Navbar() {
               prefetch={false}>
               Contact
             </Link>
+          </li><li>
+            <Link
+              href="/dash-admin/dash"
+              className="hover:underline hover:underline-offset-4"
+              prefetch={false}>
+              Admin
+            </Link>
           </li>
         </ul>
       </nav>
