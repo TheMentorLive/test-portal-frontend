@@ -20,9 +20,9 @@ export default function Exams() {
           {[
             { name: "UPSC", icon: "/icons/upsc.png" },
             { name: "CAT", icon: "/icons/cat.png" },
-            { name: "NEET", icon: "/icons/neet.png" },
-            { name: "JEE", icon: "/icons/jee.png" },
-            { name: "CLAT", icon: "/icons/clat.png" },
+            { name: "NEET", icon: "/icons/neet1.png" },
+            { name: "JEE", icon: "/icons/jee1.png" },
+            { name: "CLAT", icon: "/icons/clat1.png" },
             { name: "GATE", icon: "/icons/gate.png" },
             { name: "SSC", icon: "/icons/ssc.png" },
             { name: "Teaching", icon: "/icons/teaching.png" },
