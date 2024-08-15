@@ -3,7 +3,7 @@ import { Card } from "@/public/ui/card";
 import { Avatar, AvatarImage, AvatarFallback } from "@/public/ui/avatar";
 import { Button } from "@/public/ui/button";
 
-// Your custom icon components
+// Custom icon components
 function ChevronLeftIcon(props) {
   return (
     <svg
@@ -84,7 +84,6 @@ export default function Reviews() {
     );
   };
 
-  
   const displayReviews = [
     ...reviews.slice(-3), // Last 3 items
     ...reviews, // All items
@@ -92,39 +91,41 @@ export default function Reviews() {
   ];
 
   return (
-    <div className="flex flex-col items-center justify-center min-h-screen bg-[#eaeaea]">
-      <h2 className="text-3xl font-bold mb-10  text-[#000000]">Testimonials</h2>
-      <div className="flex items-center justify-between w-full max-w-6xl px-4 gap-4">
+    <div className="flex flex-col items-center justify-center min-h-screen bg-[#eaeaea] px-4 sm:px-6 lg:px-8">
+      <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold mb-6 sm:mb-10 text-[#000000]">Testimonials</h2>
+      <div className="flex items-center justify-between w-full max-w-6xl gap-4">
         <button
           onClick={handlePrev}
-          className="p-2 bg-white rounded-full shadow-md"
+          className="p-2 bg-white rounded-full shadow-md hover:bg-gray-100 transition"
         >
           <ChevronLeftIcon className="w-6 h-6 text-[#007bff]" />
         </button>
-        <div className="grid grid-cols-1 gap-4 md:grid-cols-3 overflow-hidden">
-          {displayReviews.slice(currentIndex, currentIndex + 3).map((review, index) => (
-            <Card
-              key={index}
-              className="flex flex-col items-center p-4 bg-white shadow-lg h-[400px]"
-            >
-              <Avatar className="w-24 h-24 mb-4">
-                <AvatarImage src={review.image} alt={`${review.name}'s avatar`} />
-                <AvatarFallback>{review.name[0]}</AvatarFallback>
-              </Avatar>
-              <h3 className="text-lg font-bold text-[#007bff]">{review.name}</h3>
-              <p className="text-sm text-gray-600">{review.designation}</p>
-              <p className="mt-2 text-center text-gray-600">{review.feedback}</p>
-              <div className="flex mt-4 space-x-4">
-                <div className="mt-14">
-                  <Button>Read More</Button>
+        <div className="flex-1 overflow-hidden">
+          <div className="grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-3">
+            {displayReviews.slice(currentIndex, currentIndex + 3).map((review, index) => (
+              <Card
+                key={index}
+                className="flex flex-col items-center p-4 bg-white shadow-lg h-auto md:h-[400px] mx-auto"
+              >
+                <Avatar className="w-24 h-24 mb-4">
+                  <AvatarImage src={review.image} alt={`${review.name}'s avatar`} />
+                  <AvatarFallback>{review.name[0]}</AvatarFallback>
+                </Avatar>
+                <h3 className="text-lg font-bold text-[#007bff]">{review.name}</h3>
+                <p className="text-sm text-gray-600">{review.designation}</p>
+                <p className="mt-2 text-center text-gray-600">{review.feedback}</p>
+                <div className="flex mt-4 space-x-4">
+                  <div className="mt-14">
+                    <Button>Read More</Button>
+                  </div>
                 </div>
-              </div>
-            </Card>
-          ))}
+              </Card>
+            ))}
+          </div>
         </div>
         <button
           onClick={handleNext}
-          className="p-2 bg-white rounded-full shadow-md"
+          className="p-2 bg-white rounded-full shadow-md hover:bg-gray-100 transition"
         >
           <ChevronRightIcon className="w-6 h-6 text-[#007bff]" />
         </button>
