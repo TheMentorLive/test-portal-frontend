@@ -10,8 +10,8 @@ export default function Hero() {
       <section className="w-full flex items-center min-h-[100dvh] justify-center">
         <div className="container grid gap-6 px-4 mr-16 ml-16 -mt-32 md:px-6 lg:grid-cols-2 lg:gap-24">
           <div className="space-y-4 pt-24">
-            <h1 className="text-3xl ml-16 font-bold text-black tracking-tighter sm:text-4xl md:text-5xl lg:text-6xl/none">
-              Unlock Your Potential with <br/> GenAI Learning
+            <h1 className="text-3xl  font-bold text-black tracking-tighter sm:text-4xl md:text-5xl lg:text-6xl/none">
+            Master the Future <br/> with  <br/> GenAI Learning
             </h1>
             <p className="max-w-full md:max-w-[600px] text-green-50 text-muted-foreground md:text-xl lg:text-base xl:text-lg">
               TheMentor offers world-class online courses and programs to help you achieve your career goals. Learn from
