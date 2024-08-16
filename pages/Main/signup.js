@@ -162,13 +162,13 @@ export default function Signup() {
           </div>
         </div>
         {/* Right side */}
-        <div className="hidden md:flex flex-1 items-center justify-center bg-muted p-4 md:p-8">
+        <div className="hidden md:flex flex-1 items-center justify-center -ml-40 bg-muted">
           <Image
-            src="/placeholder.svg"
+            src="/signin.png"
             width={600}
-            height={600}
-            alt="Sign up"
-            className="max-w-full h-auto"
+            height={500}
+            alt="Sign in"
+            className="max-w-full h-[550px]"
           />
         </div>
       </div>

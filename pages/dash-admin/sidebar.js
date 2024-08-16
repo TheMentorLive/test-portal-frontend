@@ -1,68 +1,79 @@
 // components/Sidebar.js
-
-import React, { useState } from 'react';
+import { TooltipProvider, Tooltip, TooltipTrigger } from "@/public/ui/tooltip";
 import Link from "next/link";
-import { Avatar, AvatarImage, AvatarFallback } from "@/public/ui/avatar";
+import { Sheet, SheetTrigger, SheetContent } from "@/public/ui/sheet";
 import { Button } from "@/public/ui/button";
-import { DropdownMenu, DropdownMenuTrigger, DropdownMenuContent, DropdownMenuSeparator, DropdownMenuItem } from "@/public/ui/dropdown-menu";
-import { FileTextIcon, PackageIcon, UsersIcon, BookIcon, LineChartIcon, MountainIcon } from '@/public/icons/icons';
+import { HomeIcon, LineChartIcon,  FilePenIcon, SettingsIcon, BookIcon, UsersIcon, MenuIcon } from '../../public/icons/icons-dash';
 
-export default function Sidebar({ activeTab, setActiveTab }) {
-  const [isSidebarOpen, setIsSidebarOpen] = useState(false);
-
+export default function Sidebar({ activeSection, handleLinkClick, sidebarOpen, toggleSidebar }) {
   return (
-    <div className="relative lg:flex lg:w-64 lg:flex-col">
-      {/* Sidebar */}
-      <div className={`fixed inset-0 top-0 left-0 z-40 flex flex-col border-r bg-gray-100 dark:border-gray-800 dark:bg-white lg:relative lg:block lg:w-64 ${isSidebarOpen ? "block" : "hidden"}`}>
-        <header className="flex h-16 items-center justify-between border-b px-6 dark:bg-gray-400">
-          <Link href="#" className="flex items-center gap-2 font-semibold" prefetch={false}>
-            <MountainIcon className="h-6 w-6" />
-            <span className="text-lg">Admin</span>
-          </Link>
-          <DropdownMenu>
-            <DropdownMenuTrigger asChild>
-              <Avatar className="h-9 w-9">
-                <AvatarImage src="/placeholder-user.jpg" alt="@shadcn" />
-                <AvatarFallback>JP</AvatarFallback>
-              </Avatar>
-            </DropdownMenuTrigger>
-            <DropdownMenuContent align="end">
-              <DropdownMenuItem>My Account</DropdownMenuItem>
-              <DropdownMenuItem>Settings</DropdownMenuItem>
-              <DropdownMenuSeparator />
-              <DropdownMenuItem>Logout</DropdownMenuItem>
-            </DropdownMenuContent>
-          </DropdownMenu>
-        </header>
-        <nav className="flex-1 overflow-auto py-4">
-          <ul className="grid gap-1 px-4">
-            {["Dashboard", "Quiz", "users", "Question Bank", "analytics"].map(tab => (
-              <li key={tab}>
-                <Button
-                  variant={activeTab === tab ? "secondary" : "ghost"}
-                  className={`w-full justify-start gap-2 rounded-md px-3 py-2 text-sm font-medium ${activeTab === tab ? "bg-gray-200 dark:bg-gray-600 text-blue-500" : "text-gray-500"}`}
-                  onClick={() => setActiveTab(tab)}
-                >
-                  {tab === "Dashboard" && <FileTextIcon className={`h-4 w-4 ${activeTab === tab ? "text-blue-500" : "text-gray-500"}`} />}
-                  {tab === "Quiz" && <PackageIcon className={`h-4 w-4 ${activeTab === tab ? "text-blue-500" : "text-gray-500"}`} />}
-                  {tab === "users" && <UsersIcon className={`h-4 w-4 ${activeTab === tab ? "text-blue-500" : "text-gray-500"}`} />}
-                  {tab === "Question Bank" && <BookIcon className={`h-4 w-4 ${activeTab === tab ? "text-blue-500" : "text-gray-500"}`} />}
-                  {tab === "analytics" && <LineChartIcon className={`h-4 w-4 ${activeTab === tab ? "text-blue-500" : "text-gray-500"}`} />}
-                  {tab}
-                </Button>
-              </li>
+    <>
+      {/* Desktop Sidebar */}
+      <aside className={`fixed inset-y-0 mt-[65px] left-0 z-10 flex flex-col border-r-2 border-gray-300 bg-background w-36 sm:w-52 transition-transform ${sidebarOpen ? 'translate-x-0' : '-translate-x-full'} sm:translate-x-0`}>
+        <nav className="flex flex-col items-center -ml-12 gap-4 px-2 sm:py-5">
+          <TooltipProvider>
+            {[
+              { href: "#", icon: <HomeIcon className="-ml-2 h-5 w-5" />, label: "Dashboard", section: "Dashboard" },
+              { href: "#", icon: <BookIcon className="ml-5 h-5 w-5" />, label: "Question Bank", section: "Question Bank" },
+              { href: "#", icon: <FilePenIcon className="-ml-14 h-5 w-5" />, label: "Quiz", section: "Quiz" },
+              { href: "#", icon: <UsersIcon className=" -ml-12 h-5 w-5" />, label: "Users", section: "Users" },
+              { href: "#", icon: <LineChartIcon className="-ml-10 h-5 w-5" />, label: "Results", section: "Results" }
+            ].map((item) => (
+              <Tooltip key={item.label}>
+                <TooltipTrigger asChild>
+                  <a
+                    href={item.href}
+                    className={`flex items-center gap-4 p-2 rounded-lg text-muted-foreground transition-colors hover:text-foreground ${activeSection === item.section ? 'font-bold' : ''}`}
+                    onClick={() => handleLinkClick(item.section)}
+                  >
+                    {item.icon}
+                    <span>{item.label}</span>
+                  </a>
+                </TooltipTrigger>
+              </Tooltip>
             ))}
-          </ul>
+          </TooltipProvider>
         </nav>
-      </div>
-      
-      {/* Open/Close Button for Small Screens */}
-      <button
-        className="fixed top-4 left-4 z-50 block lg:hidden p-2 rounded-md text-gray-500 hover:bg-gray-200 dark:hover:bg-gray-600"
-        onClick={() => setIsSidebarOpen(prev => !prev)}
-      >
-        {isSidebarOpen ? "Close" : "Open"}
-      </button>
-    </div>
+        <nav className="mt-auto flex flex-col items-center gap-4 px-2 sm:py-5">
+          <TooltipProvider>
+            <Tooltip>
+              <TooltipTrigger asChild>
+                <Link href="#" className="flex items-center -ml-20 gap-4 p-2 rounded-lg text-muted-foreground transition-colors hover:text-foreground" prefetch={false}>
+                  <SettingsIcon className="h-5 w-5" />
+                  <span>Settings</span>
+                </Link>
+              </TooltipTrigger>
+            </Tooltip>
+          </TooltipProvider>
+        </nav>
+      </aside>
+
+      {/* Mobile Sidebar */}
+      <Sheet>
+        <SheetTrigger asChild>
+          <Button size="icon" variant="outline" className="sm:hidden" onClick={toggleSidebar}>
+            <MenuIcon className="h-5 w-5" />
+            <span className="sr-only">Toggle Menu</span>
+          </Button>
+        </SheetTrigger>
+        <SheetContent side="left" className="sm:max-w-xs">
+          <nav className="grid gap-6 text-lg font-medium">
+            {[
+              { href: "#", icon: <HomeIcon className="h-5 w-5" />, label: "Dashboard", section: "Dashboard" },
+              { href: "#", icon: <BookIcon className="h-5 w-5" />, label: "Question Bank", section: "Question Bank" },
+              { href: "#", icon: <FilePenIcon className="h-5 w-5" />, label: "Quiz", section: "Quiz" },
+              { href: "#", icon: <UsersIcon className="h-5 w-5" />, label: "Users", section: "Users" },
+              { href: "#", icon: <LineChartIcon className="h-5 w-5" />, label: "Results", section: "Results" },
+              { href: "#", icon: <SettingsIcon className="h-5 w-5" />, label: "Settings", section: "Settings" }
+            ].map((item) => (
+              <Link key={item.label} href={item.href} className={`flex items-center gap-4 px-2.5 transition-colors ${activeSection === item.section ? 'font-bold' : 'text-muted-foreground hover:text-foreground'}`} prefetch={false}>
+                {item.icon}
+                {item.label}
+              </Link>
+            ))}
+          </nav>
+        </SheetContent>
+      </Sheet>
+    </>
   );
 }

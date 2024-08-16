@@ -13,6 +13,7 @@ export default function Footer() {
               width={150}
               height={150}
               className="mx-2"
+              href="/"
             />
           </Link>
           <div className="flex space-x-4">

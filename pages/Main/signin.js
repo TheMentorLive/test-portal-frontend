@@ -42,7 +42,7 @@ export default function Signin() {
     setEmail("");
     setPassword("");
     if (response.payload?.data?.statusCode === 200) {
-      router.push("/Main/dash");
+      router.push("/dash-user/dash");
     }
   };
 
@@ -100,11 +100,18 @@ export default function Signin() {
               <Button type="submit" className="w-full">
                 Sign In
               </Button>
+              
+              <br/>
+              <br/>
+              <Link href="/Main/forgotps" className="text-primary underline ml-32 " prefetch={false}>
+                Forgot Password
+              </Link>
             </form>
             <div className="relative">
               <div className="absolute inset-0 flex items-center" aria-hidden="true">
                 <div className="w-full border-t border-gray-300"></div>
               </div>
+              
               <div className="relative flex justify-center text-sm font-medium bg-card">
                 <span className="bg-card px-2 text-gray-500">Or Sign In with</span>
               </div>
@@ -125,16 +132,17 @@ export default function Signin() {
                 <FaLinkedin className='align-middle text-2xl' /> <span> Sign in with LinkedIn </span>
               </Button>
             </div>
+            
           </div>
         </div>
         {/* Right side */}
-        <div className="hidden md:flex flex-1 items-center justify-center bg-muted">
+        <div className="hidden md:flex flex-1 items-center justify-center -ml-40 bg-muted">
           <Image
-            src="/placeholder.svg"
+            src="/signin.png"
             width={600}
-            height={600}
+            height={500}
             alt="Sign in"
-            className="max-w-full h-auto"
+            className="max-w-full h-[550px]"
           />
         </div>
       </div>
