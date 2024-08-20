@@ -5,7 +5,7 @@ import { FaBars, FaTimes } from "react-icons/fa"; // Import icons for hamburger 
 import { DropdownMenu, DropdownMenuTrigger, DropdownMenuContent, DropdownMenuLabel, DropdownMenuSeparator, DropdownMenuItem } from "@/public/ui/dropdown-menu";
 import { Button } from "@/public/ui/button";
 
-export default function Navbar() {
+export default function Navbar({name}) {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
   // Function to toggle the mobile menu
@@ -35,14 +35,14 @@ export default function Navbar() {
   <DropdownMenuTrigger asChild>
     <Button variant="outline" size="icon" className="flex items-center space-x-2">
       <Image
-        src="/placeholder.svg"
+        src="/icons/user-logo.png"
         width={36}
         height={36}
         alt="Avatar"
         className="overflow-hidden rounded-full"
         style={{ aspectRatio: "36/36", objectFit: "cover" }}
       />
-      <span className="text-sm font-medium ">John Doe</span> {/* Replace with the actual name */}
+      <span className="text-sm font-medium ">{name}</span> {/* Replace with the actual name */}
     </Button>
   </DropdownMenuTrigger>
   <DropdownMenuContent align="end">

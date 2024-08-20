@@ -42,7 +42,7 @@ export default function Signin() {
     setEmail("");
     setPassword("");
     if (response.payload?.data?.statusCode === 200) {
-      router.push("/dash-user/dash");
+      router.push("/dash-admin/DashboardPage");
     }
   };
 

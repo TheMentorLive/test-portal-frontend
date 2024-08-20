@@ -10,7 +10,6 @@ const initialState = {
   role: typeof window !== 'undefined' ? localStorage.getItem("role") || "" : "",
   data: typeof window !== 'undefined' ? JSON.parse(localStorage.getItem("data")) || {} : {}
 };
-
 export const createAccount = createAsyncThunk('/auth/signup', async (data, { rejectWithValue }) => {
   try {
     const response =  axiosInstance.post("users/signup", data);
@@ -60,33 +59,62 @@ export const linkedinSignup = createAsyncThunk('/auth/linkedin', async () => {
   }
 });
 
+export const logout = createAsyncThunk('/auth/logout', async () => {
+  try {
+    const response = axiosInstance.post("users/logout");
+    console.log(response);
+    toast.promise(response, {
+      loading: 'Logging you out...',
+      success: 'Logged out successfully!',
+      error: 'Failed to log you out'
+    });
+    if(response?.data?.statusCode === 200) {
+    if (typeof window !== 'undefined') {
+      localStorage.clear();
+    }
+    return true;
+  }
+  } catch (e) {
+    toast.error("An error occurred");
+    return false;
+  }
+});
+
+export const updatePassword = createAsyncThunk('/auth/updatePassword', async (data, { rejectWithValue }) => {
+  try {
+    const response =  axiosInstance.put("/users/update-password", data);
+    toast.promise(response, {
+      loading: 'Updating your password...',
+      success: 'Password updated successfully!',
+      error: 'Failed to update password'
+    });
+    return true;
+  } catch (e) {
+    toast.error(e?.response?.data?.message || 'An error occurred');
+    return rejectWithValue(e?.response?.data || 'An error occurred');
+  }
+});
+
 const authSlice = createSlice({
   name: "auth",
   initialState,
   reducers: {
-    logout: (state) => {
-      if (typeof window !== 'undefined') {
-        localStorage.clear();
-      }
-      state.isLoggedIn = false;
-      state.role = "";
-      state.data = {};
-    },
   },
   extraReducers: (builder) => {
     builder
       .addCase(login.fulfilled, (state, action) => {
         if (typeof window !== 'undefined') {
+          console.log(action.payload.data);
           localStorage.setItem("data", JSON.stringify(action.payload.data));
           localStorage.setItem("isLoggedIn", 'true');
-          localStorage.setItem("role", action.payload.data.user?.role || "");
+          localStorage.setItem("role", action.payload.data?.data?.user?.role || "");
         }
         state.isLoggedIn = true;
-        state.role = action.payload.data.user?.role || "";
-        state.data = action.payload.data || {};
+        state.role = action.payload.data.data?.role || "";
+        state.data = action.payload.data?.data?.data || {};
+        state.token = action.payload.data?.data?.token || "";
       })
   }
 });
 
 export default authSlice.reducer;
-export const { logout } = authSlice.actions;
