@@ -13,7 +13,7 @@ export default function App({ Component, pageProps }) {
         position="top-right"
         toastOptions={{
           // Default options for all toasts
-          duration: 3000,
+          // duration: 3000,
           style: {
             padding: '16px',
             borderRadius: '8px',

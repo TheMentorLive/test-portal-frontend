@@ -9,10 +9,11 @@ import { BookOpenIcon, ChevronLeftIcon, ChevronRightIcon, FlagIcon } from '@/pub
 import { Card, CardHeader, CardTitle, CardDescription, CardContent } from "@/public/ui/card";
 import dynamic from "next/dynamic";
 import { submitTest } from "@/redux/slices/testSlice";
+import { useRouter } from "next/navigation";
 
 function Mainpg() {
   const dispatch = useDispatch();
-
+  const router = useRouter();
   const test = useSelector((state) => state.test.test);
   const {user} = useSelector((state) => state.auth.data.data);
   const [selectedLanguage, setSelectedLanguage] = useState("en");
@@ -92,9 +93,18 @@ function Mainpg() {
         selectedOptionIds: answers[index] ? [answers[index]] : [],
       })),
     };
-    
+    if (document.exitFullscreen) {
+      document.exitFullscreen();
+    } else if (document.mozCancelFullScreen) { // Firefox
+      document.mozCancelFullScreen();
+    } else if (document.webkitExitFullscreen) { // Chrome, Safari and Opera
+      document.webkitExitFullscreen();
+    } else if (document.msExitFullscreen) { // IE/Edge
+      document.msExitFullscreen();
+    }
     const submitResponse = await dispatch(submitTest(submissionData));
-    console.log("Submitting test data...", submissionData);
+    router.push('/dash-admin/test/submit')
+    
     setShowConfirmDialog(false);
   };
 

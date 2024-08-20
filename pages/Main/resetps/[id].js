@@ -7,8 +7,8 @@ import { Label } from "@/public/ui/label";
 import { Input } from "@/public/ui/input";
 import { Button } from "@/public/ui/button";
 import Image from 'next/image';
-import Layout from "./layout";
-import { login } from "@/redux/slices/authSlice";
+import Layout from "../layout";
+import {  resetPassword } from "@/redux/slices/authSlice";
 import { useRouter } from "next/router";
 import { useDispatch } from "react-redux";
 import { googleSinup } from "@/redux/slices/authSlice";
@@ -16,7 +16,42 @@ import { linkedinSignup } from "@/redux/slices/authSlice";
 import { FcGoogle } from "react-icons/fc";
 import { FaLinkedin } from "react-icons/fa";
 
-export default function Signin() {
+export default function resetPass() {
+
+  const [password, setPassword] = useState("");
+  const [conformPassword, setConformPassword] = useState("");
+  const dispatch = useDispatch();
+  const router = useRouter();
+
+  const {id} = router.query;
+
+  const onChangePassword = (e) => {
+    setPassword(e.target.value);
+  }
+
+  const onChangeConformPassword = (e) => {
+    setConformPassword(e.target.value);
+  }
+
+  const handleResetPassword = async (e) => {
+    e.preventDefault();
+    if(password !== conformPassword){
+      toast.error("Password and conform password not match");
+      return;
+    }
+    const resetPasswordToken = id;
+    console.log("passwod and token",password,resetPasswordToken)
+    const response = await dispatch(resetPassword({ password,resetPasswordToken  }));
+    if(response) {
+      setPassword("");
+      setConformPassword("");
+      router.push("/Main/signin");
+    } else {
+      setPassword("");
+      setConformPassword("");
+    }
+  }
+
   
 
   return (
@@ -44,12 +79,13 @@ export default function Signin() {
             <br/>
             <br/>
             
-            <form className="space-y-4" >
+            <form className="space-y-4" noValidate>
               <div className="space-y-2">
                 <Label htmlFor="Password">New Password</Label>
                 <Input
                   id="Password"
                   type="Password"
+                  onChange={onChangePassword}
                   placeholder="Enter New Password"
                   required
                  
@@ -60,13 +96,16 @@ export default function Signin() {
                 <Input
                   id="Password"
                   type="Password"
+                  onChange={onChangeConformPassword}
                   placeholder="Enter Confrim Password"
                   required
                   
                 />
               </div>
 
-              <Button type="submit" className="w-full">
+              <Button 
+              onClick={handleResetPassword}
+              type="submit" className="w-full">
                 Reset Password
               </Button>
             </form>

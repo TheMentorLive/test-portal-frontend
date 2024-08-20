@@ -3,6 +3,7 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import  toast  from "react-hot-toast";
 import axiosInstance from '../../config/axiosInstance.js';
+import axios from "axios";
 
 // Initialize state with default values, check for client-side access
 const initialState = {
@@ -94,6 +95,36 @@ export const updatePassword = createAsyncThunk('/auth/updatePassword', async (da
     return rejectWithValue(e?.response?.data || 'An error occurred');
   }
 });
+
+export const forgotPassword = createAsyncThunk('/auth/forgotPassword', async (data, { rejectWithValue }) => {
+  try {
+    const response = axiosInstance.post('/users/request-password-reset',data);
+    toast.promise(Promise.resolve(response), {
+      loading: 'Sending you a reset link...',
+      success: 'Reset link sent successfully!',
+      error: 'Failed to send reset link'
+    });
+    return true;
+  } catch (e) {
+    toast.error(e?.response?.data?.message || 'An error occurred');
+    return rejectWithValue(e?.response?.data || 'An error occurred');
+  }
+});
+
+export const resetPassword = createAsyncThunk('/auth/resetPassword',async(data)=>{
+  try {
+    const response = axiosInstance.post('/users/reset-password',data);
+    toast.promise(Promise.resolve(response),{
+      loading:'updating your Password',
+      success:'Your Password is Updated',
+      error:'Unable to update your Password'
+    });
+    return true;
+  } catch (error) {
+    toast.error('Network Error While updating your password');
+    return false;
+  }
+}) 
 
 const authSlice = createSlice({
   name: "auth",
