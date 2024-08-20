@@ -3,6 +3,7 @@ import React, { useState, useEffect } from 'react';
 import TestCard from './components/TestCard';
 import Layout from './layout/layout'; // Import your existing Layout component
 import dynamic from 'next/dynamic';
+import Head from 'next/head';
 
 const TestsPage = () => {
     const [tests, setTests] = useState([]);
@@ -71,6 +72,9 @@ const TestsPage = () => {
 
     return (
         <Layout>
+            <Head>
+        <title>Quiz</title>
+      </Head>
             <div className="container mx-auto p-4 md:pl-10 max-w-screen-xl"> {/* Centered container with max width */}
                 <div className="bg-white p-6 shadow-md rounded-lg mb-6">
                     <h1 className="text-2xl font-bold text-black mb-2">Available Exams</h1>

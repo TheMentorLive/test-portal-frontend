@@ -66,7 +66,7 @@ export default function Sidebar({ activeSection, handleLinkClick, sidebarOpen, t
               {[
                 { href: "/dash-admin", icon: <HomeIcon className="h-5 w-5" />, label: "Dashboard", section: "Dashboard" },
                 { href: "/dash-admin/questionBank", icon: <BookIcon className="h-5 w-5" />, label: "Question Bank", section: "Question Banks" },
-                { href: "/dash-admin/quiz", icon: <FilePenIcon className="h-5 w-5" />, label: "Quiz", section: "Quiz" },
+                { href: "/dash-admin/tests", icon: <FilePenIcon className="h-5 w-5" />, label: "Quiz", section: "Quiz" },
                 { href: "/dash-admin/users", icon: <UsersIcon className="h-5 w-5" />, label: "Users", section: "Users" },
                 { href: "/dash-admin/results", icon: <LineChartIcon className="h-5 w-5" />, label: "Results", section: "Results" },
                 { href: "/dash-admin/profile", icon: <SettingsIcon className="h-5 w-5" />, label: "Settings", section: "Settings" }

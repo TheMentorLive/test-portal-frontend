@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import Layout from "./layout/layout";
 import { useDispatch, useSelector } from "react-redux";
 import { updatePassword } from "@/redux/slices/authSlice";
+import Head from 'next/head';
 import Image from "next/image";
 
 const ProfilePage = () => {
@@ -31,6 +32,9 @@ const ProfilePage = () => {
 
   return (
     <Layout>
+      <Head>
+        <title>Profile Settings</title>
+      </Head>
       <div className="min-h-screen flex flex-col items-center justify-center p-4">
         <div className="w-full max-w-md bg-white p-6 rounded-lg shadow-lg">
           <div className="flex flex-col items-center">

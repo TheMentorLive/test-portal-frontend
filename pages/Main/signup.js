@@ -6,6 +6,7 @@ import Image from 'next/image';
 import Link from "next/link";
 import { Label } from "@/public/ui/label";
 import { Input } from "@/public/ui/input";
+import Head from 'next/head';
 import { Button } from "@/public/ui/button";
 import Layout from './layout';
 import { FcGoogle } from "react-icons/fc";
@@ -65,6 +66,9 @@ export default function Signup() {
 
   return (
     <Layout>
+      <Head>
+        <title>SignUp</title>
+      </Head>
       <div className="flex flex-col md:flex-row min-h-screen bg-gray-100">
         {/* Left side */}
         <div className="flex-1 flex items-center justify-center p-4 md:p-8">

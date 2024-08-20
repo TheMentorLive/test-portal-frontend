@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from 'react';
 import { useRouter } from 'next/router';
+import Head from 'next/head';
 import Layout from './layout/layout';
 import { FaTrash, FaPlus, FaEye } from 'react-icons/fa';
 import { useDispatch, useSelector } from 'react-redux';
@@ -94,6 +95,9 @@ const QuestionBankPage = () => {
 
   return (
     <Layout>
+      <Head>
+        <title>Question Bank</title>
+      </Head>
       <div className="p-6">
         {user?.role === 'admin' && (
           <button

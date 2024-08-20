@@ -3,6 +3,7 @@ import Layout from "./layout";
 import { useDispatch } from "react-redux";
 import { forgotPassword } from "@/redux/slices/authSlice";
 import Image from "next/image";
+import Head from 'next/head';
 import { useState } from "react";
 
 export default function ForgotPassword() {
@@ -23,6 +24,9 @@ export default function ForgotPassword() {
 
   return (
     <Layout>
+      <Head>
+        <title>Reset Password</title>
+      </Head>
       <div className="flex flex-col md:flex-row min-h-screen">
         {/* Left side */}
         <div className="flex-1 flex items-center justify-center p-4 md:p-8">

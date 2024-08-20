@@ -1,8 +1,12 @@
 import Layout from './layout/layout';
+import Head from 'next/head';
 
 export default function Dashboard() {
   return (
     <Layout>
+      <Head>
+        <title>Dashboard</title>
+      </Head>
       <div className="flex flex-col items-center justify-center h-full">
         <h1 className="text-4xl font-bold text-blue-800">Dashboard</h1>
         <p className="text-lg text-blue-600 mt-4">This page is currently under construction.</p>
