@@ -23,7 +23,7 @@ function Srtpg() {
       setIsLoading(true);
       console.log("Fetching test data...",test._id);
       const response = await dispatch(fetchTest(test._id)); // Adjust based on your actual action
-       // Adjust according to your action's response structure
+       // Adjust according to your actions response structure
     } catch (error) {
       console.error("Error fetching test data:", error);
     } finally {
@@ -81,7 +81,7 @@ function Srtpg() {
                   }
                 </li>
                 <li>
-                  The exam rigorously tests candidates' proficiency in Chemistry and Mathematics, ensuring a strong foundation in these subjects.
+                  The exam rigorously tests candidates proficiency in Chemistry and Mathematics, ensuring a strong foundation in these subjects.
                 </li>
                 <li>
                   {`The test consists of ${test?.numberOfQuestions} questions, each carrying 4 marks, and a negative marking of 1 mark for each wrong answer.`}
