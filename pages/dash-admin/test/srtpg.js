@@ -58,24 +58,25 @@ function Srtpg() {
     <div className="min-h-screen bg-gray-100">
       <Navbar />
       <div className="flex flex-col items-center justify-center p-4 md:p-8">
-        <div className="w-full max-w-3xl p-6 bg-white rounded-lg shadow-md">
+        <div className="w-full max-w-7xl p-12 bg-white rounded-lg shadow-md">
           <div className="flex flex-col md:flex-row">
-            <div className="md:w-1/2 md:pr-6">
-              <h1 className="text-3xl font-bold mb-4 text-gray-800">
-                {`Welcome to GenAi Learning ${test?.title}`}
+            <div className="md:w-1/2 md:pr-12">
+              <h1 className="mb-4 text-4xl font-bold">
+                Welcome to GenAi Learning {test?.title}
               </h1>
-              <div className="flex flex-col md:flex-row mb-6 text-gray-700">
-                <div className="mb-4 md:mb-0 md:mr-8">
-                  <p className="text-sm">Test Duration</p>
-                  <p className="text-lg font-semibold">90 mins</p>
+              <div className="flex space-x-12">
+                <div>
+                  <p className="text-sm text-muted-foreground">Test duration</p>
+                  <p className="text-base font-medium">90 mins</p>
                 </div>
                 <div>
-                  <p className="text-sm">No. of Questions</p>
-                  <p className="text-lg font-semibold">{`${test?.numberOfQuestions} question(s)`}</p>
+                  <p className="text-sm text-muted-foreground">No. of questions</p>
+                  <p className="text-base font-medium">{`${test?.numberOfQuestions} question(s)`}</p>
                 </div>
               </div>
-              <h2 className="text-2xl font-semibold mb-4 text-gray-800">Description</h2>
-              <ol className="list-decimal list-inside mb-6 text-gray-600 space-y-3">
+              <br/>
+              <h2 className="mb-4 text-2xl font-semibold">Description</h2>
+              <ol className="mb-8 space-y-4 text-muted-foreground">
                 <li>
                   {test?.type === 'JEE'
                     ? "The JEE is a crucial exam for aspiring engineers in India, determining admission to prestigious institutes like IITs and NITs."
@@ -83,34 +84,42 @@ function Srtpg() {
                   }
                 </li>
                 <li>
-                  The exam rigorously tests candidates proficiency in Chemistry and Mathematics, ensuring a strong foundation in these subjects.
+                  The exam rigorously tests candidates' proficiency in Chemistry and Mathematics, ensuring a strong foundation in these subjects.
                 </li>
                 <li>
                   {`The test consists of ${test?.numberOfQuestions} questions, each carrying 4 marks, and a negative marking of 1 mark for each wrong answer.`}
                 </li>
-                <li>
-                  {test?.description}
-                </li>
+                <li>{test?.description}</li>
               </ol>
             </div>
 
-            <div className="md:w-1/2 md:pl-6 mt-6 md:mt-0">
-              <h2 className="text-2xl font-semibold mb-4 text-gray-800">Instructions</h2>
-              <ol className="list-decimal list-inside mb-6 text-gray-600 space-y-3">
+
+            <div className="md:w-1/2 mt-20 md:pl-12 md:border-l">
+              
+              <h2 className="mb-4 text-2xl font-semibold">Instructions</h2>
+              <ol className="mb-8 space-y-4 text-muted-foreground">
                 <li>This is a timed test. Please make sure you are not interrupted during the test, as the timer cannot be paused once started.</li>
                 <li>Please ensure you have a stable internet connection.</li>
-                <li>We recommend you try the <a href="#" className="text-blue-500 underline">sample test</a> for a couple of minutes before taking the main test.</li>
+                <li>
+                  We recommend you try the{" "}
+                  <a href="#" className="text-primary underline">
+                    sample test
+                  </a>{" "}
+                  for a couple of minutes before taking the main test.
+                </li>
               </ol>
-              <div className="flex flex-col md:flex-row md:space-x-6">
+              <div className="flex space-x-6">
                 <Button
                   onClick={handleStartTest}
-                  className="bg-blue-600 text-white mb-4 md:mb-0"
+                  className="bg-primary text-primary-foreground"
                   disabled={isFullScreen}
                 >
                   Start Test
                 </Button>
                 <Link href="/dash-admin/test">
-                  <Button className="bg-gray-600 text-white">Back</Button>
+                  <Button variant="outline" className="border-primary text-primary">
+                    Back
+                  </Button>
                 </Link>
               </div>
             </div>
