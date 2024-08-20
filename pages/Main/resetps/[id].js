@@ -17,7 +17,6 @@ import { FcGoogle } from "react-icons/fc";
 import { FaLinkedin } from "react-icons/fa";
 
 export default function ResetPass() {
-
   const [password, setPassword] = useState("");
   const [conformPassword, setConformPassword] = useState("");
   const dispatch = useDispatch();
