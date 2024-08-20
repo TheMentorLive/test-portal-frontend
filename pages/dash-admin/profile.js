@@ -1,24 +1,32 @@
 import React, { useState } from "react";
 import Layout from "./layout/layout";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { updatePassword } from "@/redux/slices/authSlice";
-import { useSelector } from "react-redux";
 import Image from "next/image";
+
 const ProfilePage = () => {
   const [showPasswordFields, setShowPasswordFields] = useState(false);
   const [oldPassword, setOldPassword] = useState("");
   const [newPassword, setNewPassword] = useState("");
   const dispatch = useDispatch();
-  const { user } = useSelector((state) => state.auth.data.data);
-  const handleUpdatePassword = () => {
-    // Handle password update logic here
-    const response = dispatch(updatePassword({ oldPassword, newPassword }));
-    if(response) {
-      setOldPassword("");
-      setNewPassword("");
-      setShowPasswordFields(false);
+  
+  // Safely access user data
+  const user = useSelector((state) => state.auth?.data?.data?.user);
+
+  const handleUpdatePassword = async () => {
+    try {
+      const response = await dispatch(updatePassword({ oldPassword, newPassword }));
+      if (response) {
+        setOldPassword("");
+        setNewPassword("");
+        setShowPasswordFields(false);
+        // Optionally add a success message or notification here
+        console.log("Password updated:", { oldPassword, newPassword });
+      }
+    } catch (error) {
+      console.error("Failed to update password:", error);
+      // Optionally add an error message or notification here
     }
-    console.log("Password updated:", { oldPassword, newPassword });
   };
 
   return (
@@ -30,10 +38,12 @@ const ProfilePage = () => {
               src="/icons/user-logo.png" // Placeholder image
               alt="Profile"
               width={120} // Adjust width for responsiveness
-          height={110} 
+              height={110}
               className="w-24 h-24 rounded-full mb-4"
             />
-            <h1 className="text-2xl font-bold text-gray-800 mb-4">{user.email||"email@gmail.com"}</h1>
+            <h1 className="text-2xl font-bold text-gray-800 mb-4">
+              {user?.email || "email@gmail.com"}
+            </h1>
           </div>
           <div className="w-full">
             <button

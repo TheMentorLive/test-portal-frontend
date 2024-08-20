@@ -1,29 +1,36 @@
 import Link from "next/link";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { toast } from "react-toastify";
 import { Label } from "@/public/ui/label";
 import { Input } from "@/public/ui/input";
 import { Button } from "@/public/ui/button";
 import Layout from "../layout";
 import { resetPassword } from "@/redux/slices/authSlice";
-import { useRouter } from "next/navigation";
+import { useRouter } from "next/router"; // Ensure correct import
 import { useDispatch } from "react-redux";
 
 export default function ResetPass() {
   const [password, setPassword] = useState("");
   const [conformPassword, setConformPassword] = useState("");
+  const [resetToken, setResetToken] = useState(null);
   const dispatch = useDispatch();
-  const router = useRouter(); // Fixed variable name
+  const router = useRouter();
 
-  const { id } = router.query;
+  // Extract id from the URL query parameters
+  useEffect(() => {
+    if (router.isReady) {
+      const { id } = router.query;
+      setResetToken(id);
+    }
+  }, [router.isReady, router.query]);
 
   const onChangePassword = (e) => {
     setPassword(e.target.value);
-  }
+  };
 
   const onChangeConformPassword = (e) => {
     setConformPassword(e.target.value);
-  }
+  };
 
   const handleResetPassword = async (e) => {
     e.preventDefault();
@@ -31,18 +38,21 @@ export default function ResetPass() {
       toast.error("Password and confirm password do not match");
       return;
     }
-    const resetPasswordToken = id;
-    console.log("password and token", password, resetPasswordToken);
-    const response = await dispatch(resetPassword({ password, resetPasswordToken }));
-    if (response) {
-      setPassword("");
-      setConformPassword("");
-      router.push("/Main/signin");
+
+    if (resetToken) {
+      const response = await dispatch(resetPassword({ password, resetPasswordToken: resetToken }));
+      if (response) {
+        setPassword("");
+        setConformPassword("");
+        router.push("/Main/signin");
+      } else {
+        setPassword("");
+        setConformPassword("");
+      }
     } else {
-      setPassword("");
-      setConformPassword("");
+      toast.error("Invalid or missing reset token.");
     }
-  }
+  };
 
   return (
     <Layout>
@@ -87,10 +97,11 @@ export default function ResetPass() {
                   required
                 />
               </div>
-              <Button 
+              <Button
                 onClick={handleResetPassword}
-                type="submit" 
-                className="w-full">
+                type="submit"
+                className="w-full"
+              >
                 Reset Password
               </Button>
             </form>
