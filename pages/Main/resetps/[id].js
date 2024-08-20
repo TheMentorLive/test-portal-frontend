@@ -1,7 +1,7 @@
 'use client';
 
 import Link from "next/link";
-import { useState } from 'react';
+import { useState } from "react";
 import { toast } from "react-toastify";
 import { Label } from "@/public/ui/label";
 import { Input } from "@/public/ui/input";
@@ -9,19 +9,19 @@ import { Button } from "@/public/ui/button";
 import Image from 'next/image';
 import Layout from "../layout";
 import {  resetPassword } from "@/redux/slices/authSlice";
-import { useRouter } from "next/router";
+import { useRouter } from "next/navigation";
 import { useDispatch } from "react-redux";
 import { googleSinup } from "@/redux/slices/authSlice";
 import { linkedinSignup } from "@/redux/slices/authSlice";
 import { FcGoogle } from "react-icons/fc";
 import { FaLinkedin } from "react-icons/fa";
 
-export default function resetPass() {
+export default function ResetPass() {
 
   const [password, setPassword] = useState("");
   const [conformPassword, setConformPassword] = useState("");
   const dispatch = useDispatch();
-  const router = useRouter();
+  const useRouter = useRouter();
 
   const {id} = router.query;
 
@@ -45,7 +45,7 @@ export default function resetPass() {
     if(response) {
       setPassword("");
       setConformPassword("");
-      router.push("/Main/signin");
+      useRouter.push("/Main/signin");
     } else {
       setPassword("");
       setConformPassword("");
