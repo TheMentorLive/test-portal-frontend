@@ -17,20 +17,20 @@ const TestCard = ({ test, isAdmin }) => {
             <div className="relative h-48 overflow-hidden">
                 <img 
                     src='/icons/test.png' // Replace with actual image path
-                    alt={test.type}
+                    alt={test?.type}
                     className="w-full h-full object-cover transition-transform duration-300 hover:scale-110"
                 />
             </div>
             <div className="p-4">
-                <h2 className="text-2xl font-bold mb-2 text-black">{test.title}</h2>
-                <p className="text-gray-700 mb-2">{test.description}</p>
+                <h2 className="text-2xl font-bold mb-2 text-black">{test?.title}</h2>
+                <p className="text-gray-700 mb-2">{test?.description}</p>
                 
                 <div className="flex flex-col justify-center gap-1 mt-4">
                     <span className="bg-gray-50 rounded-sm text-gray-800 px-2 py-1 ">
-                        Type: {test.type}
+                        Type: {test?.type}
                     </span>
                     <span className="bg-gray-50 rounded-sm text-gray-800 px-2 py-1 ">
-                        Duration: {test.duration}
+                        Duration: {test?.duration}
                     </span>
                 </div>
 
