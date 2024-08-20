@@ -1,5 +1,3 @@
-'use client';
-
 import Link from "next/link";
 import Layout from "./layout";
 import { useDispatch } from "react-redux";
@@ -7,7 +5,6 @@ import { forgotPassword } from "@/redux/slices/authSlice";
 import { useState } from "react";
 
 export default function ForgotPassword() {
-
   const dispatch = useDispatch();
   const [email, setEmail] = useState("");
 
@@ -17,12 +14,12 @@ export default function ForgotPassword() {
 
   const handleResetPassword = async (e) => {
     e.preventDefault();
-    const response = dispatch(forgotPassword({ email }));
-    if(response) {
-      setEmail("");
+    const response = await dispatch(forgotPassword({ email }));
+    if (response) {
+      setEmail(""); // Clear email input after successful dispatch
     }
-  }
-  
+  };
+
   return (
     <Layout>
       <div className="flex flex-col md:flex-row min-h-screen">
@@ -46,10 +43,10 @@ export default function ForgotPassword() {
             </Link>
             <h1 className="text-3xl font-bold text-gray-800">Forgot Password</h1>
             <p className="text-sm text-gray-600 mt-2 mb-8">
-              Enter your email address and we'll send you a link to reset your password.
+              Enter your email address and we&apos;ll send you a link to reset your password.
             </p>
-            
-            <form className="space-y-6">
+
+            <form className="space-y-6" onSubmit={handleResetPassword}>
               <div className="space-y-2">
                 <label htmlFor="email" className="block text-sm font-medium text-gray-700">Email</label>
                 <input
@@ -58,13 +55,15 @@ export default function ForgotPassword() {
                   placeholder="Enter your email"
                   onChange={onChangeEmail}
                   required
+                  value={email}
                   className="w-full p-3 border border-gray-300 focus:ring focus:ring-blue-200 focus:border-blue-500 rounded-lg"
                 />
               </div>
-              
+
               <button 
-              onClick={handleResetPassword}
-              type="submit" className="w-full py-2 bg-blue-600 text-white rounded-lg mt-4 hover:bg-blue-700 transition-all">
+                type="submit"
+                className="w-full py-2 bg-blue-600 text-white rounded-lg mt-4 hover:bg-blue-700 transition-all"
+              >
                 Reset Password
               </button>
             </form>
@@ -80,11 +79,11 @@ export default function ForgotPassword() {
         
         {/* Right side - full screen image */}
         <div className="hidden md:flex flex-1 justify-center items-center">
-          <div
-            className="w-full h-full bg-cover bg-center"
-            style={{ backgroundImage: "url('/icons/forgotpass.jpg')" }}
-            aria-label="Forgot Password Illustration"
-          ></div>
+          <img
+            src="/icons/forgotpass.jpg"
+            alt="Forgot Password Illustration"
+            className="w-full h-full object-cover"
+          />
         </div>
       </div>
     </Layout>
