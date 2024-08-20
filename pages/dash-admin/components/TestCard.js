@@ -1,6 +1,7 @@
 import React from 'react';
 import { FaTrash } from 'react-icons/fa'; // Importing delete icon from react-icons
 import { useRouter } from 'next/router';
+import Image from 'next/image';
 const TestCard = ({ test, isAdmin }) => {
 
     const router = useRouter();
@@ -15,9 +16,11 @@ const TestCard = ({ test, isAdmin }) => {
     return (
         <div className="bg-white border border-blue-300 shadow-md rounded-lg overflow-hidden">
             <div className="relative h-48 overflow-hidden">
-                <img 
+                <Image
                     src='/icons/test.png' // Replace with actual image path
                     alt={test?.type}
+                    width={120} // Adjust width for responsiveness
+          height={110} 
                     className="w-full h-full object-cover transition-transform duration-300 hover:scale-110"
                 />
             </div>

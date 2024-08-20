@@ -2,7 +2,7 @@ import { Button } from "@/public/ui/button";
 import Navbar from "./navbar";
 import Link from "next/link";
 import { useRouter } from "next/router";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useCallback } from "react";
 import { useDispatch } from "react-redux";
 import { fetchTest } from "@/redux/slices/testSlice";
 import Loading from "../components/Loader"; // Ensure you have this component
@@ -18,18 +18,20 @@ function Srtpg() {
 
   const dispatch = useDispatch();
 
-  const fetchTestData = async () => {
+  // Wrap fetchTestData with useCallback to prevent re-creation on every render
+  const fetchTestData = useCallback(async () => {
     try {
       setIsLoading(true);
-      console.log("Fetching test data...",test._id);
+      console.log("Fetching test data...", test._id);
       const response = await dispatch(fetchTest(test._id)); // Adjust based on your actual action
-       // Adjust according to your actions response structure
+      // Handle the response accordingly
     } catch (error) {
       console.error("Error fetching test data:", error);
     } finally {
       setIsLoading(false);
     }
-  };
+  }, [dispatch, test._id]); // Include dispatch and test._id as dependencies
+
   const handleStartTest = () => {
     if (document.documentElement.requestFullscreen) {
       document.documentElement.requestFullscreen()
@@ -50,7 +52,7 @@ function Srtpg() {
 
   useEffect(() => {
     fetchTestData();
-}, []);
+  }, [fetchTestData]); // Include fetchTestData in the dependency array
 
   return (
     <div className="min-h-screen bg-gray-100">
@@ -118,4 +120,5 @@ function Srtpg() {
     </div>
   );
 }
+
 export default dynamic(() => Promise.resolve(Srtpg), { ssr: false });

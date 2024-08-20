@@ -2,6 +2,7 @@ import Link from "next/link";
 import Layout from "./layout";
 import { useDispatch } from "react-redux";
 import { forgotPassword } from "@/redux/slices/authSlice";
+import Image from "next/image";
 import { useState } from "react";
 
 export default function ForgotPassword() {
@@ -79,7 +80,9 @@ export default function ForgotPassword() {
         
         {/* Right side - full screen image */}
         <div className="hidden md:flex flex-1 justify-center items-center">
-          <img
+          <Image
+          width={120} // Adjust width for responsiveness
+          height={110} 
             src="/icons/forgotpass.jpg"
             alt="Forgot Password Illustration"
             className="w-full h-full object-cover"

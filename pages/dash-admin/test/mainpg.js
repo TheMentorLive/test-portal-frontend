@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { Button } from "@/public/ui/button";
 import { Progress } from "@/public/ui/progress";
@@ -15,7 +15,7 @@ function Mainpg() {
   const dispatch = useDispatch();
   const router = useRouter();
   const test = useSelector((state) => state.test.test);
-  const {user} = useSelector((state) => state.auth.data.data);
+  const { user } = useSelector((state) => state.auth.data.data);
   const [selectedLanguage, setSelectedLanguage] = useState("en");
   const [currentQuestion, setCurrentQuestion] = useState(0);
   const [answers, setAnswers] = useState({});
@@ -29,6 +29,17 @@ function Mainpg() {
       setTimeRemaining(test.questions.length * 180); // Total time in seconds
     }
   }, [test]);
+
+  // Memoize handleQuestionChange to avoid unnecessary re-renders
+  const handleQuestionChange = useCallback((direction) => {
+    if (direction === "prev" && currentQuestion > 0) {
+      setCurrentQuestion(currentQuestion - 1);
+      setQuestionTimeRemaining(180);
+    } else if (direction === "next" && currentQuestion < test.questions.length - 1) {
+      setCurrentQuestion(currentQuestion + 1);
+      setQuestionTimeRemaining(180);
+    }
+  }, [currentQuestion, test.questions.length]);
 
   useEffect(() => {
     const interval = setInterval(() => {
@@ -52,22 +63,12 @@ function Mainpg() {
     }, 1000);
 
     return () => clearInterval(interval);
-  }, [currentQuestion]);
+  }, [currentQuestion, handleQuestionChange]); // handleQuestionChange is now a stable dependency
 
   const formatTime = (seconds) => {
     const minutes = Math.floor(seconds / 60);
     const remainingSeconds = seconds % 60;
     return `${minutes.toString().padStart(2, "0")}:${remainingSeconds.toString().padStart(2, "0")}`;
-  };
-
-  const handleQuestionChange = (direction) => {
-    if (direction === "prev" && currentQuestion > 0) {
-      setCurrentQuestion(currentQuestion - 1);
-      setQuestionTimeRemaining(180); 
-    } else if (direction === "next" && currentQuestion < test.questions.length - 1) {
-      setCurrentQuestion(currentQuestion + 1);
-      setQuestionTimeRemaining(180);
-    }
   };
 
   const handleAnswerSelect = (questionIndex, optionId) => {
@@ -103,8 +104,8 @@ function Mainpg() {
       document.msExitFullscreen();
     }
     const submitResponse = await dispatch(submitTest(submissionData));
-    router.push('/dash-admin/test/submit')
-    
+    router.push('/dash-admin/test/submit');
+
     setShowConfirmDialog(false);
   };
 
@@ -216,53 +217,25 @@ function Mainpg() {
             <div className="mt-6 flex justify-between items-center border-t border-gray-400 pt-4">
               <div className="flex items-center gap-2">
                 <span className="text-muted-foreground">
-                  Progress: {currentQuestion + 1}/{test.questions.length}
+                  Progress: {((Object.keys(answers).length / test.questions.length) * 100).toFixed(0)}%
                 </span>
-                <Progress value={((currentQuestion + 1) / test.questions.length) * 100} className="border border-gray-400" />
-              </div>
-              <div className="flex items-center gap-2">
-                <Button
-                  variant="ghost"
-                  size="icon"
-                  onClick={() => handleQuestionChange("prev")}
-                  disabled={currentQuestion === 0}
-                  className="border border-gray-400"
-                >
-                  <ChevronLeftIcon className="h-5 w-5" />
-                  <span className="sr-only">Previous question</span>
-                </Button>
-                <Button
-                  variant="ghost"
-                  size="icon"
-                  onClick={() => handleQuestionChange("next")}
-                  disabled={currentQuestion === test.questions.length - 1}
-                  className="border border-gray-400"
-                >
-                  <ChevronRightIcon className="h-5 w-5" />
-                  <span className="sr-only">Next question</span>
-                </Button>
+                <Progress value={(Object.keys(answers).length / test.questions.length) * 100} />
               </div>
             </div>
           </div>
         </main>
       </div>
-
-      {/* Confirmation dialog */}
       {showConfirmDialog && (
-        <div className="fixed inset-0 flex items-center justify-center z-50 bg-black bg-opacity-50">
-          <div className="bg-white p-6 rounded-lg">
-            <h2 className="text-lg font-bold mb-4">Confirm Submission</h2>
-            <p>Are you sure you want to submit the test?</p>
-            <div className="mt-4 flex justify-end gap-2">
-              <Button
-                variant="outline"
-                onClick={() => setShowConfirmDialog(false)}
-                className="border border-gray-400"
-              >
+        <div className="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center z-50">
+          <div className="bg-white p-8 rounded-md shadow-lg">
+            <h2 className="text-lg font-medium mb-4">Confirm Submission</h2>
+            <p className="text-muted-foreground mb-6">Are you sure you want to submit your test?</p>
+            <div className="flex justify-end gap-4">
+              <Button variant="outline" onClick={() => setShowConfirmDialog(false)}>
                 Cancel
               </Button>
-              <Button variant="primary" onClick={handleSubmit} className="bg-primary text-primary-foreground px-4 py-2 rounded-md font-medium border border-primary">
-                Confirm
+              <Button variant="primary" onClick={handleSubmit}>
+                Submit
               </Button>
             </div>
           </div>
@@ -272,6 +245,4 @@ function Mainpg() {
   );
 }
 
-export default dynamic(() => Promise.resolve(Mainpg), {
-  ssr: false,
-});
+export default dynamic(() => Promise.resolve(Mainpg), { ssr: false });

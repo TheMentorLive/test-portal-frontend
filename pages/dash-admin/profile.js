@@ -3,6 +3,7 @@ import Layout from "./layout/layout";
 import { useDispatch } from "react-redux";
 import { updatePassword } from "@/redux/slices/authSlice";
 import { useSelector } from "react-redux";
+import Image from "next/image";
 const ProfilePage = () => {
   const [showPasswordFields, setShowPasswordFields] = useState(false);
   const [oldPassword, setOldPassword] = useState("");
@@ -25,9 +26,11 @@ const ProfilePage = () => {
       <div className="min-h-screen flex flex-col items-center justify-center p-4">
         <div className="w-full max-w-md bg-white p-6 rounded-lg shadow-lg">
           <div className="flex flex-col items-center">
-            <img
+            <Image
               src="/icons/user-logo.png" // Placeholder image
               alt="Profile"
+              width={120} // Adjust width for responsiveness
+          height={110} 
               className="w-24 h-24 rounded-full mb-4"
             />
             <h1 className="text-2xl font-bold text-gray-800 mb-4">{user.email||"email@gmail.com"}</h1>
