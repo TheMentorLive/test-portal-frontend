@@ -6,23 +6,18 @@ import { toast } from "react-toastify";
 import { Label } from "@/public/ui/label";
 import { Input } from "@/public/ui/input";
 import { Button } from "@/public/ui/button";
-import Image from 'next/image';
 import Layout from "../layout";
-import {  resetPassword } from "@/redux/slices/authSlice";
+import { resetPassword } from "@/redux/slices/authSlice";
 import { useRouter } from "next/navigation";
 import { useDispatch } from "react-redux";
-import { googleSinup } from "@/redux/slices/authSlice";
-import { linkedinSignup } from "@/redux/slices/authSlice";
-import { FcGoogle } from "react-icons/fc";
-import { FaLinkedin } from "react-icons/fa";
 
 export default function ResetPass() {
   const [password, setPassword] = useState("");
   const [conformPassword, setConformPassword] = useState("");
   const dispatch = useDispatch();
-  const useRouter = useRouter();
+  const router = useRouter(); // Fixed variable name
 
-  const {id} = router.query;
+  const { id } = router.query;
 
   const onChangePassword = (e) => {
     setPassword(e.target.value);
@@ -34,24 +29,22 @@ export default function ResetPass() {
 
   const handleResetPassword = async (e) => {
     e.preventDefault();
-    if(password !== conformPassword){
-      toast.error("Password and conform password not match");
+    if (password !== conformPassword) {
+      toast.error("Password and confirm password do not match");
       return;
     }
     const resetPasswordToken = id;
-    console.log("passwod and token",password,resetPasswordToken)
-    const response = await dispatch(resetPassword({ password,resetPasswordToken  }));
-    if(response) {
+    console.log("password and token", password, resetPasswordToken);
+    const response = await dispatch(resetPassword({ password, resetPasswordToken }));
+    if (response) {
       setPassword("");
       setConformPassword("");
-      useRouter.push("/Main/signin");
+      router.push("/Main/signin");
     } else {
       setPassword("");
       setConformPassword("");
     }
   }
-
-  
 
   return (
     <Layout>
@@ -74,46 +67,37 @@ export default function ResetPass() {
               </svg>
               <span className="text-primary underline">Back</span>
             </Link>
-            <h1 className="text-3xl font-bold">Create New password</h1>
-            <br/>
-            <br/>
-            
+            <h1 className="text-3xl font-bold">Create New Password</h1>
             <form className="space-y-4" noValidate>
               <div className="space-y-2">
                 <Label htmlFor="Password">New Password</Label>
                 <Input
                   id="Password"
-                  type="Password"
+                  type="password"
                   onChange={onChangePassword}
                   placeholder="Enter New Password"
                   required
-                 
                 />
               </div>
               <div className="space-y-2">
-                <Label htmlFor="Password">Confrim New Password</Label>
+                <Label htmlFor="ConfirmPassword">Confirm New Password</Label>
                 <Input
-                  id="Password"
-                  type="Password"
+                  id="ConfirmPassword"
+                  type="password"
                   onChange={onChangeConformPassword}
-                  placeholder="Enter Confrim Password"
+                  placeholder="Confirm New Password"
                   required
-                  
                 />
               </div>
-
               <Button 
-              onClick={handleResetPassword}
-              type="submit" className="w-full">
+                onClick={handleResetPassword}
+                type="submit" 
+                className="w-full">
                 Reset Password
               </Button>
             </form>
-            
-            
           </div>
         </div>
-        {/* Right side */}
-        
       </div>
     </Layout>
   );
