@@ -16,7 +16,7 @@ export default function ForgotPassword() {
     e.preventDefault();
     const response = await dispatch(forgotPassword({ email }));
     if (response) {
-      setEmail(""); // Clear email input after successful dispatch
+      setEmail(""); 
     }
   };
 
@@ -43,7 +43,7 @@ export default function ForgotPassword() {
             </Link>
             <h1 className="text-3xl font-bold text-gray-800">Forgot Password</h1>
             <p className="text-sm text-gray-600 mt-2 mb-8">
-              Enter your email address and we&apos;ll send you a link to reset your password.
+              Enter your email address and well send you a link to reset your password.
             </p>
 
             <form className="space-y-6" onSubmit={handleResetPassword}>
