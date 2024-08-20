@@ -84,7 +84,7 @@ function Srtpg() {
                   }
                 </li>
                 <li>
-                  The exam rigorously tests candidates' proficiency in Chemistry and Mathematics, ensuring a strong foundation in these subjects.
+                  The exam rigorously tests candidates&rsquo; proficiency in Chemistry and Mathematics, ensuring a strong foundation in these subjects.
                 </li>
                 <li>
                   {`The test consists of ${test?.numberOfQuestions} questions, each carrying 4 marks, and a negative marking of 1 mark for each wrong answer.`}
@@ -93,9 +93,7 @@ function Srtpg() {
               </ol>
             </div>
 
-
             <div className="md:w-1/2 mt-20 md:pl-12 md:border-l">
-              
               <h2 className="mb-4 text-2xl font-semibold">Instructions</h2>
               <ol className="mb-8 space-y-4 text-muted-foreground">
                 <li>This is a timed test. Please make sure you are not interrupted during the test, as the timer cannot be paused once started.</li>
