@@ -142,7 +142,7 @@ export default function Signin() {
             width={600}
             height={500}
             alt="Sign in"
-            className="max-w-full h-[550px]"
+            className="max-w-full border-2 border-gray-200 h-[550px]"
           />
         </div>
       </div>
