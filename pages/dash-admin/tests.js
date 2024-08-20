@@ -1,6 +1,6 @@
 // pages/tests.js
 import React, { useState, useEffect } from 'react';
-import TestCard from '../dash-admin/components/TestCard';
+import TestCard from './components/TestCard';
 import Layout from './layout/layout'; // Import your existing Layout component
 import dynamic from 'next/dynamic';
 
