@@ -7,15 +7,43 @@ export default function Dashboard() {
       <Head>
         <title>Dashboard</title>
       </Head>
-      <div className="flex flex-col items-center justify-center h-full">
-        <h1 className="text-4xl font-bold text-blue-800">Dashboard</h1>
-        <p className="text-lg text-blue-600 mt-4">This page is currently under construction.</p>
-        <div className="mt-6">
-          <svg className="w-16 h-16 text-blue-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
-          </svg>
-        </div>
+      <div className="flex min-h-[600px] flex-col items-center justify-center bg-background px-4 py-12 sm:px-6 lg:px-8">
+      <div className="mx-auto max-w-md text-center">
+        <LoaderIcon className="mx-auto h-12 w-12 animate-spin text-primary" />
+        <h1 className="mt-4 text-3xl font-bold tracking-tight text-foreground sm:text-4xl">Dashboard</h1>
+        <p className="mt-4 text-muted-foreground">
+          We're working hard to bring you a brand new experience. Please check back soon.
+        </p>
       </div>
+    </div>
+  
+
     </Layout>
   );
+}
+
+function LoaderIcon(props) {
+  return (
+    <svg
+      {...props}
+      xmlns="http://www.w3.org/2000/svg"
+      width="24"
+      height="24"
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="2"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+    >
+      <path d="M12 2v4" />
+      <path d="m16.2 7.8 2.9-2.9" />
+      <path d="M18 12h4" />
+      <path d="m16.2 16.2 2.9 2.9" />
+      <path d="M12 18v4" />
+      <path d="m4.9 19.1 2.9-2.9" />
+      <path d="M2 12h4" />
+      <path d="m4.9 4.9 2.9 2.9" />
+    </svg>
+  )
 }

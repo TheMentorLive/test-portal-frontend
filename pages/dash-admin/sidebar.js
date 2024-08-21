@@ -12,7 +12,7 @@ export default function Sidebar({ activeSection, handleLinkClick, sidebarOpen, t
         <nav className="flex flex-col items-center gap-4 px-2 sm:py-5">
           <TooltipProvider>
             {[
-              { href: "/dash-admin", icon: <HomeIcon className="-ml-2 h-5 w-5" />, label: "Dashboard", section: "Dashboard" },
+              { href: "/dash-admin/DashboardPage", icon: <HomeIcon className="-ml-2 h-5 w-5" />, label: "Dashboard", section: "Dashboard" },
               { href: "/dash-admin/questionBank", icon: <BookIcon className="ml-5 h-5 w-5" />, label: "Question Bank", section: "Question Bank" },
               { href: "/dash-admin/tests", icon: <FilePenIcon className="-ml-14 h-5 w-5" />, label: "Quiz", section: "Quiz" },
               { href: "/dash-admin/users", icon: <UsersIcon className=" -ml-12 h-5 w-5" />, label: "Users", section: "Users" },
@@ -64,7 +64,7 @@ export default function Sidebar({ activeSection, handleLinkClick, sidebarOpen, t
             </SheetClose>
             <nav className="grid gap-6 text-lg font-medium mt-4">
               {[
-                { href: "/dash-admin", icon: <HomeIcon className="h-5 w-5" />, label: "Dashboard", section: "Dashboard" },
+                { href: "/dash-admin/DashboardPage", icon: <HomeIcon className="h-5 w-5" />, label: "Dashboard", section: "Dashboard" },
                 { href: "/dash-admin/questionBank", icon: <BookIcon className="h-5 w-5" />, label: "Question Bank", section: "Question Banks" },
                 { href: "/dash-admin/tests", icon: <FilePenIcon className="h-5 w-5" />, label: "Quiz", section: "Quiz" },
                 { href: "/dash-admin/users", icon: <UsersIcon className="h-5 w-5" />, label: "Users", section: "Users" },
