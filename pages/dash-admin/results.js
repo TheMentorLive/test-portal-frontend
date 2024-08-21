@@ -1,16 +1,16 @@
 import Layout from './layout/layout';
 import Head from 'next/head';
 
-export default function Dashboard() {
+export default function Results() {
   return (
     <Layout>
       <Head>
-        <title>Dashboard</title>
+        <title>Results</title>
       </Head>
       <div className="flex min-h-[600px] ml-14 flex-col items-center justify-center bg-background px-4 py-12 sm:px-6 lg:px-8">
       <div className="mx-auto max-w-md text-center">
         <LoaderIcon className="mx-auto h-12 w-12 animate-spin text-primary" />
-        <h1 className="mt-4 text-3xl font-bold tracking-tight text-foreground sm:text-4xl">Dashboard</h1>
+        <h1 className="mt-4 text-3xl font-bold tracking-tight text-foreground sm:text-4xl">Results</h1>
         <p className="mt-4 text-muted-foreground">
           We're working hard to bring you a brand new experience. Please check back soon.
         </p>
