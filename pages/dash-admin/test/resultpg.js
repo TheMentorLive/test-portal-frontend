@@ -1,73 +1,74 @@
+/**
+ * v0 by Vercel.
+ * @see https://v0.dev/t/QQD0eboNsyb
+ * Documentation: https://v0.dev/docs#integrating-generated-code-into-your-nextjs-app
+ */
 import { Button } from "@/public/ui/button"
-import Navbar from "./navbar"
 
 export default function Component() {
   return (
-    <div>
-        <Navbar/>
-    <div className="flex flex-col items-center justify-center  bg-background">
-      <div className="flex flex-col items-center justify-center   bg-background">
-        <div className="flex flex-col items-center justify-center   bg-background">
-          <div className="flex flex-col items-center justify-center mt-32  bg-background">
-            <div className="flex flex-col w-full max-w-4xl p-16 bg-white rounded-lg shadow-md">
-              <div className="flex flex-col md:flex-row">
-                <div className="md:w-1/2 md:pr-16">
-                  <div className="flex flex-col items-center mb-6">
-                    <div className="flex items-center">
-                
-                    </div>
-                    <h1 className="text-4xl font-bold">Test Results</h1>
-                  </div>
-                  <div className="flex flex-col items-center justify-center h-full">
-                    
-                    <div className="mt-10 flex space-x-8">
-                      <Button className="bg-primary text-primary-foreground">Check Answers</Button>
-                      <Button variant="outline" className="border-primary text-primary">
-                        Retake Test
-                      </Button>
-                    </div>
-                  </div>
-                </div>
-                <div className="md:w-1/2 md:pl-16 md:border-l">
-                  <h2 className="mb-6 text-2xl font-semibold">Test Summary</h2>
-                  <div className="flex space-x-[100px] mb-6">
-                    <div>
-                      <p className="text-sm text-muted-foreground">Test duration</p>
-                      <p className="text-base font-medium">90 mins</p>
-                    </div>
-                    <div>
-                      <p className="text-sm text-muted-foreground">No. of questions</p>
-                      <p className="text-base font-medium">1 question</p>
-                    </div>
-                  </div>
-                  <div className="flex space-x-[140px] mb-6">
-                    <div>
-                      <p className="text-sm text-muted-foreground">Score</p>
-                      <p className="text-base font-medium text-primary">100%</p>
-                    </div >
-                    <div>
-                      <p className="text-sm text-muted-foreground">Rank</p>
-                      <p className="text-base font-medium">Top 10%</p>
-                    </div>
-                  </div>
-                  <div className="flex space-x-[75px] mb-6">
-                    <div>
-                      <p className="text-sm text-muted-foreground">Completion Time</p>
-                      <p className="text-base font-medium">60 mins</p>
-                    </div>
-                    <div>
-                      <p className="text-sm text-muted-foreground">Attempts</p>
-                      <p className="text-base font-medium">1</p>
-                    </div>
-                  </div>
-                </div>
-              </div>
+    <div className="flex min-h-[100dvh] items-center justify-center bg-background px-4 py-12 sm:px-6 lg:px-8">
+      <div className="mx-auto w-full max-w-md rounded-lg border bg-card p-6 shadow-lg">
+        <div className="grid gap-4">
+          <div className="text-center">
+            <h2 className="text-2xl font-bold">Test Results</h2>
+          </div>
+          <div className="flex items-center justify-between">
+            <div className="text-sm font-medium text-muted-foreground">Submission ID</div>
+            <div className="text-sm font-medium">ABC123</div>
+          </div>
+          <div className="flex items-center justify-between">
+            <div className="text-sm font-medium text-muted-foreground">Total Questions</div>
+            <div className="text-sm font-medium">20</div>
+          </div>
+          <div className="flex items-center justify-between">
+            <div className="text-sm font-medium text-muted-foreground">Correct Answers</div>
+            <div className="text-sm font-medium">18</div>
+          </div>
+          <div className="flex items-center justify-between">
+            <div className="text-sm font-medium text-muted-foreground">Score</div>
+            <div className="text-sm font-medium">90%</div>
+          </div>
+          <div className="flex items-center justify-between">
+            <div className="text-sm font-medium text-muted-foreground">Passed</div>
+            <div className="flex items-center gap-2">
+              <CheckIcon className="h-5 w-5 text-green-500" />
+              <span className="text-sm font-medium text-green-500">Passed</span>
             </div>
+          </div>
+          <div className="flex items-center justify-between">
+            <div className="text-sm font-medium text-muted-foreground">Evaluated At</div>
+            <div className="text-sm font-medium">June 23, 2023 at 10:30 AM</div>
+          </div>
+          <div className="flex justify-center gap-4 pt-4">
+            <Button variant="ghost" className="bg-primary text-primary-foreground hover:bg-primary/80">
+              View Answers
+            </Button>
+            <Button variant="ghost" className="bg-secondary text-secondary-foreground hover:bg-secondary/80">
+              Home
+            </Button>
           </div>
         </div>
       </div>
     </div>
-    </div>
   )
 }
 
+function CheckIcon(props) {
+  return (
+    <svg
+      {...props}
+      xmlns="http://www.w3.org/2000/svg"
+      width="24"
+      height="24"
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="2"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+    >
+      <path d="M20 6 9 17l-5-5" />
+    </svg>
+  )
+}

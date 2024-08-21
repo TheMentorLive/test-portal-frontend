@@ -14,12 +14,15 @@ import { FaLinkedin } from "react-icons/fa";
 import { isEmail } from '@/utils/validations/emailValidator';
 import { createAccount, googleSinup, linkedinSignup } from '@/redux/slices/authSlice';
 import { useDispatch } from 'react-redux';
+import { useRouter } from 'next/router';
 
 export default function Signup() {
   const dispatch = useDispatch();
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [name, setName] = useState('');
+  const router = useRouter();
+
 
   async function handleGoogleSignup(e) {
     e.preventDefault();
@@ -62,6 +65,8 @@ export default function Signup() {
     setEmail('');
     setName('');
     setPassword('');
+    router.push('/dash-admin/DashboardPage')
+
   }
 
   return (
