@@ -12,7 +12,7 @@ export default function Users() {
         <LoaderIcon className="mx-auto h-12 w-12 animate-spin text-primary" />
         <h1 className="mt-4 text-3xl font-bold tracking-tight text-foreground sm:text-4xl">Users</h1>
         <p className="mt-4 text-muted-foreground">
-          We're working hard to bring you a brand new experience. Please check back soon.
+          We&apos;re working hard to bring you a brand new experience. Please check back soon.
         </p>
       </div>
     </div>
