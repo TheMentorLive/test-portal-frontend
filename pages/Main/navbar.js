@@ -44,14 +44,14 @@ export default function Navbar() {
               About
             </Link>
           </li>
-          <li>
+          {/* <li>
             <Link
               href="/dash-admin/DashboardPage"
               className="hover:underline hover:underline-offset-4"
               prefetch={false}>
               dash
             </Link>
-          </li>
+          </li> */}
           <li>
             <Link
               href="#"
