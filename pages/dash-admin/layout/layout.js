@@ -1,13 +1,11 @@
-import Navbar from '../navbar'
+import Navbar from '../navbar';
 import Sidebar from '../sidebar';
 import { useState } from 'react';
 
 export default function Layout({ children }) {
-  const [activeSection, setActiveSection] = useState("Dashboard");
   const [sidebarOpen, setSidebarOpen] = useState(false);
 
-  const handleLinkClick = (section) => {
-    setActiveSection(section);
+  const handleLinkClick = () => {
     setSidebarOpen(false); // Close the sidebar on mobile when a link is clicked
   };
 
@@ -21,7 +19,6 @@ export default function Layout({ children }) {
 
       <div className="flex flex-1 overflow-hidden">
         <Sidebar 
-          activeSection={activeSection} 
           handleLinkClick={handleLinkClick} 
           sidebarOpen={sidebarOpen} 
           toggleSidebar={toggleSidebar} 
