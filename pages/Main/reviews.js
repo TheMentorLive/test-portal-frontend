@@ -84,11 +84,7 @@ export default function Reviews() {
     );
   };
 
-  const displayReviews = [
-    ...reviews.slice(-3), // Last 3 items
-    ...reviews, // All items
-    ...reviews.slice(0, 3) // First 3 items
-  ];
+  const displayReviews = reviews.slice(currentIndex, currentIndex + 3);
 
   return (
     <div className="flex flex-col items-center justify-center min-h-screen bg-[#eaeaea] px-4 sm:px-6 lg:px-8">
@@ -101,8 +97,8 @@ export default function Reviews() {
           <ChevronLeftIcon className="w-6 h-6 text-[#007bff]" />
         </button>
         <div className="flex-1 overflow-hidden">
-          <div className="grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-3">
-            {displayReviews.slice(currentIndex, currentIndex + 3).map((review, index) => (
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+            {displayReviews.map((review, index) => (
               <Card
                 key={index}
                 className="flex flex-col items-center p-4 bg-white shadow-lg h-auto md:h-[400px] mx-auto"

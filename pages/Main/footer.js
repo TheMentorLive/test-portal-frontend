@@ -3,6 +3,7 @@ import Link from "next/link";
 
 export default function Footer() {
   return (
+    <div className='align-middle justify-center'>
     <footer className="bg-[#e3e6f1] text-black py-6 px-4 sm:px-6 md:px-10">
       <div className="container mx-auto grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-6 md:gap-8">
         <div className="flex flex-col items-center space-y-6">
@@ -72,6 +73,7 @@ export default function Footer() {
         <p className="text-sm text-gray-700">{`\u00A9 2024 Your Company. All rights reserved.`}</p>
       </div>
     </footer>
+    </div>
   );
 }
 
