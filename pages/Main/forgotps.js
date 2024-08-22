@@ -72,6 +72,7 @@ export default function ForgotPassword() {
                 Reset Password
               </button>
             </form>
+            
 
             <div className="text-center mt-8">
               <span className="text-sm text-gray-600">Remember your password?</span>
@@ -83,12 +84,12 @@ export default function ForgotPassword() {
         </div>
         
         {/* Right side - full screen image */}
-        <div className="hidden md:flex flex-1 justify-center items-center">
+        <div className=" md:flex border border-gray-300 max-h-[500px] max-w-[600px] m-10 mt-[110px] flex-1 justify-center items-center">
           <Image
-          width={120} // Adjust width for responsiveness
-          height={110} 
-            src="/icons/forgotpass.jpg"
-            alt="Forgot Password Illustration"
+          width={999} // Adjust width for responsiveness
+          height={999} 
+            src="/forgotpass.jpg"
+            alt="Forgot Password "
             className="w-full h-full object-cover"
           />
         </div>
