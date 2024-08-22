@@ -34,7 +34,7 @@ export default function Navbar() {
   };
 
   return (
-    <header className="flex h-16 w-full items-center justify-between bg-background px-4 md:px-6 shadow-md">
+    <header className="flex h-16 w-full items-center justify-between border-b border-gray-400 bg-background px-4 md:px-6 shadow-md">
       {/* Logo and Home Link */}
       <Link href="/" className="flex items-center gap-2" prefetch={false}>
         <Image
