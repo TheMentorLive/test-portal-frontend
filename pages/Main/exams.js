@@ -9,14 +9,15 @@ export default function Exams() {
           From videos to notes to tests, providing all you need to learn and practice in one place
         </p>
       </div>
-      <div className="w-full max-w-4xl p-6 bg-white rounded-lg shadow">
+      <br/>
+      <div className="w-full max-w-4xl p-6  bg-white rounded-lg border border-opacity-40 border-blue-400 ">
         <div className="flex items-center mb-6 md:mb-8 justify-between">
           <h2 className="text-xl md:text-2xl font-semibold">50+ Entrance Exams</h2>
           <a href="#" className="text-blue-500 hover:underline">
             Explore all Exams &gt;
           </a>
         </div>
-        <div className="grid grid-cols-2 gap-4 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-6">
+        <div className="grid grid-cols-2  gap-2  md:grid-cols-3 lg:grid-cols-12 xl:grid-cols-6">
           {[
             { name: "UPSC", icon: "/icons/upsc.png" },
             { name: "CAT", icon: "/icons/cat.png" },
@@ -43,13 +44,13 @@ export default function Exams() {
           ].map((exam) => (
             <div
               key={exam.name}
-              className="flex items-center p-2 border rounded-md transition-all duration-300 ease-in-out hover:bg-primary hover:text-primary-foreground"
+              className="flex min-w-[135px] items-center border-opacity-40 border-blue-400 p-2 border rounded-md transition-all duration-300 ease-in-out hover:bg-primary hover:text-primary-foreground"
             >
               <Image 
                 src={exam.icon} 
                 alt={exam.name} 
-                width={32}       // Add width here
-                height={32}      // Add height here
+                width={400}       // Add width here
+                height={400}      // Add height here
                 className="w-8 h-8 mr-2" 
               />
               <span>{exam.name}</span>
@@ -57,7 +58,9 @@ export default function Exams() {
           ))}
         </div>
       </div>
-      <div className="w-full max-w-4xl p-6 mt-6 bg-white rounded-lg shadow">
+      <br/>
+      <br/>
+      <div className="w-full max-w-4xl p-6 mt-6 bg-white rounded-lg border border-opacity-40 border-blue-400 ">
         <div className="flex items-center justify-between mb-6 md:mb-8">
           <h2 className="text-xl md:text-2xl font-semibold">All School Classes</h2>
           <a href="#" className="text-blue-500 hover:underline">
@@ -81,7 +84,7 @@ export default function Exams() {
           ].map((exam) => (
             <div
               key={exam.name}
-              className="flex items-center p-2 border rounded-md transition-all duration-300 ease-in-out hover:bg-primary hover:text-primary-foreground"
+              className="flex items-center p-2 border border-opacity-40 border-blue-400 rounded-md transition-all duration-300 ease-in-out hover:bg-primary hover:text-primary-foreground"
             >
               <Image 
                 src={exam.icon} 
