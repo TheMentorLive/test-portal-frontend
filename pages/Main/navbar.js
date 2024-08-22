@@ -12,7 +12,7 @@ export default function Navbar() {
   };
 
   return (
-    <div className="border-b border-gray-300">
+    <div className="border-b bg-white border-gray-300">
     <header className="flex h-16 ml-48 mr-[217px] items-center justify-between bg-background px-4 md:px-6 "> {/* Added border-b and border-gray-300 */}
       {/* Logo and Home Link */}
       <Link href="/" className="flex items-center gap-2" prefetch={false}>
