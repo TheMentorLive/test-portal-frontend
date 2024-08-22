@@ -75,7 +75,7 @@ const TestsPage = () => {
             <Head>
         <title>Quiz</title>
       </Head>
-            <div className="container mx-auto p-4 md:pl-10 max-w-screen-xl"> {/* Centered container with max width */}
+            <div className="container mx-auto p-4 md:pl-10 -mt-3 max-w-screen-xl"> {/* Centered container with max width */}
                 <div className="bg-white p-6 shadow-md rounded-lg mb-6">
                     <h1 className="text-2xl font-bold text-black mb-2">Available Exams</h1>
                     <p className="text-gray-600 mb-4">Find the right exam for your preparation</p>

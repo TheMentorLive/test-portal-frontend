@@ -15,14 +15,14 @@ const TestCard = ({ test = {}, isAdmin = false }) => {
     };
 
     return (
-        <div className="bg-white border border-blue-300 shadow-md rounded-lg overflow-hidden">
-            <div className="relative h-48 overflow-hidden">
+        <div className="bg-white border border-blue-300 shadow-md rounded-lg overflow-hidden transition-transform duration-300 hover:scale-105">
+            <div className="relative h-48 overflow-hidden p-4">
                 <Image
                     src='/icons/test.png' // Ensure this path is correct
                     alt={test.type || "Test Image"} // Providing a fallback alt text
-                    width={120} // Adjust width for responsiveness
-                    height={110} // Adjust height for responsiveness
-                    className="w-full h-full object-cover transition-transform duration-300 hover:scale-110"
+                    width={400} // Adjust width for responsiveness
+                    height={400} // Adjust height for responsiveness
+                    className="w-full h-full object-cover rounded-lg" // Added rounded-lg for rounded corners
                 />
             </div>
             <div className="p-4">
