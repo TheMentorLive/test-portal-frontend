@@ -52,10 +52,10 @@ export default function Signin() {
       <Head>
         <title>SignIn</title>
       </Head>
-      <div className="flex flex-col md:flex-row min-h-screen">
+      <div className="flex flex-col  md:flex-row min-h-screen">
         {/* Left side */}
         <div className="flex-1 flex items-center justify-center p-4 md:p-8 bg-gray-100">
-          <div className="max-w-md w-full bg-card p-8 space-y-6">
+        <div className="max-w-md w-full border-2 border-gray-200 bg-card p-8 space-y-6 rounded-lg">
             <Link href="/Main" className="flex items-center gap-2 mb-4" prefetch={false}>
               <svg
                 className="w-5 h-5 text-primary"
@@ -140,13 +140,13 @@ export default function Signin() {
           </div>
         </div>
         {/* Right side */}
-        <div className="hidden md:flex flex-1 items-center justify-center -ml-40 bg-muted">
+        <div className="hidden md:flex flex-1 rounded-lg items-center justify-center -ml-40 bg-muted">
           <Image
             src="/signin.png"
             width={600}
             height={500}
             alt="Sign in"
-            className="max-w-full border-2 border-gray-200 h-[550px]"
+            className="max-w-full border-2 border-gray-200 rounded-lg h-[550px]"
           />
         </div>
       </div>

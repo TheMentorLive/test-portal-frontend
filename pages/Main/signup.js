@@ -76,8 +76,8 @@ export default function Signup() {
       </Head>
       <div className="flex flex-col md:flex-row min-h-screen bg-gray-100">
         {/* Left side */}
-        <div className="flex-1 flex items-center justify-center p-4 md:p-8">
-          <div className="w-full max-w-md bg-card p-6 md:p-8 space-y-6">
+        <div className="flex-1 flex items-center  justify-center p-4 md:p-8">
+          <div className="w-full max-w-md bg-card border-2 border-gray-200 p-6 md:p-8 rounded-lg space-y-6">
             <Link href="/Main" className="flex items-center gap-2 mb-4" prefetch={false}>
               <svg
                 className="w-5 h-5 text-primary"
@@ -177,7 +177,7 @@ export default function Signup() {
             width={600}
             height={500}
             alt="Sign in"
-            className="max-w-full border-2 border-gray-200 h-[550px]"
+            className="max-w-full  rounded-lg border-2 border-gray-200 h-[550px]"
           />
         </div>
       </div>
