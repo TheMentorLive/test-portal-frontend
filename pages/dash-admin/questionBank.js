@@ -98,7 +98,7 @@ const QuestionBankPage = () => {
       <Head>
         <title>Question Bank</title>
       </Head>
-      <div className="p-6">
+      <div className="p-6 m-20">
         {user?.role === 'admin' && (
           <button
             onClick={() => setDialogOpen(true)}
