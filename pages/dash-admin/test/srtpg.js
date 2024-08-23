@@ -104,7 +104,7 @@ function Srtpg() {
                 <li>Please ensure you have a stable internet connection.</li>
                 <li>
                   We recommend you try the{" "}
-                  <a href="#" className="text-primary underline">
+                  <a href="#">
                     sample test
                   </a>{" "}
                   for a couple of minutes before taking the main test.
