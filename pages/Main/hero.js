@@ -14,7 +14,7 @@ export default function Hero() {
             Master the Future <br/> with  <br/> GenAI Learning
             </h1>
             <p className="max-w-full md:max-w-[600px] text-green-50 text-muted-foreground md:text-xl lg:text-base xl:text-lg">
-              TheMentor offers world-class online courses and programs to help you achieve your career goals. Learn from
+            GenAI Learning offers world-class online courses and programs to help you achieve your career goals. Learn from
               industry experts and transform your future.
             </p>
             <div className="flex flex-col gap-6 md:flex-row">

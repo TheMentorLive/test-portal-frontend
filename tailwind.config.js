@@ -12,6 +12,7 @@ module.exports = {
       fontFamily: {
         heading: ['var(--font-heading)', ...fontFamily.sans],
         body: ['var(--font-body)', ...fontFamily.sans],
+          kyrial: ['Kyrial Sans Pro', 'sans-serif'],
       },
       colors: {
         border: 'hsl(var(--border))',

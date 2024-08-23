@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Card } from "@/public/ui/card";
 import { Avatar, AvatarImage, AvatarFallback } from "@/public/ui/avatar";
 import { Button } from "@/public/ui/button";
@@ -64,32 +64,68 @@ const reviews = [
   {
     name: "Bob Brown",
     designation: "Marketing Specialist",
-    image: "#",
+    image: "/reviews/re2.png",
     feedback: "Bob's review text goes here. It's persuasive and engaging.",
   },
 ];
 
-export default function Reviews() {
+export default function Re1() {
   const [currentIndex, setCurrentIndex] = useState(0);
+  const [visibleCards, setVisibleCards] = useState(1);
+  const [isAutoplay, setIsAutoplay] = useState(true);
 
   const handlePrev = () => {
     setCurrentIndex((prevIndex) =>
-      prevIndex === 0 ? reviews.length - 3 : prevIndex - 1
+      prevIndex === 0 ? reviews.length - visibleCards : prevIndex - 1
     );
   };
 
   const handleNext = () => {
     setCurrentIndex((prevIndex) =>
-      prevIndex === reviews.length - 3 ? 0 : prevIndex + 1
+      (prevIndex + 1) % reviews.length
     );
   };
 
-  const displayReviews = reviews.slice(currentIndex, currentIndex + 3);
+  useEffect(() => {
+    const updateVisibleCards = () => {
+      const screenWidth = window.innerWidth;
+      if (screenWidth >= 1024) {
+        setVisibleCards(3); // Show 3 cards on large screens
+      } else if (screenWidth >= 640) {
+        setVisibleCards(2); // Show 2 cards on medium screens
+      } else {
+        setVisibleCards(1); // Show 1 card on small screens
+      }
+    };
+
+    updateVisibleCards();
+    window.addEventListener("resize", updateVisibleCards);
+
+    return () => window.removeEventListener("resize", updateVisibleCards);
+  }, []);
+
+  useEffect(() => {
+    if (isAutoplay) {
+      const intervalId = setInterval(() => {
+        handleNext();
+      }, 5000); // Autoplay interval (5 seconds)
+
+      return () => clearInterval(intervalId);
+    }
+  }, [isAutoplay]);
+
+  // Create a looped version of the reviews array
+  const displayReviews = [...reviews, ...reviews].slice(
+    currentIndex,
+    currentIndex + visibleCards
+  );
 
   return (
-    <div className="flex flex-col items-center justify-center min-h-screen bg-[#eaeaea] px-4 sm:px-6 lg:px-8">
-      <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold mb-6 sm:mb-10 text-[#000000]">Testimonials</h2>
-      <div className="flex items-center justify-between w-full max-w-6xl gap-4">
+    <div className="flex flex-col items-center justify-center mt-32 p-20  bg-[#eaeaea]  sm:px-6 lg:px-8">
+      <h2 className="text-2xl sm:text-3xl  mb-16 md:text-4xl font-bold  sm:mb-10 text-[#000000]">
+        Testimonials
+      </h2>
+      <div className="flex items-center justify-between w-full max-w-2xl sm:max-w-4xl lg:max-w-6xl gap-4">
         <button
           onClick={handlePrev}
           className="p-2 bg-white rounded-full shadow-md hover:bg-gray-100 transition"
@@ -101,7 +137,7 @@ export default function Reviews() {
             {displayReviews.map((review, index) => (
               <Card
                 key={index}
-                className="flex flex-col items-center p-4 bg-white shadow-lg h-auto md:h-[400px] mx-auto"
+                className="flex flex-col items-center p-4 bg-white shadow-lg mx-auto"
               >
                 <Avatar className="w-24 h-24 mb-4">
                   <AvatarImage src={review.image} alt={`${review.name}'s avatar`} />
@@ -111,9 +147,7 @@ export default function Reviews() {
                 <p className="text-sm text-gray-600">{review.designation}</p>
                 <p className="mt-2 text-center text-gray-600">{review.feedback}</p>
                 <div className="flex mt-4 space-x-4">
-                  <div className="mt-14">
-                    <Button>Read More</Button>
-                  </div>
+                  <Button>Read More</Button>
                 </div>
               </Card>
             ))}
