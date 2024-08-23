@@ -33,7 +33,7 @@ export default function Navbar({name}) {
       
       <DropdownMenu>
   <DropdownMenuTrigger asChild>
-    <Button variant="outline" size="icon" className="flex items-center space-x-2">
+    <Button variant="outline" size="icon" className="flex w-[auto] items-center space-x-2">
       <Image
         src="/icons/user-logo.png"
         width={36}

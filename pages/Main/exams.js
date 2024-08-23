@@ -67,7 +67,7 @@ export default function Exams() {
             Explore all Classes &gt;
           </a>
         </div>
-        <div className="grid grid-cols-2 gap-4 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-6">
+        <div className="grid grid-cols-2 gap-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-6">
           {[
             { name: "Class 1", icon: "/icons/class1.png" },
             { name: "Class 2", icon: "/icons/class2.png" },
@@ -89,8 +89,8 @@ export default function Exams() {
               <Image 
                 src={exam.icon} 
                 alt={exam.name} 
-                width={32}       // Add width here
-                height={32}      // Add height here
+                width={400}       // Add width here
+                height={400}      // Add height here
                 className="w-8 h-8 mr-2" 
               />
               <span>{exam.name}</span>
