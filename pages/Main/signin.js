@@ -75,7 +75,7 @@ export default function Component() {
               </Link>
               <h1 className="text-3xl font-bold text-gray-900 text-center">Sign In</h1>
               <p className="text-gray-600 text-center">
-                Don't have an account?{" "}
+                Don&apos;t have an account?{" "}
                 <Link href="/Main/signup" className="text-primary hover:underline" prefetch={false}>
                   Create one
                 </Link>
