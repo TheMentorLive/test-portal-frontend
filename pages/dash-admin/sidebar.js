@@ -38,12 +38,12 @@ function Sidebar({ handleLinkClick, sidebarOpen, toggleSidebar }) {
 
   const adminLinks = [
     { href: "/dash-admin/DashboardPage", icon: <HomeIcon className="ml-4 h-5 w-5" />, label: "Dashboard", section: "Dashboard" },
-    { href: "/dash-admin/questionBank", icon: <BookIcon className="ml-4 h-5 w-5" />, label: "Question Bank", section: "Question Bank" },
+    { href: "/dash-admin/questionBank", icon: <BookIcon className="ml-4 h-5 w-5" />, label: "Question Bank", section: "Question Bank" }, 
+    { href: "/dash-admin/users", icon: <UsersIcon className="ml-4 h-5 w-5" />, label: "Users", section: "Users" },
   ];
 
   const commonLinks = [
     { href: "/dash-admin/tests", icon: <FilePenIcon className="ml-4 h-5 w-5" />, label: "Quiz", section: "Quiz" },
-    { href: "/dash-admin/users", icon: <UsersIcon className="ml-4 h-5 w-5" />, label: "Users", section: "Users" },
     { href: "/dash-admin/results", icon: <LineChartIcon className="ml-4 h-5 w-5" />, label: "Results", section: "Results" }
   ];
 
