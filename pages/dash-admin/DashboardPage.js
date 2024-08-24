@@ -256,35 +256,35 @@ import { useRouter } from 'next/router'
           </Card>
 
           {/* Test Popularity Pie Chart */}
-          <Card className="animate-fade-in" style={{ animationDelay: '0.7s' }}>
-            <CardHeader>
-              <CardTitle className="text-xl font-bold text-blue-800">Top 5 Popular Tests</CardTitle>
-            </CardHeader>
-            <CardContent>
-              <div className="h-80 w-full">
-                <ResponsiveContainer width="100%" height="100%">
-                  <PieChart>
-                    <Pie
-                      data={testPopularityData}
-                      cx="50%"
-                      cy="50%"
-                      labelLine={false}
-                      outerRadius={80}
-                      fill="#8884d8"
-                      dataKey="value"
-                      label={({ name, percent }) => `${name} ${(percent * 100).toFixed(0)}%`}
-                    >
-                      {testPopularityData.map((entry, index) => (
-                        <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />
-                      ))}
-                    </Pie>
-                    <Tooltip />
-                    <Legend />
-                  </PieChart>
-                </ResponsiveContainer>
-              </div>
-            </CardContent>
-          </Card>
+          <Card className="animate-fade-in mb-8" style={{ animationDelay: '0.7s' }}>
+  <CardHeader className="px-4 py-2 bg-gray-100">
+    <CardTitle className="text-xl font-bold text-blue-800">Top 5 Popular Tests</CardTitle>
+  </CardHeader>
+  <CardContent className="p-4">
+    <div className="h-80 w-full">
+      <ResponsiveContainer width="100%" height="100%">
+        <PieChart>
+          <Pie
+            data={testPopularityData}
+            cx="50%"
+            cy="50%"
+            outerRadius={80}
+            fill="#8884d8"
+            dataKey="value"
+            label={({ name, percent }) => `${name} ${(percent * 100).toFixed(0)}%`}
+          >
+            {testPopularityData.map((entry, index) => (
+              <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />
+            ))}
+          </Pie>
+          <Tooltip />
+          <Legend />
+        </PieChart>
+      </ResponsiveContainer>
+    </div>
+  </CardContent>
+</Card>
+
         </div>
 
        {/* User Management */}
