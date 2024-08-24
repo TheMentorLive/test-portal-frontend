@@ -112,7 +112,7 @@ export default function Component() {
                   <CartesianGrid vertical={false} />
                   <XAxis dataKey="month" tickLine={false} axisLine={false} tickMargin={8} />
                   <ChartTooltip cursor={false} content={<ChartTooltipContent indicator="dot" hideLabel />} />
-                  <Bar dataKey="sales" type="natural" fill="var(--color-revenue)" strokeWidth={2} radius={4} />
+                  <Bar dataKey="sales" type="natural" fill='rgb(59, 130, 246)' strokeWidth={2} radius={4} />
                 </BarChart>
               </ChartContainer>
             </CardContent>
@@ -175,7 +175,7 @@ export default function Component() {
                   <Line
                     dataKey="users"
                     type="natural"
-                    stroke="var(--color-users)"
+                    stroke="rgb(59, 130, 246)"
                     strokeWidth={2}
                     dot={{ r: 4, fillOpacity: 1 }}
                   />
