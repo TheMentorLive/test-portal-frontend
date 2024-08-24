@@ -57,7 +57,7 @@ export default function Signin() {
       <Head>
         <title>SignIn</title>
       </Head>
-      <div  className="flex flex-col  md:flex-row min-h-screen">
+      <div  className="flex flex-col  items-center justify-center -ml-24 md:flex-row min-h-screen">
         {/* Left side */}
         <div className="flex-1 flex items-center justify-center p-4 md:p-8 bg-gray-100">
         <div className="max-w-md w-full border-2 border-gray-200 bg-card p-8 space-y-6 rounded-lg">
@@ -145,13 +145,13 @@ export default function Signin() {
           </div>
         </div>
         {/* Right side */}
-        <div className="hidden md:flex flex-1 rounded-lg items-center justify-center -ml-40 bg-muted">
+        <div className="hidden md:flex flex-1 rounded-lg items-center justify-center -ml-56 bg-muted">
           <Image
             src="/signin.png"
             width={600}
             height={500}
             alt="Sign in"
-            className="max-w-full border-2 border-gray-200 rounded-lg h-[550px]"
+            className="max-w-full border-2 border-gray-200 -ml-20 rounded-lg h-[550px]"
           />
         </div>
       </div>
