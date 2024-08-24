@@ -117,7 +117,7 @@ function Sidebar({ handleLinkClick, sidebarOpen, toggleSidebar }) {
       <div className="sm:hidden">
         <Sheet open={sidebarOpen} onOpenChange={toggleSidebar}>
           <SheetTrigger asChild>
-            <Button size="icon" variant="outline" className="fixed bottom-4 right-4 z-50 rounded-full w-12 h-12 shadow-lg">
+            <Button size="icon" variant="outline" className="fixed top-20 left-4 z-50 rounded-full w-12 h-12 shadow-lg">
               <MenuIcon className="h-6 w-6" />
               <span className="sr-only">Toggle Menu</span>
             </Button>
@@ -127,9 +127,9 @@ function Sidebar({ handleLinkClick, sidebarOpen, toggleSidebar }) {
               <div className="flex justify-between items-center p-4 border-b">
                 <h2 className="text-lg font-semibold">Menu</h2>
                 <SheetClose asChild>
-                  <Button variant="ghost" size="icon">
+                  <Button variant="ghost" className="-mt-52" size="icon">
                     <span className="sr-only">Close</span>
-                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="lucide lucide-x"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg>
+                    
                   </Button>
                 </SheetClose>
               </div>
