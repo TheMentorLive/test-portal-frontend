@@ -16,7 +16,7 @@ const TestCard = ({ test = {}, isAdmin = false }) => {
     const handlePayment = async (test) => {
         try {
             // Dispatching the purchaseTest action to get the order response
-            const response = await dispatch(purchaseTest({ amount: test.price }));
+            const response = await dispatch(purchaseTest({ amount: test?.price }));
             const orderData = response?.payload?.data;
 
             if (!orderData) {
@@ -40,7 +40,7 @@ const TestCard = ({ test = {}, isAdmin = false }) => {
                 description: "Test Transaction",
                 image: "https://media.licdn.com/dms/image/v2/C4E0BAQHekeqCPnvCcQ/company-logo_200_200/company-logo_200_200/0/1630635152075/thementorlive_logo?e=1732752000&v=beta&t=-WRiuUdSQyqM_grePkOivEMrzB4_gzHBhaPN9WHpw5w",
                 order_id: orderData?.id, // Ensuring order ID is present
-                callback_url: "http://localhost:8000/api/v1/payment/verify",
+                callback_url: "https://test-platform-backend.onrender.com/api/v1/payment/verify",
                 notes: {
                     "address": "Bangalore, Karnataka" // You can add as many custom notes as you like
                 },
@@ -52,7 +52,6 @@ const TestCard = ({ test = {}, isAdmin = false }) => {
                     paymentDetails.razorpay_order_id = response.razorpay_order_id;
                     paymentDetails.razorpay_signature = response.razorpay_signature;
                     const res = await dispatch(verifyUserPayment({ ...paymentDetails, testId: test._id }));
-                    console.log("res is ",res);
                     res?.payload?.success ? window.location.reload() : router.push('/checkout/failure');
                 }
             };
@@ -83,7 +82,7 @@ const TestCard = ({ test = {}, isAdmin = false }) => {
     }
 
     const handleDelete = async(id) => {
-        const continueDelete = window?.confirm("Are you sure you want to delete this test?");
+        const continueDelete = confirm("Are you sure you want to delete this test?");
         if (!continueDelete) return;
         await dispatch(deleteTest(id));
         // Handle delete logic here

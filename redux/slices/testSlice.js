@@ -98,7 +98,7 @@ const testSlice = createSlice({
             state.test = null;
         })
         .addCase(fetchAllTests.fulfilled, (state, action) => {
-            state.testList = [...action.payload?.data];
+            state.testList = action.payload?.data;
         })
         .addCase(isElgibleForTest.fulfilled, (state, action) => {
             state.allowedTests = action.payload?.data?.payment;

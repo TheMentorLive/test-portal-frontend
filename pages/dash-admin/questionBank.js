@@ -6,7 +6,7 @@ import Head from 'next/head';
 import Layout from './layout/layout';
 import { FaTrash, FaPlus, FaEye } from 'react-icons/fa';
 import { useDispatch, useSelector } from 'react-redux';
-import { createQuestion, getQuestions , deleteQuestion } from '@/redux/slices/questionSlice';
+import { createQuestion, getQuestions } from '@/redux/slices/questionSlice';
 import dynamic from 'next/dynamic';
 
 const QuestionBankPage = () => {
@@ -84,14 +84,6 @@ const QuestionBankPage = () => {
     }
   };
 
-  const handleDeleteQuestion = async (id) => {
-    try {
-      const response = await dispatch(deleteQuestion(id));
-      dispatch(getQuestions()); // Refresh questions list
-    } catch (error) {
-      console.error('Error deleting question:', error);
-    }
-  };
 
   return (
     <Layout>
@@ -160,14 +152,6 @@ const QuestionBankPage = () => {
                   >
                     <FaEye /> View More
                   </button>
-                  {user?.role === 'admin' && (
-                    <button
-                      onClick={() => handleDeleteQuestion(question._id)}
-                      className="bg-red-500 text-white hover:bg-red-600 px-4 py-2 rounded flex items-center gap-2"
-                    >
-                      <FaTrash /> Delete
-                    </button>
-                  )}
                 </div>
               </div>
             ))}

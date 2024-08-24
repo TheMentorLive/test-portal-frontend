@@ -5,17 +5,27 @@ import { Sheet, SheetTrigger, SheetContent, SheetClose } from "@/public/ui/sheet
 import { Button } from "@/public/ui/button";
 import { HomeIcon, LineChartIcon, FilePenIcon, SettingsIcon, BookIcon, UsersIcon, MenuIcon } from '../../public/icons/icons-dash';
 import { useSelector } from 'react-redux';
-import  dynamic  from 'next/dynamic';
-import { useEffect } from 'react';
+import dynamic from 'next/dynamic';
+import { useEffect, useState } from 'react';
 
- function Sidebar({ handleLinkClick, sidebarOpen, toggleSidebar }) {
+function Sidebar({ handleLinkClick, sidebarOpen, toggleSidebar }) {
   const router = useRouter();
   const isAdmin = useSelector((state) => {
     return state.auth?.data?.data?.user?.role === 'admin';
   });
-  const currentPath = router.pathname;
+  const [isMobile, setIsMobile] = useState(false);
+
+  useEffect(() => {
+    const handleResize = () => {
+      setIsMobile(window.innerWidth < 640);
+    };
+    handleResize();
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
+  }, []);
 
   const getActiveSection = () => {
+    const currentPath = router.pathname;
     if (currentPath.includes('/dash-admin/questionBank')) return 'Question Bank';
     if (currentPath.includes('/dash-admin/tests')) return 'Quiz';
     if (currentPath.includes('/dash-admin/users')) return 'Users';
@@ -40,7 +50,7 @@ import { useEffect } from 'react';
   return (
     <>
       {/* Desktop Sidebar */}
-      <aside className={`fixed inset-y-0 mt-[65px] left-0 z-10 hidden sm:flex flex-col border-r-2 border-gray-300 bg-background w-36 sm:w-52 transition-transform duration-300`}>
+      <aside className={`fixed inset-y-0 mt-[65px] left-0 z-10 hidden sm:flex flex-col border-r-2 border-gray-300 bg-background w-36 sm:w-52 transition-transform duration-300 ${sidebarOpen ? 'translate-x-0' : '-translate-x-full sm:translate-x-0'}`}>
         <nav className="flex flex-col items-center gap-4 px-2 sm:py-5 w-full">
           <TooltipProvider>
             {isAdmin && adminLinks.map((item) => (
@@ -56,7 +66,7 @@ import { useEffect } from 'react';
                     onClick={() => handleLinkClick(item.section)}
                   >
                     {item.icon}
-                    <span>{item.label}</span>
+                    <span className="hidden sm:inline">{item.label}</span>
                   </Link>
                 </TooltipTrigger>
               </Tooltip>
@@ -74,7 +84,7 @@ import { useEffect } from 'react';
                     onClick={() => handleLinkClick(item.section)}
                   >
                     {item.icon}
-                    <span>{item.label}</span>
+                    <span className="hidden sm:inline">{item.label}</span>
                   </Link>
                 </TooltipTrigger>
               </Tooltip>
@@ -95,7 +105,7 @@ import { useEffect } from 'react';
                   prefetch={false}
                 >
                   <SettingsIcon className="ml-4 h-5 w-5" />
-                  <span>Settings</span>
+                  <span className="hidden sm:inline">Settings</span>
                 </Link>
               </TooltipTrigger>
             </Tooltip>
@@ -105,53 +115,83 @@ import { useEffect } from 'react';
 
       {/* Mobile Sidebar */}
       <div className="sm:hidden">
-        <Sheet>
+        <Sheet open={sidebarOpen} onOpenChange={toggleSidebar}>
           <SheetTrigger asChild>
-            <Button size="icon" variant="outline" onClick={toggleSidebar}>
-              <MenuIcon className="h-5 w-5" />
+            <Button size="icon" variant="outline" className="fixed bottom-4 right-4 z-50 rounded-full w-12 h-12 shadow-lg">
+              <MenuIcon className="h-6 w-6" />
               <span className="sr-only">Toggle Menu</span>
             </Button>
           </SheetTrigger>
-          <SheetContent side="left" className="sm:max-w-xs p-4 bg-background">
-            <SheetClose asChild>
-              <Button variant="ghost" className="self-end">
-                Close
-              </Button>
-            </SheetClose>
-            <nav className="grid gap-6 text-lg font-medium mt-4">
-              {isAdmin && adminLinks.map((item) => (
-                <Link 
-                  key={item.label} 
-                  href={item.href} 
-                  className={`flex items-center gap-4 px-2.5 transition-colors w-full ${
-                    activeSection === item.section 
-                      ? 'font-bold text-white bg-blue-500' 
-                      : 'text-muted-foreground hover:text-foreground'
-                  }`} 
-                  onClick={() => handleLinkClick(item.section)}
-                  prefetch={false}
-                >
-                  {item.icon}
-                  {item.label}
-                </Link>
-              ))}
-              {commonLinks.map((item) => (
-                <Link 
-                  key={item.label} 
-                  href={item.href} 
-                  className={`flex items-center gap-4 px-2.5 transition-colors w-full ${
-                    activeSection === item.section 
-                      ? 'font-bold text-white bg-blue-500' 
-                      : 'text-muted-foreground hover:text-foreground'
-                  }`} 
-                  onClick={() => handleLinkClick(item.section)}
-                  prefetch={false}
-                >
-                  {item.icon}
-                  {item.label}
-                </Link>
-              ))}
-            </nav>
+          <SheetContent side="left" className="w-[80vw] sm:max-w-xs p-0 bg-background">
+            <div className="flex flex-col h-full">
+              <div className="flex justify-between items-center p-4 border-b">
+                <h2 className="text-lg font-semibold">Menu</h2>
+                <SheetClose asChild>
+                  <Button variant="ghost" size="icon">
+                    <span className="sr-only">Close</span>
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="lucide lucide-x"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg>
+                  </Button>
+                </SheetClose>
+              </div>
+              <nav className="flex-1 overflow-y-auto">
+                <div className="grid gap-4 p-4">
+                  {isAdmin && adminLinks.map((item) => (
+                    <Link 
+                      key={item.label} 
+                      href={item.href} 
+                      className={`flex items-center gap-4 p-2 rounded-lg transition-colors w-full ${
+                        activeSection === item.section 
+                          ? 'font-bold text-white bg-blue-500' 
+                          : 'text-muted-foreground hover:text-foreground'
+                      }`} 
+                      onClick={() => {
+                        handleLinkClick(item.section);
+                        toggleSidebar();
+                      }}
+                      prefetch={false}
+                    >
+                      {item.icon}
+                      {item.label}
+                    </Link>
+                  ))}
+                  {commonLinks.map((item) => (
+                    <Link 
+                      key={item.label} 
+                      href={item.href} 
+                      className={`flex items-center gap-4 p-2 rounded-lg transition-colors w-full ${
+                        activeSection === item.section 
+                          ? 'font-bold text-white bg-blue-500' 
+                          : 'text-muted-foreground hover:text-foreground'
+                      }`} 
+                      onClick={() => {
+                        handleLinkClick(item.section);
+                        toggleSidebar();
+                      }}
+                      prefetch={false}
+                    >
+                      {item.icon}
+                      {item.label}
+                    </Link>
+                  ))}
+                  <Link 
+                    href="/dash-admin/profile" 
+                    className={`flex items-center gap-4 p-2 rounded-lg transition-colors w-full ${
+                      activeSection === 'Settings' 
+                        ? 'font-bold text-white bg-blue-500' 
+                        : 'text-muted-foreground hover:text-foreground'
+                    }`} 
+                    onClick={() => {
+                      handleLinkClick('Settings');
+                      toggleSidebar();
+                    }}
+                    prefetch={false}
+                  >
+                    <SettingsIcon className="ml-4 h-5 w-5" />
+                    <span>Settings</span>
+                  </Link>
+                </div>
+              </nav>
+            </div>
           </SheetContent>
         </Sheet>
       </div>

@@ -2,7 +2,6 @@
 
 import { useState } from 'react';
 import toast from 'react-hot-toast';
-import Image from 'next/image';
 import Link from "next/link";
 import { Label } from "@/public/ui/label";
 import { Input } from "@/public/ui/input";
@@ -14,7 +13,7 @@ import { FaLinkedin } from "react-icons/fa";
 import { isEmail } from '@/utils/validations/emailValidator';
 import { createAccount, googleSinup, linkedinSignup } from '@/redux/slices/authSlice';
 import { useDispatch } from 'react-redux';
-import { useRouter } from 'next/router';
+import { useRouter } from 'next/navigation';
 
 export default function Signup() {
   const dispatch = useDispatch();
@@ -23,11 +22,9 @@ export default function Signup() {
   const [name, setName] = useState('');
   const router = useRouter();
 
-
   async function handleGoogleSignup(e) {
     e.preventDefault();
     const response = await dispatch(googleSinup());
-    console.log(response);
     if (response.payload?.data?.status === 200) {
       toast.success(response.payload.data.message);
     }
@@ -35,8 +32,7 @@ export default function Signup() {
 
   async function handleLinkedinSignup(e) {
     e.preventDefault();
-    const response = await dispatch(linkedinSignup());
-    console.log(response);
+    await dispatch(linkedinSignup());
   }
 
   async function handleRegister(e) {
@@ -54,53 +50,46 @@ export default function Signup() {
       return;
     }
 
-    const formData = new FormData();
-    formData.append("name", name);
-    formData.append("email", email);
-    formData.append("password", password);
-
-    console.log("Form data", formData);
     const response = await dispatch(createAccount({ name, email, password }));
-    console.log(response);
     setEmail('');
     setName('');
     setPassword('');
     router.push('/dash-admin/tests');
-
   }
 
   return (
     <Layout>
       <Head>
-        <title>SignUp</title>
+        <title>Sign Up</title>
       </Head>
-      <div className="flex flex-col md:flex-row min-h-screen bg-gray-100">
-        {/* Left side */}
-        <div className="flex-1 flex items-center  justify-center p-4 md:p-8">
-          <div className="w-full max-w-md bg-card border-2 border-gray-200 p-6 md:p-8 rounded-lg space-y-6">
-            <Link href="/Main" className="flex items-center gap-2 mb-4" prefetch={false}>
-              <svg
-                className="w-5 h-5 text-primary"
-                xmlns="http://www.w3.org/2000/svg"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                strokeWidth="2"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-              >
-                <path d="M15 18l-6-6 6-6" />
-              </svg>
-              <span className="text-primary underline">Back</span>
-            </Link>
-            <h1 className="text-2xl md:text-3xl font-bold">Create an Account</h1>
-            <p className="text-muted-foreground text-sm md:text-base">
-              Already have an account?{" "}
-              <Link href="/Main/signin" className="text-primary underline" prefetch={false}>
-                Sign in
+      <div className="flex items-center justify-center min-h-screen bg-gradient-to-br from-blue-100 to-purple-100 p-4">
+        <div className="w-full max-w-md bg-white rounded-lg shadow-xl overflow-hidden">
+          <div className="p-6 sm:p-8 space-y-6">
+            <div className="flex flex-col items-center space-y-4">
+              <Link href="/Main" className="self-start flex items-center gap-2 text-primary hover:underline" prefetch={false}>
+                <svg
+                  className="w-5 h-5"
+                  xmlns="http://www.w3.org/2000/svg"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  strokeWidth="2"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                >
+                  <path d="M15 18l-6-6 6-6" />
+                </svg>
+                <span>Back</span>
               </Link>
-            </p>
-            <form className="space-y-4" noValidate>
+              <h1 className="text-2xl sm:text-3xl font-bold text-gray-900 text-center">Create an Account</h1>
+              <p className="text-gray-600 text-sm sm:text-base text-center">
+                Already have an account?{" "}
+                <Link href="/Main/signin" className="text-primary hover:underline" prefetch={false}>
+                  Sign in
+                </Link>
+              </p>
+            </div>
+            <form className="space-y-4" onSubmit={handleRegister} noValidate>
               <div className="space-y-2">
                 <Label htmlFor="name">Name</Label>
                 <Input
@@ -109,7 +98,7 @@ export default function Signup() {
                   value={name}
                   onChange={(e) => setName(e.target.value)}
                   required
-                  className="py-2 px-3 md:py-3 md:px-4" // Adjust padding for responsiveness
+                  className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-primary"
                 />
               </div>
               <div className="space-y-2">
@@ -121,7 +110,7 @@ export default function Signup() {
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
                   required
-                  className="py-2 px-3 md:py-3 md:px-4" // Adjust padding for responsiveness
+                  className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-primary"
                 />
               </div>
               <div className="space-y-2">
@@ -133,52 +122,43 @@ export default function Signup() {
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
                   required
-                  className="py-2 px-3 md:py-3 md:px-4" // Adjust padding for responsiveness
+                  className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-primary"
                 />
               </div>
               <Button
                 type="submit"
-                className="w-full"
-                onClick={handleRegister}
+                className="w-full bg-primary text-white hover:bg-primary-dark"
               >
                 Sign Up
               </Button>
             </form>
             <div className="relative">
-              <div className="absolute inset-0 flex items-center" aria-hidden="true">
+              <div className="absolute inset-0 flex items-center">
                 <div className="w-full border-t border-gray-300"></div>
               </div>
-              <div className="relative flex justify-center text-sm font-medium bg-card">
-                <span className="bg-card px-2 text-gray-500">Or Sign Up with</span>
+              <div className="relative flex justify-center text-sm">
+                <span className="px-2 bg-white text-gray-500">Or Sign Up with</span>
               </div>
             </div>
-            <div className="flex flex-col sm:flex-row gap-4">
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
               <Button
                 onClick={handleGoogleSignup}
                 variant="outline"
-                className="py-6 flex items-center justify-center gap-1"
+                className="py-2 px-4 flex items-center justify-center gap-2 border border-gray-300 rounded-md hover:bg-gray-50 transition-colors"
               >
-                <FcGoogle className='align-middle text-2xl' /> <span> Sign Up with Google </span>
+                <FcGoogle className="text-xl" />
+                <span>Google</span>
               </Button>
               <Button
                 onClick={handleLinkedinSignup}
                 variant="outline"
-                className="py-6 flex items-center justify-center gap-1"
+                className="py-2 px-4 flex items-center justify-center gap-2 border border-gray-300 rounded-md hover:bg-gray-50 transition-colors"
               >
-                <FaLinkedin className='align-middle text-2xl' /> <span> Sign Up with LinkedIn </span>
+                <FaLinkedin className="text-xl text-[#0A66C2]" />
+                <span>LinkedIn</span>
               </Button>
             </div>
           </div>
-        </div>
-        {/* Right side */}
-        <div className="hidden md:flex flex-1 items-center justify-center -ml-40 bg-muted">
-          <Image
-            src="/signin.png"
-            width={600}
-            height={500}
-            alt="Sign in"
-            className="max-w-full  rounded-lg border-2 border-gray-200 h-[550px]"
-          />
         </div>
       </div>
     </Layout>

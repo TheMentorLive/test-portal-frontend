@@ -124,7 +124,23 @@ export const resetPassword = createAsyncThunk('/auth/resetPassword',async(data)=
     toast.error('Network Error While updating your password');
     return false;
   }
-}) 
+})
+
+export const deleteUser = createAsyncThunk('/auth/deleteUser', async (data, { rejectWithValue }) => {
+  try {
+    console.log("data is",data);
+    const response =  axiosInstance.delete(`/users/${data}`);
+    toast.promise(response, {
+      loading: 'Deleting your account...',
+      success: 'Account deleted successfully!',
+      error: 'Failed to delete account'
+    });
+    return true;
+  } catch (e) {
+    toast.error(e?.response?.data?.message || 'An error occurred');
+    return rejectWithValue(e?.response?.data || 'An error occurred');
+  }
+});
 
 const authSlice = createSlice({
   name: "auth",
