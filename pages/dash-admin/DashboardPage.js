@@ -28,9 +28,9 @@ function Dashboard() {
           <h1 className="mt-4 text-3xl font-bold tracking-tight text-foreground sm:text-4xl">Dashboard</h1>
           <p className="mt-4 text-muted-foreground">
             We&apos;re working hard to bring you a brand new experience. Please check back soon.
-            { allUsers.count && <span> There are {allUsers.count} users</span> }
-            { Payments && <span> There are {Payments} payments</span> }
-            { testList.length && <span> There are {testList.length} tests</span> }
+            { allUsers?.count && <span> There are {allUsers?.count} users</span> }
+            { Payments && <span> There are  payments</span> }
+            { testList?.length && <span> There are {testList?.length} tests</span> }
           </p>
         </div>
       </div>
