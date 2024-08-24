@@ -5,6 +5,7 @@ import dynamic from 'next/dynamic';
 import Head from 'next/head';
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchAllTests,isElgibleForTest } from '@/redux/slices/testSlice';
+import Script from 'next/script';
 
 const TestsPage = () => {
     const [tests, setTests] = useState([]);
@@ -102,6 +103,10 @@ const TestsPage = () => {
                     )}
                 </div>
             </div>
+            <Script
+             src="https://checkout.razorpay.com/v1/checkout.js"
+             strategy="afterInteractive"
+            />
         </Layout>
     );
 };
