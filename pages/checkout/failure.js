@@ -26,7 +26,7 @@ export default function PaymentFailure() {
           
           <div className="space-y-4">
             <p className="text-gray-600 text-center">
-              We're sorry, but we couldn't process your payment at this time.
+              We&apos;re sorry, but we couldn&apos;t process your payment at this time.
             </p>
             
             <div className="bg-blue-50 border-l-4 border-blue-500 p-4 rounded">

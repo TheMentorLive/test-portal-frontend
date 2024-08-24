@@ -115,7 +115,7 @@ import { useRouter } from 'next/router'
             <LoaderIcon className="mx-auto h-12 w-12 animate-spin text-primary" />
             <h1 className="mt-4 text-3xl font-bold tracking-tight text-foreground sm:text-4xl">Loading Dashboard</h1>
             <p className="mt-4 text-muted-foreground">
-              We're fetching the latest data for you. Please wait a moment.
+              We&apos;re fetching the latest data for you. Please wait a moment.
             </p>
           </div>
         </div>
