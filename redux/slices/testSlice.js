@@ -11,7 +11,6 @@ const intialState = {
 export const fetchTest = createAsyncThunk('test/fetchTest', async (id) => {
     try {
         const response = await axiosInstance.get(`/tests/${id}`);
-        console.log(response.data);
         return response.data;
     } catch (error) {
         toast.error('Failed to fetch test');   
@@ -34,12 +33,24 @@ export const fetchAllTests = createAsyncThunk('test/fetchAllTests', async () => 
 
 export const isElgibleForTest = createAsyncThunk('test/isElgibleForTest', async (id) => {
     try {
-        console.log("id",id);
         const response = await axiosInstance.post(`/payment/is-elgiblefor-test`,{testId:id});
-        console.log(response.data);
         return response.data;
     } catch (error) {
         toast.error('Failed to check eligibility');   
+    }
+});
+
+export const createTest = createAsyncThunk('test/createTest', async (data) => {
+    try {
+        const response =  axiosInstance.post('/tests/create', data);
+        toast.promise(Promise.resolve(response), {
+            loading: 'Creating test...',
+            success: 'Test created successfully',
+            error: 'Failed to create test'
+        });
+        return true;
+    } catch (error) {
+        toast.error('Failed to create test');  
     }
 });
 
@@ -54,6 +65,20 @@ export const submitTest = createAsyncThunk('test/submitTest', async (data) => {
         return true;
     } catch (error) {
         toast.error('Failed to submit test');  
+    }
+});
+
+export const deleteTest = createAsyncThunk('test/deleteTest', async (id) => {
+    try {
+        const response =  axiosInstance.delete(`/tests/${id}`);
+        toast.promise(response, {
+            loading: 'Deleting test...',
+            success: 'Test deleted successfully',
+            error: 'Failed to delete test'
+        });
+        return true;
+    } catch (error) {
+        toast.error('Failed to delete test');  
     }
 });
 
@@ -73,11 +98,9 @@ const testSlice = createSlice({
             state.test = null;
         })
         .addCase(fetchAllTests.fulfilled, (state, action) => {
-            console.log("action",action.payload);
             state.testList = [...action.payload?.data];
         })
         .addCase(isElgibleForTest.fulfilled, (state, action) => {
-            console.log("action e",action.payload);
             state.allowedTests = action.payload?.data?.payment;
         })
     }

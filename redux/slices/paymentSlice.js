@@ -14,7 +14,6 @@ const initialState = {
 export const getRazorPayId = createAsyncThunk("/razorPay/getId" , async () => {
     try {
         const response = await axiosInstance.get("/payment/getrazorpaykey");
-        console.log("razorpayid",await response.data);
         return response.data;
     } catch (error){
         toast.error("failed to get the razorpay key.");
@@ -24,7 +23,6 @@ export const getRazorPayId = createAsyncThunk("/razorPay/getId" , async () => {
 export const purchaseTest = createAsyncThunk("/purchaseTes" , async (data) => {
     try {
         const response = await axiosInstance.post("/payment/checkout",{...data});
-        // console.log("purchaseTest",await response.data);
         return  response.data;
     } catch (error){
         toast.error(error?.response?.data?.message);
@@ -44,7 +42,6 @@ export const getPaymentRecord = createAsyncThunk("/payments/record" , async () =
 export const verifyUserPayment = createAsyncThunk("/payment/verify" , async (data) => {
     try {
         const response = await axiosInstance.post("/payment/verify",data);
-        console.log("verifyUserPayment",await response.data);
         return response.data;
     } catch (error){
         toast.error(error?.data?.message);
@@ -61,15 +58,12 @@ const razorPaySlice = createSlice({
             state.key = action?.payload?.data?.key;
         })
         .addCase(purchaseTest.fulfilled, (state, action) => {
-            console.log("payements: razorpay", action?.payload?.data);
             state.orderResponse = {...action?.payload?.data};
         })
         .addCase(getPaymentRecord.fulfilled, (state, action) => {
-            console.log("payents: razorpay", action?.payload?.allPayments);
             state.allPayments = action?.payload?.allPayments;
             state.finalMonths = action?.payload?.finalMonths;
             state.monthlySalesRecord = action?.payload?.monthlySalesRecord;
-            console.log(action?.payload);
         })
 
     }

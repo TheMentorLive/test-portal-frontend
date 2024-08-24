@@ -4,6 +4,7 @@ import { useRouter } from 'next/router';
 import Image from 'next/image';
 import { getRazorPayId, purchaseTest, verifyUserPayment } from '@/redux/slices/paymentSlice';
 import { useDispatch, useSelector } from 'react-redux';
+import { deleteTest } from '@/redux/slices/testSlice';
 
 const TestCard = ({ test = {}, isAdmin = false }) => {
     const router = useRouter();
@@ -81,6 +82,14 @@ const TestCard = ({ test = {}, isAdmin = false }) => {
         return allowedTests.some((allowedTest) => allowedTest.testId === test._id);
     }
 
+    const handleDelete = async(id) => {
+        const continueDelete = window?.confirm("Are you sure you want to delete this test?");
+        if (!continueDelete) return;
+        await dispatch(deleteTest(id));
+        // Handle delete logic here
+        window.location.reload();
+    }
+
     return (
         <div className="bg-white border border-blue-300 shadow-md rounded-lg overflow-hidden transition-transform duration-300 hover:scale-105">
             <div className="relative h-48 overflow-hidden p-4">
@@ -108,7 +117,9 @@ const TestCard = ({ test = {}, isAdmin = false }) => {
 
                 {/* Conditional rendering of buttons */}
                 {isAdmin ? (
-                    <button className="bg-red-600 text-white flex items-center justify-center px-4 py-2 rounded-md mt-4 hover:bg-red-700 transition-colors w-full">
+                    <button 
+                    onClick={() => handleDelete(test._id)}
+                    className="bg-red-600 text-white flex items-center justify-center px-4 py-2 rounded-md mt-4 hover:bg-red-700 transition-colors w-full">
                         <FaTrash className="mr-2" /> {/* Using react-icons for delete symbol */}
                         Delete
                     </button>

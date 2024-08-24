@@ -6,6 +6,7 @@ import Head from 'next/head';
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchAllTests,isElgibleForTest } from '@/redux/slices/testSlice';
 import Script from 'next/script';
+import { useRouter } from 'next/router';
 
 const TestsPage = () => {
     const [tests, setTests] = useState([]);
@@ -16,13 +17,13 @@ const TestsPage = () => {
     const [filteredTests, setFilteredTests] = useState([]);
     const [filterType, setFilterType] = useState(''); // For filtering by type
     const dispatch = useDispatch();
+    const router = useRouter();
 
     useEffect(() => {
         // Fetching tests data using Redux action
         dispatch(fetchAllTests())
             .then((response) => {
                 if (response?.payload) {
-                    console.log("payload",response.payload);
                     setTests(response.payload?.data);
                     setFilteredTests(response.payload?.data);
                 } else {
@@ -31,7 +32,6 @@ const TestsPage = () => {
                 }
             })
             .catch((error) => {
-                console.error("Error fetching tests:", error);
                 setTests([]);
                 setFilteredTests([]);
             });
@@ -86,7 +86,9 @@ const TestsPage = () => {
                                 <option value="NEET">NEET</option>
                             </select>
                             {isAdmin && (
-                                <button className="bg-blue-600 text-white px-4 py-2 rounded-md shadow-md hover:bg-blue-700 transition-colors">
+                                <button 
+                                onClick={() => router.push('/dash-admin/tests/createtest')}
+                                className="bg-blue-600 text-white px-4 py-2 rounded-md shadow-md hover:bg-blue-700 transition-colors">
                                     Create Test
                                 </button>
                             )}

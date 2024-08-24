@@ -14,7 +14,6 @@ export const getQuestions = createAsyncThunk(
   async (_, { rejectWithValue }) => {
     try {
       const response = await axiosInstance.get('/questions');
-      console.log(response);
       toast.promise(Promise.resolve(response), {
         error: "Unable to fetch Questions",
         loading: "Fetching Questions",
@@ -31,14 +30,12 @@ export const getQuestionById = createAsyncThunk(
   'questions/getQuestion',
   async (id, { rejectWithValue }) => {
     try {
-      console.log("id is",id);
       const response = await axiosInstance.get(`/questions/${id}`);
       toast.promise(Promise.resolve(response), {
         error: "Unable to fetch Question",
         loading: "Fetching Question",
         success: "Question Fetched Successfully"
       });
-      console.log("question is",response.data);
       return response.data; // Ensure response.data is returned
     } catch (error) {
       return rejectWithValue(error.response.data);
@@ -91,7 +88,6 @@ const questionSlice = createSlice({
         state.error = null;
       })
       .addCase(getQuestions.fulfilled, (state, action) => {
-        console.log("Questions Fetched Successfully",action.payload.data);
         state.loading = false;
         state.questions = action.payload?.data;
 
