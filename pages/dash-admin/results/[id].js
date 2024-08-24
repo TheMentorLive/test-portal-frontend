@@ -226,21 +226,21 @@ export default function ResultPage() {
                     <div className="bg-card rounded-lg shadow-md p-4 sm:p-6 flex flex-col gap-4">
                         <h2 className="text-lg sm:text-xl text-black font-bold">Statistics</h2>
                         <div className="grid grid-cols-2 gap-4">
-                            <div className="bg-card-foreground rounded-lg p-3 sm:p-4 flex flex-col items-center gap-2">
+                            <div className="bg-blue-400 rounded-lg p-3 sm:p-4 flex flex-col items-center gap-2">
                                 <span className="text-2xl sm:text-4xl text-white font-bold">{totalQuestions}</span>
                                 <span className="text-sm sm:text-base text-muted-foreground">Total Questions</span>
                             </div>
-                            <div className="bg-card-foreground rounded-lg p-3 sm:p-4 flex flex-col items-center gap-2">
+                            <div className="bg-blue-400 rounded-lg p-3 sm:p-4 flex flex-col items-center gap-2">
                                 <span className="text-2xl sm:text-4xl font-bold text-green-500">{correctAnswers}</span>
                                 <span className="text-sm sm:text-base text-muted-foreground">Correct</span>
                             </div>
-                            <div className="bg-card-foreground rounded-lg p-3 sm:p-4 flex flex-col items-center gap-2">
+                            <div className="bg-blue-400 rounded-lg p-3 sm:p-4 flex flex-col items-center gap-2">
                                 <span className={`text-2xl sm:text-4xl font-bold ${incorrectPercentage > 50 ? "text-red-500" : "text-gray-500"}`}>
                                     {incorrectAnswers}
                                 </span>
                                 <span className="text-sm sm:text-base text-muted-foreground">Incorrect</span>
                             </div>
-                            <div className="bg-card-foreground rounded-lg p-3 sm:p-4 flex flex-col items-center gap-2">
+                            <div className="bg-blue-400 rounded-lg p-3 sm:p-4 flex flex-col items-center gap-2">
                                 <span className={`text-2xl sm:text-4xl font-bold ${skippedPercentage > 25 ? "text-yellow-500" : "text-gray-500"}`}>
                                     {skippedQuestions}
                                 </span>
@@ -253,12 +253,12 @@ export default function ResultPage() {
                         <div className="flex flex-col items-center gap-4">
                             <div className="relative w-full max-w-[150px] sm:max-w-[200px] h-[150px] sm:h-[200px]">
                                 <div />
-                                <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 flex flex-col items-center bg-card-foreground p-3 sm:p-5 rounded-lg">
+                                <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 flex flex-col items-center bg-blue-400 p-3 sm:p-5 rounded-lg">
                                     <span className="text-2xl sm:text-4xl font-bold text-white">{accuracy.toFixed(2)}%</span>
                                     <span className="text-sm sm:text-base text-muted-foreground">Accuracy</span>
                                 </div>
                             </div>
-                            <div className="flex flex-col items-center gap-2 bg-card-foreground p-3 sm:p-5 rounded-lg">
+                            <div className="flex flex-col items-center gap-2 bg-blue-400 p-3 sm:p-5 rounded-lg">
                                 <span className="text-xl sm:text-2xl font-bold text-white">{score}</span>
                                 <span className="text-sm sm:text-base text-muted-foreground">Score</span>
                             </div>
