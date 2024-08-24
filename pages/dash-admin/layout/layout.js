@@ -14,7 +14,7 @@ export default function Layout({ children }) {
   };
 
   return (
-    <div className="flex flex-col h-screen">
+    <div style={{ fontFamily: 'Inter, sans-serif' }} className="flex flex-col h-screen">
       <Navbar />
 
       <div className="flex flex-1 overflow-hidden">

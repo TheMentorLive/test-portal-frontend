@@ -5,6 +5,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { Button } from "@/public/ui/button";
 import { Progress } from "@/public/ui/progress";
 import Navbar from "./navbar";
+import Head from "next/head";
 import { BookOpenIcon, ChevronLeftIcon, ChevronRightIcon, FlagIcon } from '@/public/icons/icons';
 import { Card, CardHeader, CardTitle, CardDescription, CardContent } from "@/public/ui/card";
 import dynamic from "next/dynamic";
@@ -113,7 +114,11 @@ function Mainpg() {
   if (!test || !test.questions || test.questions.length === 0) return <div>Loading...</div>;
 
   return (
+    
     <div>
+      <Head>
+      <title>GenAI Learning - Test</title>
+      </Head>
       <Navbar name={user.name || "Jon"} />
       <div className="flex flex-col h-screen">
         <main className="flex-1 bg-background text-foreground p-8">

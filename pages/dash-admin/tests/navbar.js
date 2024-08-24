@@ -14,7 +14,7 @@ export default function Navbar({name}) {
   };
 
   return (
-    <header className="flex h-16 w-full items-center justify-between bg-background px-4 md:px-6">
+    <header className="flex h-16 w-full items-center border-b bg-white border-gray-300 justify-between bg-background px-4 md:px-6">
       {/* Logo and Home Link */}
       <Link href="/" className="flex items-center gap-2" prefetch={false}>
         <Image
@@ -33,7 +33,7 @@ export default function Navbar({name}) {
       
       <DropdownMenu>
   <DropdownMenuTrigger asChild>
-    <Button variant="outline" size="icon" className="flex items-center space-x-2">
+    <Button variant="outline" size="icon" className="flex p-2 w-auto items-center space-x-2">
       <Image
         src="/icons/user-logo.png"
         width={36}
@@ -42,7 +42,7 @@ export default function Navbar({name}) {
         className="overflow-hidden rounded-full"
         style={{ aspectRatio: "36/36", objectFit: "cover" }}
       />
-      <span className="text-sm font-medium ">{name}</span> {/* Replace with the actual name */}
+      <span className="text-sm font-medium ">{name || "Jhon"}</span> {/* Replace with the actual name */}
     </Button>
   </DropdownMenuTrigger>
   <DropdownMenuContent align="end">

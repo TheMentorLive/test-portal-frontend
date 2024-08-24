@@ -1,5 +1,6 @@
 import { Button } from "@/public/ui/button";
 import Navbar from "./navbar";
+import Head from "next/head";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import { useEffect, useState, useCallback } from "react";
@@ -56,6 +57,9 @@ function Srtpg() {
 
   return (
     <div className="min-h-screen bg-gray-100">
+      <Head>
+      <title>GenAI Learning - Test</title>
+      </Head>
       <Navbar />
       <div className="flex flex-col items-center justify-center p-4 md:p-8">
         <div className="w-full max-w-7xl p-12 bg-white rounded-lg shadow-md">
@@ -100,7 +104,7 @@ function Srtpg() {
                 <li>Please ensure you have a stable internet connection.</li>
                 <li>
                   We recommend you try the{" "}
-                  <a href="#" className="text-primary underline">
+                  <a href="#">
                     sample test
                   </a>{" "}
                   for a couple of minutes before taking the main test.

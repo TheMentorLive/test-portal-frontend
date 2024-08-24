@@ -27,7 +27,7 @@ export default function ForgotPassword() {
       <Head>
         <title>Reset Password</title>
       </Head>
-      <div className="flex flex-col md:flex-row min-h-screen">
+      <div style={{ fontFamily: 'Inter, sans-serif' }} className="flex flex-col md:flex-row min-h-screen">
         {/* Left side */}
         <div className="flex-1 flex items-center justify-center p-4 md:p-8">
           <div className="max-w-md w-full bg-white p-8 rounded-lg shadow-md">

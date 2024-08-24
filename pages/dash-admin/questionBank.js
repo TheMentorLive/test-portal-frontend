@@ -98,7 +98,11 @@ const QuestionBankPage = () => {
       <Head>
         <title>Question Bank</title>
       </Head>
-      <div className="p-6">
+      <div className="container mx-auto p-4 md:pl-10 -mt-3 max-w-screen-xl">
+      <div className="bg-white p-6 shadow-md rounded-lg mb-6">
+                    <h1 className="text-2xl font-bold text-black mb-2">Available Question Banks</h1>
+                </div>
+        
         {user?.role === 'admin' && (
           <button
             onClick={() => setDialogOpen(true)}
