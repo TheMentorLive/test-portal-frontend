@@ -5,7 +5,7 @@ export default function Footer() {
   return (
     <div style={{ fontFamily: 'Inter, sans-serif' }} className='align-middle border-t border-gray-500 justify-center'>
     <footer className="bg-[#e3e6f1] text-black py-6 px-4 sm:px-6 md:px-10">
-      <div className="container mx-auto grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-6 md:gap-8">
+      <div className="container mx-auto grid grid-cols-1 ml-10 sm:grid-cols-2 md:grid-cols-4 gap-6 md:gap-8">
         <div className="flex flex-col items-center space-y-6">
           <Link href="/" className="flex items-center" prefetch={false}>
             <Image
