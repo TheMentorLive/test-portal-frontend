@@ -54,7 +54,7 @@ export default function Component() {
       <Head>
         <title>Sign In</title>
       </Head>
-      <div className="flex items-center justify-center min-h-screen bg-gradient-to-br from-blue-100 to-purple-100 p-4">
+      <div className="flex  items-center justify-center min-h-screen bg-gradient-to-br from-blue-100 to-purple-100 p-4">
         <div className="w-full max-w-md bg-white rounded-lg shadow-xl overflow-hidden">
           <div className="p-8 space-y-6">
             <div className="flex flex-col items-center space-y-4">

@@ -8,7 +8,7 @@ import store from '@/redux/store';
 export default function App({ Component, pageProps }) {
   return (
     <Provider store={store}>
-      <Component {...pageProps} />
+      <Component className="fontFamily: 'Inter, sans-serif'" {...pageProps} />
       <Toaster
         position="top-right"
         toastOptions={{
