@@ -1,61 +1,46 @@
-// pages/tests.js
 import React, { useState, useEffect } from 'react';
-import TestCard from './components/TestCard';
-import Layout from './layout/layout'; // Import your existing Layout component
+import TestCard from '../components/TestCard';
+import Layout from '../layout/layout'; // Import your existing Layout component
 import dynamic from 'next/dynamic';
 import Head from 'next/head';
+import { useDispatch, useSelector } from 'react-redux';
+import { fetchAllTests,isElgibleForTest } from '@/redux/slices/testSlice';
 
 const TestsPage = () => {
     const [tests, setTests] = useState([]);
-    const [isAdmin, setIsAdmin] = useState(false); // Simulating admin user
+    const isAdmin = useSelector((state) => {
+        return state.auth?.data?.data?.user?.role === 'admin';
+    });
     const [searchTerm, setSearchTerm] = useState('');
     const [filteredTests, setFilteredTests] = useState([]);
     const [filterType, setFilterType] = useState(''); // For filtering by type
+    const dispatch = useDispatch();
 
     useEffect(() => {
-        // Mock fetching tests data
-        const mockResponse = {
-            statusCode: 200,
-            data: [
-                {
-                    _id: "66c1d48f4b2347f45c964afd",
-                    title: "Sample Test 1",
-                    type: "JEE",
-                    description: "This is a sample test for JEE preparation.",
-                    duration: "40 minutes",
-                    createdBy: "66bed0fb23b291f43cd1d0d3",
-                    createdAt: "2024-08-18T11:01:35.810Z",
-                    updatedAt: "2024-08-18T11:01:35.810Z",
-                    numberOfQuestions:10
-                },
-                {
-                    _id: "66c1d5e6ad5b420b4be56e7e",
-                    title: "Sample Test 2",
-                    type: "NEET",
-                    description: "This is a sample test for NEET preparation.",
-                    duration: "40 minutes",
-                    createdBy: "66bed0fb23b291f43cd1d0d3",
-                    createdAt: "2024-08-18T11:07:18.777Z",
-                    updatedAt: "2024-08-18T11:07:18.777Z",
-                    numberOfQuestions:8
+        // Fetching tests data using Redux action
+        dispatch(fetchAllTests())
+            .then((response) => {
+                if (response?.payload) {
+                    console.log("payload",response.payload);
+                    setTests(response.payload?.data);
+                    setFilteredTests(response.payload?.data);
+                } else {
+                    setTests([]);
+                    setFilteredTests([]);
                 }
-            ],
-            message: "Tests Fetched Successfully",
-            success: true
-        };
-
-        // Simulate API call delay
-        setTimeout(() => {
-            setTests(mockResponse.data);
-            setFilteredTests(mockResponse.data);
-        }, 1000);
-
-        // Set user role
-        setIsAdmin(false); // Example: admin user
-    }, []);
+            })
+            .catch((error) => {
+                console.error("Error fetching tests:", error);
+                setTests([]);
+                setFilteredTests([]);
+            });
+        dispatch(isElgibleForTest());
+    }, [dispatch]);
 
     useEffect(() => {
-        let filtered = tests;
+        if (!tests || tests.length === 0) return;
+
+        let filtered = [...tests]; // Copy tests array to avoid direct mutation
 
         if (searchTerm) {
             filtered = filtered.filter(test =>
@@ -73,9 +58,9 @@ const TestsPage = () => {
     return (
         <Layout>
             <Head>
-        <title>Quiz</title>
-      </Head>
-            <div className="container mx-auto p-4 md:pl-10 -mt-3 max-w-screen-xl"> {/* Centered container with max width */}
+                <title>Quiz</title>
+            </Head>
+            <div className="container mx-auto p-4 md:pl-10 -mt-3 max-w-screen-xl">
                 <div className="bg-white p-6 shadow-md rounded-lg mb-6">
                     <h1 className="text-2xl font-bold text-black mb-2">Available Exams</h1>
                     <p className="text-gray-600 mb-4">Find the right exam for your preparation</p>
@@ -108,9 +93,13 @@ const TestsPage = () => {
                     </div>
                 </div>
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                    {filteredTests.map(test => (
-                        <TestCard key={test._id} test={test} isAdmin={isAdmin} />
-                    ))}
+                    {filteredTests?.length > 0 ? (
+                        filteredTests.map(test => (
+                            <TestCard key={test._id} test={test} isAdmin={isAdmin} />
+                        ))
+                    ) : (
+                        <p>No tests available.</p> // Handle the case where no tests are available
+                    )}
                 </div>
             </div>
         </Layout>

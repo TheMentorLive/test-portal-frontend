@@ -1,7 +1,7 @@
 'use client';
 
 import Link from "next/link";
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { toast } from "react-toastify";
 import { Label } from "@/public/ui/label";
 import { Input } from "@/public/ui/input";
@@ -43,10 +43,15 @@ export default function Signin() {
     setEmail("");
     setPassword("");
     if (response.payload?.data?.statusCode === 200) {
-      router.push("/dash-admin/DashboardPage");
+      if(response.payload?.data?.data?.user?.role === 'admin'){
+        console.log("admin");
+        router.push("/dash-admin/DashboardPage");
+      } else {
+        console.log("user");
+        router.push("/dash-admin/tests");
+      }
     }
   };
-
   return (
     <Layout>
       <Head>

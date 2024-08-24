@@ -8,9 +8,8 @@ const ThankYouPage = () => {
   const router = useRouter();
 
   const handleViewResults = () => {
-    router.push('/results'); // Adjust the path as needed
+    router.push('/dash-admin/results'); // Adjust the path as needed
   };
-
   return (
     <Layout>
       <main className="flex-1 flex flex-col justify-center items-center bg-gray-100 p-4 sm:p-8">

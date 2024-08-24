@@ -39,7 +39,7 @@ function Srtpg() {
           setIsFullScreen(true);
           fetchTestData().then(() => {
             // Navigate to the test page after fetching data
-            router.push('/dash-admin/test/mainpg');
+            router.push('/dash-admin/tests/mainpg');
           });
         })
         .catch((err) => {

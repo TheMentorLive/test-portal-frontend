@@ -4,6 +4,8 @@ import axiosInstance from "@/config/axiosInstance";
 
 const intialState = {
     test: null,
+    testList: [],
+    allowedTests: []
 }
 
 export const fetchTest = createAsyncThunk('test/fetchTest', async (id) => {
@@ -13,6 +15,31 @@ export const fetchTest = createAsyncThunk('test/fetchTest', async (id) => {
         return response.data;
     } catch (error) {
         toast.error('Failed to fetch test');   
+    }
+});
+
+export const fetchAllTests = createAsyncThunk('test/fetchAllTests', async () => {
+    try {
+        const response =  axiosInstance.get('/tests');
+        toast.promise(Promise.resolve(response), {
+            loading: 'Fetching tests...',
+            success: 'Tests fetched successfully',
+            error: 'Failed to fetch tests'
+        });
+        return (await response).data;
+    } catch (error) {
+        toast.error('Failed to fetch tests');   
+    }
+});
+
+export const isElgibleForTest = createAsyncThunk('test/isElgibleForTest', async (id) => {
+    try {
+        console.log("id",id);
+        const response = await axiosInstance.post(`/payment/is-elgiblefor-test`,{testId:id});
+        console.log(response.data);
+        return response.data;
+    } catch (error) {
+        toast.error('Failed to check eligibility');   
     }
 });
 
@@ -44,7 +71,15 @@ const testSlice = createSlice({
         })
         .addCase(submitTest.fulfilled, (state, action) => {
             state.test = null;
-    });
+        })
+        .addCase(fetchAllTests.fulfilled, (state, action) => {
+            console.log("action",action.payload);
+            state.testList = [...action.payload?.data];
+        })
+        .addCase(isElgibleForTest.fulfilled, (state, action) => {
+            console.log("action e",action.payload);
+            state.allowedTests = action.payload?.data?.payment;
+        })
     }
 });
 

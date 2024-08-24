@@ -7,6 +7,7 @@ export default function Document() {
         {/* Link to the favicon */}
         <link rel="icon" href="/placeholder.svg" />
         {/* You can add other meta tags or link tags here if needed */}
+        <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
       </Head>
       <body>
         <Main />

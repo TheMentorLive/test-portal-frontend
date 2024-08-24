@@ -65,7 +65,7 @@ export default function Signup() {
     setEmail('');
     setName('');
     setPassword('');
-    router.push('/dash-admin/DashboardPage')
+    router.push('/dash-admin/tests');
 
   }
 

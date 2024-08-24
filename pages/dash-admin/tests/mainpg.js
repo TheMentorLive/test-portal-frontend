@@ -88,9 +88,9 @@ function Mainpg() {
 
   const handleSubmit = async () => {
     const submissionData = {
-      testId: test._id,
-      answers: test.questions.map((question, index) => ({
-        questionId: question._id,
+      testId: test?._id,
+      answers: test?.questions?.map((question, index) => ({
+        questionId: question?._id,
         selectedOptionIds: answers[index] ? [answers[index]] : [],
       })),
     };
@@ -103,8 +103,9 @@ function Mainpg() {
     } else if (document.msExitFullscreen) { // IE/Edge
       document.msExitFullscreen();
     }
-    const submitResponse = await dispatch(submitTest(submissionData));
-    router.push('/dash-admin/test/submit');
+    const submitResponse =  dispatch(submitTest(submissionData));
+    
+    router.push('/dash-admin/tests/submit');
 
     setShowConfirmDialog(false);
   };

@@ -1,7 +1,21 @@
 import Layout from './layout/layout';
 import Head from 'next/head';
+import dynamic from 'next/dynamic';
+import { fetchAllUsers, getAllPayments } from '@/redux/slices/dashboardSlice';
+import { fetchAllTests } from '@/redux/slices/testSlice';
+import { useDispatch, useSelector } from 'react-redux';
+import { useEffect } from 'react';
 
-export default function Dashboard() {
+
+ function Dashboard() {
+  const dispatch = useDispatch();
+  const { allUsers, Payments } = useSelector((state) => state.dashboard);
+  const { testList } = useSelector((state) => state.test);
+  useEffect(() => {
+    dispatch(fetchAllUsers());
+    dispatch(getAllPayments());
+    dispatch(fetchAllTests());
+  }, []);
   return (
     <Layout>
       <Head>
@@ -13,6 +27,10 @@ export default function Dashboard() {
         <h1 className="mt-4 text-3xl font-bold tracking-tight text-foreground sm:text-4xl">Dashboard</h1>
         <p className="mt-4 text-muted-foreground">
           We&apos;re working hard to bring you a brand new experience. Please check back soon.
+          { allUsers.count && <span>There are {allUsers.count} users</span> }
+          { Payments && <span>There are {Payments} payments</span> }
+          { testList.length && <span>There are {testList.length} tests</span> }
+
         </p>
       </div>
     </div>
@@ -47,3 +65,5 @@ function LoaderIcon(props) {
     </svg>
   )
 }
+
+export default dynamic(() => Promise.resolve(Dashboard), { ssr: false });

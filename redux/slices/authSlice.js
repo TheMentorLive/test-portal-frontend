@@ -19,7 +19,7 @@ export const createAccount = createAsyncThunk('/auth/signup', async (data, { rej
       success: 'Account created successfully!',
       error: 'Failed to create account'
     });
-    return response;
+    return (await response).data;
   } catch (e) {
     toast.error(e?.response?.data?.message || 'An error');
     return rejectWithValue(e?.response?.data || 'An error occurred');
@@ -134,6 +134,7 @@ const authSlice = createSlice({
   extraReducers: (builder) => {
     builder
       .addCase(login.fulfilled, (state, action) => {
+       
         if (typeof window !== 'undefined') {
           console.log(action.payload.data);
           localStorage.setItem("data", JSON.stringify(action.payload.data));
@@ -144,6 +145,18 @@ const authSlice = createSlice({
         state.role = action.payload.data.data?.role || "";
         state.data = action.payload.data?.data?.data || {};
         state.token = action.payload.data?.data?.token || "";
+      })
+      .addCase(createAccount.fulfilled, (state, action) => {
+        console.log("signup is",action.payload.data);
+        if (typeof window !== 'undefined') {
+          console.log(action.payload.data);
+          localStorage.setItem("data", JSON.stringify(action.payload.data));
+          localStorage.setItem("isLoggedIn", 'true');
+          localStorage.setItem("role", action.payload.data?.data?.user?.role || "");
+        }
+        state.isLoggedIn = true;
+        state.role = action.payload.data.role || "";
+        state.data = action.payload.data || {};
       })
   }
 });
