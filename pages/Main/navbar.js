@@ -11,7 +11,7 @@ export default function Navbar() {
   };
 
   return (
-    <div className="border-b bg-white border-gray-300">
+    <div style={{ fontFamily: 'Inter, sans-serif' }} className="border-b bg-white border-gray-300">
       <header className="flex h-16 items-center justify-between bg-background px-4 md:px-6 lg:ml-48 lg:mr-[217px]">
         {/* Logo and Home Link */}
         <Link href="/" className="flex items-center gap-2" prefetch={false}>

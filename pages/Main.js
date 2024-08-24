@@ -7,7 +7,7 @@ import Footer from "./Main/footer";
 
 export default function Main() {
   return (
-    <div>
+    <div style={{ fontFamily: 'Inter, sans-serif' }}>
       <Head>
         <title>GenAI Learning</title>
        

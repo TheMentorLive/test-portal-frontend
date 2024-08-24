@@ -121,7 +121,7 @@ export default function Re1() {
   );
 
   return (
-    <div className="flex flex-col items-center justify-center mt-32 p-20  bg-[#eaeaea]  sm:px-6 lg:px-8">
+    <div style={{ fontFamily: 'Inter, sans-serif' }} className="flex flex-col items-center justify-center mt-32 p-20  bg-[#eaeaea]  sm:px-6 lg:px-8">
       <h2 className="text-2xl sm:text-3xl  mb-16 md:text-4xl font-bold  sm:mb-10 text-[#000000]">
         Testimonials
       </h2>

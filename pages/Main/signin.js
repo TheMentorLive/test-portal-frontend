@@ -52,7 +52,7 @@ export default function Signin() {
       <Head>
         <title>SignIn</title>
       </Head>
-      <div className="flex flex-col  md:flex-row min-h-screen">
+      <div  className="flex flex-col  md:flex-row min-h-screen">
         {/* Left side */}
         <div className="flex-1 flex items-center justify-center p-4 md:p-8 bg-gray-100">
         <div className="max-w-md w-full border-2 border-gray-200 bg-card p-8 space-y-6 rounded-lg">

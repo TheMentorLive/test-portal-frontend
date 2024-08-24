@@ -1,18 +1,10 @@
-import Link from "next/link";
-import { Inter } from "next/font/google";
-import Main from "./Main";
-
-
-const inter = Inter({ subsets: ["latin"] });
+import Link from 'next/link';
+import Main from './Main';
 
 export default function Home() {
   return (
-    
-    <div>
-        
-        <Main/> 
-      
+    <div className="font-body">
+      <Main />
     </div>
-   
   );
 }

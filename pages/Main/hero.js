@@ -6,15 +6,17 @@ import { Label } from "@/public/ui/label";
 
 export default function Hero() {
   return (
-    <div className="flex-1 px-4 md:px-10 lg:px-20 xl:px-32 py-8">
+    <div 
+    style={{ fontFamily: 'Inter, sans-serif' }}
+    className="flex-1 px-4 md:px-10 lg:px-20 xl:px-32 py-8 font-body">
       <section className="w-full flex items-center min-h-[100dvh] justify-center">
         <div className="container grid gap-6 px-4 mr-16 ml-16 -mt-32 md:px-6 lg:grid-cols-2 lg:gap-24">
           <div className="space-y-4 pt-24">
-            <h1 className="text-3xl  font-bold text-black tracking-tighter sm:text-4xl md:text-5xl lg:text-6xl/none">
-            Master the Future <br/> with  <br/> GenAI Learning
+            <h1 className="text-3xl font-heading font-bold text-black tracking-tighter sm:text-4xl md:text-5xl lg:text-6xl/none">
+              Master the Future <br /> with <br /> GenAI Learning
             </h1>
             <p className="max-w-full md:max-w-[600px] text-green-50 text-muted-foreground md:text-xl lg:text-base xl:text-lg">
-            GenAI Learning offers world-class online courses and programs to help you achieve your career goals. Learn from
+              GenAI Learning offers world-class online courses and programs to help you achieve your career goals. Learn from
               industry experts and transform your future.
             </p>
             <div className="flex flex-col gap-6 md:flex-row">
@@ -37,24 +39,24 @@ export default function Hero() {
           <div className="flex flex-col items-center justify-center mt-10 md:mt-14 space-y-8">
             <Card className="w-full max-w-md border-opacity-40 border-blue-400">
               <CardHeader>
-                <CardTitle className="text-xl md:text-[29px]">Get in Touch</CardTitle>
+                <CardTitle className="text-xl md:text-[29px] font-heading">Get in Touch</CardTitle>
               </CardHeader>
               <CardContent className="space-y-4">
                 <div className="space-y-2">
-                  <Label htmlFor="full-name" className="text-sm">Full Name</Label>
-                  <Input id="full-name" placeholder="Full Name" className="border-opacity-40 border-blue-400 focus:border-blue-700" />
+                  <Label htmlFor="full-name" className="text-sm font-body">Full Name</Label>
+                  <Input id="full-name" placeholder="Full Name" className="border-opacity-40 border-blue-400 focus:border-blue-700 font-body" />
                 </div>
                 <div className="space-y-2">
-                  <Label htmlFor="email" className="text-sm">Email</Label>
-                  <Input id="email" placeholder="Email" type="email" className="border-opacity-40 border-blue-400 focus:border-blue-700" />
+                  <Label htmlFor="email" className="text-sm font-body">Email</Label>
+                  <Input id="email" placeholder="Email" type="email" className="border-opacity-40 border-blue-400 focus:border-blue-700 font-body" />
                 </div>
                 <div className="space-y-2">
-                  <Label htmlFor="contact" className="text-sm">Contact</Label>
-                  <Input id="contact" placeholder="Contact" className="border-opacity-40 border-blue-400 focus:border-blue-700" />
+                  <Label htmlFor="contact" className="text-sm font-body">Contact</Label>
+                  <Input id="contact" placeholder="Contact" className="border-opacity-40 border-blue-400 focus:border-blue-700 font-body" />
                 </div>
               </CardContent>
               <CardFooter>
-                <Button className="w-full bg-blue-500 text-white">Start Learning</Button>
+                <Button className="w-full bg-blue-500 text-white font-body">Start Learning</Button>
               </CardFooter>
             </Card>
           </div>

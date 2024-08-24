@@ -1,4 +1,4 @@
-import { fontFamily } from "tailwindcss/defaultTheme";
+
 
 /** @type {import('tailwindcss').Config} */
 module.exports = {
@@ -10,9 +10,9 @@ module.exports = {
   theme: {
     extend: {
       fontFamily: {
-        heading: ['var(--font-heading)', ...fontFamily.sans],
-        body: ['var(--font-body)', ...fontFamily.sans],
-          kyrial: ['Kyrial Sans Pro', 'sans-serif'],
+        heading: ['var(--font-heading)', 'Inter', 'sans-serif'],
+        body: ['var(--font-body)', 'Inter', 'sans-serif'],
+          kyrial: ['Inter', 'sans-serif'],
       },
       colors: {
         border: 'hsl(var(--border))',

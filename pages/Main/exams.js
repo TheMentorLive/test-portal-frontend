@@ -18,9 +18,9 @@ export default function Exams() {
   };
 
   return (
-    <div className="flex flex-col items-center px-4 py-6 space-y-6 font-kyrial">
+    <div style={{ fontFamily: 'Inter, sans-serif' }} className="flex flex-col  items-center px-4 py-6 space-y-6 font-body">
       <div className="text-center">
-        <h1 className="text-3xl md:text-4xl font-bold">We cover all Exams and Classes</h1>
+        <h1 className="text-3xl md:text-4xl font-heading font-bold">We cover all Exams and Classes</h1>
         <p className="mt-2 text-base md:text-lg text-muted-foreground">
           From videos to notes to tests, providing all you need to learn and practice in one place
         </p>
@@ -102,7 +102,7 @@ export default function Exams() {
             <div
               key={exam.name}
               onClick={() => openModal(exam)}
-              className="flex items-center p-2 border border-opacity-40 border-blue-400 rounded-md transition-all duration-300 ease-in-out hover:bg-primary hover:text-primary-foreground cursor-pointer"
+              className="flex items-center p-2 border font-heading border-opacity-40 border-blue-400 rounded-md transition-all duration-300 ease-in-out hover:bg-primary hover:text-primary-foreground cursor-pointer"
             >
               <Image 
                 src={exam.icon} 
@@ -125,7 +125,7 @@ export default function Exams() {
             animate={{ opacity: 1, scale: 1 }}
             exit={{ opacity: 0, scale: 0.8 }}
             transition={{ duration: 0.3 }}
-            className="bg-gray-200 border border-blue-400 p-6 rounded-lg shadow-lg w-80 sm:w-96 relative font-kyrial"
+            className="bg-gray-200 border border-blue-400 p-6 rounded-lg shadow-lg w-80 sm:w-96 relative font-body"
           >
             <hr className='bg-black'/>
             
@@ -142,7 +142,7 @@ export default function Exams() {
                 </div>
 
                 <div className='flex items-center justify-center'>
-                  <h2 className="text-2xl font-bold mt-4 text-black">{selectedExam.name}</h2>
+                  <h2 className="text-2xl font-heading mt-4 text-black">{selectedExam.name}</h2>
                   <br/>
                 </div>
                 <br/>
