@@ -6,36 +6,34 @@ import { fetchAllTests } from '@/redux/slices/testSlice';
 import { useDispatch, useSelector } from 'react-redux';
 import { useEffect } from 'react';
 
-
- function Dashboard() {
+function Dashboard() {
   const dispatch = useDispatch();
   const { allUsers, Payments } = useSelector((state) => state.dashboard);
   const { testList } = useSelector((state) => state.test);
+
   useEffect(() => {
     dispatch(fetchAllUsers());
     dispatch(getAllPayments());
     dispatch(fetchAllTests());
-  }, []);
+  }, [dispatch]); // Include dispatch in the dependency array
+
   return (
     <Layout>
       <Head>
         <title>Dashboard</title>
       </Head>
       <div style={{ fontFamily: 'Inter, sans-serif' }} className="flex min-h-[600px] ml-14 flex-col items-center justify-center bg-background px-4 py-12 sm:px-6 lg:px-8">
-      <div className="mx-auto max-w-md text-center">
-        <LoaderIcon className="mx-auto h-12 w-12 animate-spin text-primary" />
-        <h1 className="mt-4 text-3xl font-bold tracking-tight text-foreground sm:text-4xl">Dashboard</h1>
-        <p className="mt-4 text-muted-foreground">
-          We&apos;re working hard to bring you a brand new experience. Please check back soon.
-          { allUsers.count && <span>There are {allUsers.count} users</span> }
-          { Payments && <span>There are {Payments} payments</span> }
-          { testList.length && <span>There are {testList.length} tests</span> }
-
-        </p>
+        <div className="mx-auto max-w-md text-center">
+          <LoaderIcon className="mx-auto h-12 w-12 animate-spin text-primary" />
+          <h1 className="mt-4 text-3xl font-bold tracking-tight text-foreground sm:text-4xl">Dashboard</h1>
+          <p className="mt-4 text-muted-foreground">
+            We&apos;re working hard to bring you a brand new experience. Please check back soon.
+            { allUsers.count && <span> There are {allUsers.count} users</span> }
+            { Payments && <span> There are {Payments} payments</span> }
+            { testList.length && <span> There are {testList.length} tests</span> }
+          </p>
+        </div>
       </div>
-    </div>
-  
-
     </Layout>
   );
 }
@@ -63,7 +61,7 @@ function LoaderIcon(props) {
       <path d="M2 12h4" />
       <path d="m4.9 4.9 2.9 2.9" />
     </svg>
-  )
+  );
 }
 
 export default dynamic(() => Promise.resolve(Dashboard), { ssr: false });
