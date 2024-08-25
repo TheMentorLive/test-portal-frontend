@@ -10,9 +10,8 @@ import { useEffect, useState } from 'react';
 
 function Sidebar({ handleLinkClick, sidebarOpen, toggleSidebar }) {
   const router = useRouter();
-  const isAdmin = useSelector((state) => {
-    return state.auth?.data?.data?.user?.role === 'admin';
-  });
+  const user = useSelector((state)=> state.auth?.data);
+  const isAdmin = user?.role === 'admin';
   const [isMobile, setIsMobile] = useState(false);
 
   useEffect(() => {
@@ -22,7 +21,7 @@ function Sidebar({ handleLinkClick, sidebarOpen, toggleSidebar }) {
     handleResize();
     window.addEventListener('resize', handleResize);
     return () => window.removeEventListener('resize', handleResize);
-  }, []);
+  }, [user]);
 
   const getActiveSection = () => {
     const currentPath = router.pathname;

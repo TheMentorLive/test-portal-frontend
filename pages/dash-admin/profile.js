@@ -1,6 +1,6 @@
 'use client'
 
-import React, { useState } from "react"
+import React, { useEffect, useState } from "react"
 import { useDispatch, useSelector } from "react-redux"
 import { updatePassword } from "@/redux/slices/authSlice"
 import Head from 'next/head'
@@ -17,7 +17,7 @@ import dynamic from "next/dynamic"
   const [showNewPassword, setShowNewPassword] = useState(false)
   const dispatch = useDispatch()
   
-  const user = useSelector((state) => state.auth?.data?.data?.user)
+  const user = useSelector((state) => state.auth?.data)
 
   const handleUpdatePassword = async () => {
     try {
@@ -33,7 +33,8 @@ import dynamic from "next/dynamic"
       alert("Failed to update password. Please try again.")
     }
   }
-
+  useEffect(() => {
+  }, [dispatch])
   return (
     <Layout>
       <Head>

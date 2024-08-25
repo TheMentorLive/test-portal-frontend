@@ -12,7 +12,6 @@ const TestCard = ({ test = {}, isAdmin = false }) => {
     const razorpay_key = useSelector((state) => state?.payment?.key);
     const { allowedTests } = useSelector((state) => state?.test);
     const [orderResponse, setOrderResponse] = useState(null); // Initializing with null
-
     const handlePayment = async (test) => {
         try {
             // Dispatching the purchaseTest action to get the order response
@@ -131,7 +130,7 @@ const TestCard = ({ test = {}, isAdmin = false }) => {
                                 {`Pay ₹${test.price}`}
                             </button>
                         )}
-                        {(!isAdmin&&isEligible())&&(<button
+                        {(!isAdmin&&(isEligible()||!test.isPaid))&&(<button
                             onClick={() => handleEnterIntoTest(test)}
                             className={`bg-blue-600 text-white w-full px-4 py-2 rounded-md hover:bg-blue-700 transition-colors ${test.isPaid ? 'mt-2' : 'mt-4'}`}>
                             Enter Test

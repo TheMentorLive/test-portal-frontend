@@ -5,22 +5,30 @@ import dynamic from 'next/dynamic';
 import Head from 'next/head';
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchAllTests,isElgibleForTest } from '@/redux/slices/testSlice';
+import { getDetails } from '@/redux/slices/authSlice';
 import Script from 'next/script';
 import { useRouter } from 'next/router';
 
 const TestsPage = () => {
+
+    const dispatch = useDispatch();
+    const user = useSelector((state) => state.auth?.data);
     const [tests, setTests] = useState([]);
     const isAdmin = useSelector((state) => {
-        return state.auth?.data?.data?.user?.role === 'admin';
+        return state.auth?.role === 'admin';
     });
+    console.log(isAdmin,"isAd");
     const [searchTerm, setSearchTerm] = useState('');
     const [filteredTests, setFilteredTests] = useState([]);
     const [filterType, setFilterType] = useState(''); // For filtering by type
-    const dispatch = useDispatch();
+
     const router = useRouter();
 
     useEffect(() => {
         // Fetching tests data using Redux action
+        if(!user) {
+            dispatch(getDetails());
+        }
         dispatch(fetchAllTests())
             .then((response) => {
                 if (response?.payload) {

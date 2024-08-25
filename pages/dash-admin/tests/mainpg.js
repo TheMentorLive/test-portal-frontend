@@ -16,7 +16,7 @@ function Mainpg() {
   const dispatch = useDispatch();
   const router = useRouter();
   const test = useSelector((state) => state.test.test);
-  const { user } = useSelector((state) => state.auth.data.data);
+  const user = useSelector((state) => state.auth.data);
   const [selectedLanguage, setSelectedLanguage] = useState("en");
   const [currentQuestion, setCurrentQuestion] = useState(0);
   const [answers, setAnswers] = useState({});
@@ -40,7 +40,7 @@ function Mainpg() {
       setCurrentQuestion(currentQuestion + 1);
       setQuestionTimeRemaining(180);
     }
-  }, [currentQuestion, test.questions.length]);
+  }, [currentQuestion, test]);
 
   useEffect(() => {
     const interval = setInterval(() => {
