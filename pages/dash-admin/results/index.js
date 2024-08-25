@@ -10,10 +10,9 @@ import Image from 'next/image'
 import { Loader2 } from 'lucide-react'
 import dynamic from 'next/dynamic'
 
-
 function TestCard({ testName, submissionId, onViewResult }) {
   return (
-    <div className="bg-white rounded-lg shadow-md hover:shadow-lg transition-all duration-300 ease-in-out flex flex-col justify-between h-full">
+    <div className="bg-white rounded-lg shadow-md transition-transform duration-300 ease-in-out transform hover:scale-105 hover:shadow-lg flex flex-col justify-between h-full">
       <div className="p-4">
         <div className="relative w-full h-40 mb-4">
           <Image
@@ -38,7 +37,7 @@ function TestCard({ testName, submissionId, onViewResult }) {
   )
 }
 
- function Results() {
+function Results() {
   const [submissions, setSubmissions] = useState([])
   const [loading, setLoading] = useState(true)
   const dispatch = useDispatch()
@@ -61,14 +60,14 @@ function TestCard({ testName, submissionId, onViewResult }) {
       <Head>
         <title>Results</title>
       </Head>
-      <div className="flex flex-col min-h-screen bg-gray-100">
-        <div className="bg-gradient-to-r from-blue-500 to-blue-600 text-white py-12 px-4 sm:px-6 lg:px-8">
+      <div className="container mx-auto p-4 md:pl-10 -mt-3 max-w-screen-xl flex flex-col min-h-screen bg-gray-100">
+        <div className="bg-gradient-to-r from-blue-500 to-blue-600 rounded-lg text-white py-12 px-4 sm:px-6 lg:px-8">
           <div className="max-w-7xl mx-auto">
             <h1 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-center">Results Announcement</h1>
             <p className="mt-4 text-xl text-center text-blue-100">Check your latest test results below</p>
           </div>
         </div>
-        
+
         <main className="flex-grow px-4 py-12 sm:px-6 lg:px-8">
           {loading ? (
             <div className="flex items-center justify-center h-64">
@@ -97,4 +96,4 @@ function TestCard({ testName, submissionId, onViewResult }) {
   )
 }
 
-export default dynamic(() => Promise.resolve(Results), { ssr: false });
+export default dynamic(() => Promise.resolve(Results), { ssr: false })

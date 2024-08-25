@@ -256,160 +256,161 @@ import { useRouter } from 'next/router'
           </Card>
 
           {/* Test Popularity Pie Chart */}
-          <Card className="animate-fade-in" style={{ animationDelay: '0.7s' }}>
-            <CardHeader>
-              <CardTitle className="text-xl font-bold text-blue-800">Top 5 Popular Tests</CardTitle>
-            </CardHeader>
-            <CardContent>
-              <div className="h-80 w-full">
-                <ResponsiveContainer width="100%" height="100%">
-                  <PieChart>
-                    <Pie
-                      data={testPopularityData}
-                      cx="50%"
-                      cy="50%"
-                      labelLine={false}
-                      outerRadius={80}
-                      fill="#8884d8"
-                      dataKey="value"
-                      label={({ name, percent }) => `${name} ${(percent * 100).toFixed(0)}%`}
-                    >
-                      {testPopularityData.map((entry, index) => (
-                        <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />
-                      ))}
-                    </Pie>
-                    <Tooltip />
-                    <Legend />
-                  </PieChart>
-                </ResponsiveContainer>
-              </div>
-            </CardContent>
-          </Card>
+          <Card className="animate-fade-in mb-8" style={{ animationDelay: '0.7s' }}>
+  <CardHeader className="px-4 py-2 bg-gray-100">
+    <CardTitle className="text-xl font-bold text-blue-800">Top 5 Popular Tests</CardTitle>
+  </CardHeader>
+  <CardContent className="p-4">
+    <div className="h-80 w-full">
+      <ResponsiveContainer width="100%" height="100%">
+        <PieChart>
+          <Pie
+            data={testPopularityData}
+            cx="50%"
+            cy="50%"
+            outerRadius={80}
+            fill="#8884d8"
+            dataKey="value"
+            label={({ name, percent }) => `${name} ${(percent * 100).toFixed(0)}%`}
+          >
+            {testPopularityData.map((entry, index) => (
+              <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />
+            ))}
+          </Pie>
+          <Tooltip />
+          <Legend />
+        </PieChart>
+      </ResponsiveContainer>
+    </div>
+  </CardContent>
+</Card>
+
         </div>
 
-        {/* User Management */}
-        <Card className="mb-8 animate-fade-in" style={{ animationDelay: '0.8s' }}>
-          <CardHeader>
-            <CardTitle className="text-xl font-bold text-blue-800">User Management</CardTitle>
-          </CardHeader>
-          <CardContent>
-            <div className="overflow-x-auto max-h-96 overflow-y-auto">
-              <Table>
-                <TableHeader>
-                  <TableRow>
-                    <TableHead>Name</TableHead>
-                    <TableHead>Email</TableHead>
-                    <TableHead>Role</TableHead>
-                    <TableHead>Actions</TableHead>
-                  </TableRow>
-                </TableHeader>
-                <TableBody>
-                  {displayedUsers.map((user) => (
-                    <TableRow key={user._id} className="transition-all duration-300 hover:bg-blue-50">
-                      <TableCell>{user.name}</TableCell>
-                      <TableCell>{user.email}</TableCell>
-                      <TableCell>{user.role}</TableCell>
-                      <TableCell>
-                        <Button
-                          variant="destructive"
-                          size="sm"
-                          className={`transition-all duration-300 ${
-                            isDeleteHovered === user._id ? 'bg-red-600 scale-105' : 'bg-red-500'
-                          }`}
-                          onMouseEnter={() => setIsDeleteHovered(user._id)}
-                          onMouseLeave={() => setIsDeleteHovered(null)}
-                          onClick={() => {
-                            // Implement delete functionality here
-                            handleDeleteUser(user._id)
-                            console.log(`Delete user with ID: ${user._id}`)
-                          }}
-                        >
-                          <Trash2 className="h-4 w-4 mr-2" />
-                          Delete
-                        </Button>
-                      </TableCell>
-                    </TableRow>
-                  ))}
-                </TableBody>
-              </Table>
-            </div>
-            {displayedUsers.length < allUsers.data.length && (
-              <div className="mt-4 text-center">
+       {/* User Management */}
+<Card className="mb-8 animate-fade-in" style={{ animationDelay: '0.8s' }}>
+  <CardHeader className="px-4 py-2 bg-gray-100">
+    <CardTitle className="text-xl font-bold text-blue-800">User Management</CardTitle>
+  </CardHeader>
+  <CardContent className="p-4">
+    <div className="overflow-x-auto max-h-96 overflow-y-auto">
+      <Table className="min-w-full">
+        <TableHeader>
+          <TableRow>
+            <TableHead className="text-left">Name</TableHead>
+            <TableHead className="text-left">Email</TableHead>
+            <TableHead className="text-left">Role</TableHead>
+            <TableHead className="text-left">Actions</TableHead>
+          </TableRow>
+        </TableHeader>
+        <TableBody>
+          {displayedUsers.map((user) => (
+            <TableRow key={user._id} className="transition-all duration-300 hover:bg-blue-50">
+              <TableCell>{user.name}</TableCell>
+              <TableCell>{user.email}</TableCell>
+              <TableCell>{user.role}</TableCell>
+              <TableCell>
                 <Button
-                  onClick={loadMoreUsers}
-                  className="bg-blue-600 text-white hover:bg-blue-700 transition-all duration-300"
+                  variant="destructive"
+                  size="sm"
+                  className={`transition-all duration-300 ${
+                    isDeleteHovered === user._id ? 'bg-red-600 scale-105' : 'bg-red-500'
+                  }`}
+                  onMouseEnter={() => setIsDeleteHovered(user._id)}
+                  onMouseLeave={() => setIsDeleteHovered(null)}
+                  onClick={() => {
+                    handleDeleteUser(user._id)
+                    console.log(`Delete user with ID: ${user._id}`)
+                  }}
                 >
-                  Load More Users
+                  <Trash2 className="h-4 w-4 mr-2" />
+                  Delete
                 </Button>
-              </div>
-            )}
-          </CardContent>
-        </Card>
+              </TableCell>
+            </TableRow>
+          ))}
+        </TableBody>
+      </Table>
+    </div>
+    {displayedUsers.length < allUsers.data.length && (
+      <div className="mt-4 text-center">
+        <Button
+          onClick={loadMoreUsers}
+          className="bg-blue-600 text-white hover:bg-blue-700 transition-all duration-300"
+        >
+          Load More Users
+        </Button>
+      </div>
+    )}
+  </CardContent>
+</Card>
+
 
         {/* Test Management */}
-        <Card className="animate-fade-in" style={{ animationDelay: '0.9s' }}>
-          <CardHeader>
-            <CardTitle className="text-xl font-bold text-blue-800">Test Management</CardTitle>
-          </CardHeader>
-          <CardContent>
-            <div className="mb-4">
-              <Button 
-              onClick={() => router.push('/dash-admin/tests/createtest')}
-              className="bg-blue-600 text-white hover:bg-blue-700 transition-all duration-300 hover:scale-105">
-                <PlusCircle className="h-4 w-4 mr-2" />
-                Create New Test
-              </Button>
-            </div>
-            <div className="overflow-x-auto max-h-96 overflow-y-auto">
-              <Table>
-                <TableHeader>
-                  <TableRow>
-                    <TableHead>Title</TableHead>
-                    <TableHead>Type</TableHead>
-                    <TableHead>Price</TableHead>
-                    <TableHead>Questions</TableHead>
-                    <TableHead>Actions</TableHead>
-                  </TableRow>
-                </TableHeader>
-                <TableBody>
-                  {displayedTests.map((test) => (
-                    <TableRow key={test._id} className="transition-all duration-300 hover:bg-blue-50">
-                      <TableCell>{test.title}</TableCell>
-                      <TableCell>{test.type}</TableCell>
-                      <TableCell>{test.isPaid ? `₹${test.price}` : 'Free'}</TableCell>
-                      <TableCell>{test.numberOfQuestions}</TableCell>
-                      <TableCell>
-                        <Button
-                          variant="destructive"
-                          size="sm"
-                          className="transition-all duration-300 hover:bg-red-600 hover:scale-105"
-                          onClick={() => {
-                            // Implement delete functionality here
-                            handleTestDelete(test._id)
-                            console.log(`Delete test with ID: ${test._id}`)
-                          }}
-                        >
-                          <Trash2 className="h-4 w-4 mr-2" />
-                          Delete
-                        </Button>
-                      </TableCell>
-                    </TableRow>
-                  ))}
-                </TableBody>
-              </Table>
-            </div>
-            {displayedTests.length < testList.length && (
-              <div className="mt-4 text-center">
+        <Card className="animate-fade-in mb-8" style={{ animationDelay: '0.9s' }}>
+  <CardHeader className="px-4 py-2 bg-gray-100">
+    <CardTitle className="text-xl font-bold text-blue-800">Test Management</CardTitle>
+  </CardHeader>
+  <CardContent className="p-4">
+    <div className="mb-4">
+      <Button 
+        onClick={() => router.push('/dash-admin/tests/createtest')}
+        className="bg-blue-600 text-white hover:bg-blue-700 transition-all duration-300 hover:scale-105"
+      >
+        <PlusCircle className="h-4 w-4 mr-2" />
+        Create New Test
+      </Button>
+    </div>
+    <div className="overflow-x-auto max-h-96 overflow-y-auto">
+      <Table className="min-w-full">
+        <TableHeader>
+          <TableRow>
+            <TableHead className="text-left">Title</TableHead>
+            <TableHead className="text-left">Type</TableHead>
+            <TableHead className="text-left">Price</TableHead>
+            <TableHead className="text-left">Questions</TableHead>
+            <TableHead className="text-left">Actions</TableHead>
+          </TableRow>
+        </TableHeader>
+        <TableBody>
+          {displayedTests.map((test) => (
+            <TableRow key={test._id} className="transition-all duration-300 hover:bg-blue-50">
+              <TableCell>{test.title}</TableCell>
+              <TableCell>{test.type}</TableCell>
+              <TableCell>{test.isPaid ? `₹${test.price}` : 'Free'}</TableCell>
+              <TableCell>{test.numberOfQuestions}</TableCell>
+              <TableCell>
                 <Button
-                  onClick={loadMoreTests}
-                  className="bg-blue-600 text-white hover:bg-blue-700 transition-all duration-300"
+                  variant="destructive"
+                  size="sm"
+                  className="transition-all duration-300 hover:bg-red-600 hover:scale-105"
+                  onClick={() => {
+                    handleTestDelete(test._id)
+                    console.log(`Delete test with ID: ${test._id}`)
+                  }}
                 >
-                  Load More Tests
+                  <Trash2 className="h-4 w-4 mr-2" />
+                  Delete
                 </Button>
-              </div>
-            )}
-          </CardContent>
-        </Card>
+              </TableCell>
+            </TableRow>
+          ))}
+        </TableBody>
+      </Table>
+    </div>
+    {displayedTests.length < testList.length && (
+      <div className="mt-4 text-center">
+        <Button
+          onClick={loadMoreTests}
+          className="bg-blue-600 text-white hover:bg-blue-700 transition-all duration-300"
+        >
+          Load More Tests
+        </Button>
+      </div>
+    )}
+  </CardContent>
+</Card>
+
       </div>
     </Layout>
   )
