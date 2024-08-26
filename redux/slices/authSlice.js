@@ -161,7 +161,6 @@ const authSlice = createSlice({
   extraReducers: (builder) => {
     builder
       .addCase(login.fulfilled, (state, action) => {
-        console.log("action payload",action.payload.data);
         if(typeof window !== 'undefined'){
           localStorage.setItem('isLoggedIn',true);
           console.log("role is",action.payload.data.data?.user?.role);
@@ -174,9 +173,6 @@ const authSlice = createSlice({
         state.data = action.payload.data?.user || {};
       })
       .addCase(getDetails.fulfilled, (state, action) => {
-        // console.log("action payload",action.payload.data);
-        console.log("action payload getd",action.payload.data);
-        console.log("state",state);
         if(typeof window !== 'undefined'){
           localStorage.setItem('isLoggedIn',true);
           localStorage.setItem('role',action.payload.data.data?.user?.role);
