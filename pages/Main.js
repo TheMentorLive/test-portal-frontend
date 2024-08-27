@@ -4,7 +4,7 @@ import Hero from "./Main/hero";
 import Exams from "./Main/exams";
 import Reviews from "./Main/reviews";
 import Footer from "./Main/footer";
-import SparklesPreview from "./Main/te";
+// import SparklesPreview from "./Main/te";
 import HoverBorderGradientDemo from "./Main/t2";
 
 export default function Main() {
@@ -20,7 +20,7 @@ export default function Main() {
       <HoverBorderGradientDemo/>
       <Exams />
       <Reviews />
-      <SparklesPreview/>
+      {/* <SparklesPreview/> */}
       <Footer />
     </div>
   );
