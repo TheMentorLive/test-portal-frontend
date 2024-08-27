@@ -3,10 +3,9 @@ import { useEffect, useRef, useState } from "react";
 import Link from "next/link";
 import { Button } from "@/public/ui/button";
 import { Card, CardHeader, CardTitle, CardContent } from "@/public/ui/card";
-import { Cover } from "../../components/ui/cover";
+import { Cover } from "../../public/ui/cover";
 import { Input } from "@/public/ui/input";
 import { Label } from "@/public/ui/label";
-import { TextGenerateEffect } from "@/components/ui/text-generate-effect"; // Ensure the path is correct
 import { motion, useAnimation } from 'framer-motion';
 import { Loader2, Send } from "lucide-react";
 import toast from "react-hot-toast";
@@ -95,27 +94,12 @@ export default function Hero() {
         >
           <div className="space-y-4 pt-28">
           <h1 className="text-3xl font-heading font-bold text-black tracking-tighter sm:text-4xl md:text-5xl lg:text-6xl">
-          <TextGenerateEffect
-                words="Master the Future"
-                className="inline"
-                duration={0.3}
-                delay={0}
-              />
-              <TextGenerateEffect
-                words="with"
-                className="inline"
-                duration={0.3}
-                delay={0.5}
-              />
-              
-  <Cover>
-    GenAI Learning
-  </Cover>
-
-
-
+          Master the Future <br />
+          with <br />
+          <Cover >
+            GenAI Learning
+            </Cover>
             </h1>
-          
             <p className="max-w-full md:max-w-[600px] text-green-50 text-muted-foreground md:text-xl lg:text-base xl:text-lg">
               GenAI Learning offers world-class online courses and programs to help you achieve your career goals. Learn from
               industry experts and transform your future.
