@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import { Card } from "@/public/ui/card";
 import { Avatar, AvatarImage, AvatarFallback } from "@/public/ui/avatar";
 import { Button } from "@/public/ui/button";
+import { motion } from "framer-motion";
 
 // Custom icon components
 function ChevronLeftIcon(props) {
@@ -121,7 +122,13 @@ export default function Re1() {
   );
 
   return (
-    <div style={{ fontFamily: 'Inter, sans-serif' }} className="flex flex-col items-center justify-center mt-32 p-20  bg-[#eaeaea]  sm:px-6 lg:px-8">
+    <motion.div
+      initial={{ opacity: 0, y: -50 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.5 }}
+      style={{ fontFamily: 'Inter, sans-serif' }}
+      className="flex flex-col items-center justify-center mt-32 p-20  bg-[#eaeaea]  sm:px-6 lg:px-8"
+    >
       <h2 className="text-2xl sm:text-3xl  mb-16 md:text-4xl font-bold  sm:mb-10 text-[#000000]">
         Testimonials
       </h2>
@@ -135,21 +142,27 @@ export default function Re1() {
         <div className="flex-1 overflow-hidden">
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
             {displayReviews.map((review, index) => (
-              <Card
+              <motion.div
                 key={index}
-                className="flex flex-col items-center p-4 bg-white shadow-lg mx-auto"
+                initial={{ opacity: 0, y: -50 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.5, delay: index * 0.2 }}
               >
-                <Avatar className="w-24 h-24 mb-4">
-                  <AvatarImage src={review.image} alt={`${review.name}'s avatar`} />
-                  <AvatarFallback>{review.name[0]}</AvatarFallback>
-                </Avatar>
-                <h3 className="text-lg font-bold text-[#007bff]">{review.name}</h3>
-                <p className="text-sm text-gray-600">{review.designation}</p>
-                <p className="mt-2 text-center text-gray-600">{review.feedback}</p>
-                <div className="flex mt-4 space-x-4">
-                  <Button>Read More</Button>
-                </div>
-              </Card>
+                <Card
+                  className="flex flex-col items-center p-4 bg-white shadow-lg mx-auto"
+                >
+                  <Avatar className="w-24 h-24 mb-4">
+                    <AvatarImage src={review.image} alt={`${review.name}'s avatar`} />
+                    <AvatarFallback>{review.name[0]}</AvatarFallback>
+                  </Avatar>
+                  <h3 className="text-lg font-bold text-[#007bff]">{review.name}</h3>
+                  <p className="text-sm text-gray-600">{review.designation}</p>
+                  <p className="mt-2 text-center text-gray-600">{review.feedback}</p>
+                  <div className="flex mt-4 space-x-4">
+                    <Button>Read More</Button>
+                  </div>
+                </Card>
+              </motion.div>
             ))}
           </div>
         </div>
@@ -160,6 +173,6 @@ export default function Re1() {
           <ChevronRightIcon className="w-6 h-6 text-[#007bff]" />
         </button>
       </div>
-    </div>
+    </motion.div>
   );
 }

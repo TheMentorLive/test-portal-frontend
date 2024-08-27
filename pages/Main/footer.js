@@ -1,79 +1,86 @@
 import Image from 'next/image';
 import Link from "next/link";
+import { motion } from "framer-motion"; // Import Framer Motion
 
 export default function Footer() {
   return (
-    <div style={{ fontFamily: 'Inter, sans-serif' }} className='align-middle border-t border-gray-500 justify-center'>
-    <footer className="bg-[#e3e6f1] text-black py-6 px-4 sm:px-6 md:px-10">
-      <div className="container mx-auto grid grid-cols-1 ml-10 sm:grid-cols-2 md:grid-cols-4 gap-6 md:gap-8">
-        <div className="flex flex-col items-center space-y-6">
-          <Link href="/" className="flex items-center" prefetch={false}>
-            <Image
-              src="/logo.png"
-              alt="Company Logo"
-              width={150}
-              height={150}
-              className="mx-2"
-              href="/"
-            />
-          </Link>
-          <div className="flex space-x-4">
-            <Link href="#" prefetch={false}>
-              <FacebookIcon className="h-6 w-6 text-black hover:text-blue-600 transition-colors" />
+    <motion.div 
+      initial={{ opacity: 0, y: 50 }} // Start with opacity 0 and slightly below the original position
+      animate={{ opacity: 1, y: 0 }} // Animate to full opacity and original position
+      transition={{ duration: 0.5 }} // Set the transition duration
+      style={{ fontFamily: 'Inter, sans-serif' }} 
+      className='align-middle border-t border-gray-500 justify-center'
+    >
+      <footer className="bg-[#e3e6f1] text-black py-6 px-4 sm:px-6 md:px-10">
+        <div className="container mx-auto grid grid-cols-1 ml-10 sm:grid-cols-2 md:grid-cols-4 gap-6 md:gap-8">
+          <div className="flex flex-col items-center space-y-6">
+            <Link href="/" className="flex items-center" prefetch={false}>
+              <Image
+                src="/logo.png"
+                alt="Company Logo"
+                width={150}
+                height={150}
+                className="mx-2"
+                href="/"
+              />
             </Link>
-            <Link href="#" prefetch={false}>
-              <TwitterIcon className="h-6 w-6 text-black hover:text-blue-400 transition-colors" />
+            <div className="flex space-x-4">
+              <Link href="#" prefetch={false}>
+                <FacebookIcon className="h-6 w-6 text-black hover:text-blue-600 transition-colors" />
+              </Link>
+              <Link href="#" prefetch={false}>
+                <TwitterIcon className="h-6 w-6 text-black hover:text-blue-400 transition-colors" />
+              </Link>
+              <Link href="#" prefetch={false}>
+                <InstagramIcon className="h-6 w-6 text-black hover:text-pink-600 transition-colors" />
+              </Link>
+              <Link href="#" prefetch={false}>
+                <LinkedinIcon className="h-6 w-6 text-black hover:text-blue-800 transition-colors" />
+              </Link>
+            </div>
+          </div>
+          <div className="flex flex-col space-y-2">
+            <h3 className="font-bold text-lg">Company</h3>
+            <Link href="#" className="text-gray-900 hover:text-black transition-colors" prefetch={false}>
+              About us
             </Link>
-            <Link href="#" prefetch={false}>
-              <InstagramIcon className="h-6 w-6 text-black hover:text-pink-600 transition-colors" />
+            <Link href="#" className="text-gray-900 hover:text-black transition-colors" prefetch={false}>
+              Our team
             </Link>
-            <Link href="#" prefetch={false}>
-              <LinkedinIcon className="h-6 w-6 text-black hover:text-blue-800 transition-colors" />
+            <Link href="#" className="text-gray-900 hover:text-black transition-colors" prefetch={false}>
+              Careers
+            </Link>
+          </div>
+          <div className="flex flex-col space-y-2">
+            <h3 className="font-bold text-lg">Help</h3>
+            <Link href="#" className="text-gray-900 hover:text-black transition-colors" prefetch={false}>
+              Support
+            </Link>
+            <Link href="#" className="text-gray-900 hover:text-black transition-colors" prefetch={false}>
+              FAQs
+            </Link>
+            <Link href="#" className="text-gray-900 hover:text-black transition-colors" prefetch={false}>
+              Contact us
+            </Link>
+          </div>
+          <div className="flex flex-col space-y-2">
+            <h3 className="font-bold text-lg">Explore</h3>
+            <Link href="#" className="text-gray-900 hover:text-black transition-colors" prefetch={false}>
+              Services
+            </Link>
+            <Link href="#" className="text-gray-900 hover:text-black transition-colors" prefetch={false}>
+              Products
+            </Link>
+            <Link href="#" className="text-gray-900 hover:text-black transition-colors" prefetch={false}>
+              Blog
             </Link>
           </div>
         </div>
-        <div className="flex flex-col space-y-2">
-          <h3 className="font-bold text-lg">Company</h3>
-          <Link href="#" className="text-gray-900 hover:text-black transition-colors" prefetch={false}>
-            About us
-          </Link>
-          <Link href="#" className="text-gray-900 hover:text-black transition-colors" prefetch={false}>
-            Our team
-          </Link>
-          <Link href="#" className="text-gray-900 hover:text-black transition-colors" prefetch={false}>
-            Careers
-          </Link>
+        <div className="text-center mt-6">
+          <p className="text-sm text-gray-700">{`\u00A9 2024 Your Company. All rights reserved.`}</p>
         </div>
-        <div className="flex flex-col space-y-2">
-          <h3 className="font-bold text-lg">Help</h3>
-          <Link href="#" className="text-gray-900 hover:text-black transition-colors" prefetch={false}>
-            Support
-          </Link>
-          <Link href="#" className="text-gray-900 hover:text-black transition-colors" prefetch={false}>
-            FAQs
-          </Link>
-          <Link href="#" className="text-gray-900 hover:text-black transition-colors" prefetch={false}>
-            Contact us
-          </Link>
-        </div>
-        <div className="flex flex-col space-y-2">
-          <h3 className="font-bold text-lg">Explore</h3>
-          <Link href="#" className="text-gray-900 hover:text-black transition-colors" prefetch={false}>
-            Services
-          </Link>
-          <Link href="#" className="text-gray-900 hover:text-black transition-colors" prefetch={false}>
-            Products
-          </Link>
-          <Link href="#" className="text-gray-900 hover:text-black transition-colors" prefetch={false}>
-            Blog
-          </Link>
-        </div>
-      </div>
-      <div className="text-center mt-6">
-        <p className="text-sm text-gray-700">{`\u00A9 2024 Your Company. All rights reserved.`}</p>
-      </div>
-    </footer>
-    </div>
+      </footer>
+    </motion.div>
   );
 }
 

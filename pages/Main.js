@@ -4,7 +4,7 @@ import Hero from "./Main/hero";
 import Exams from "./Main/exams";
 import Reviews from "./Main/reviews";
 import Footer from "./Main/footer";
-// import TextGenerateEffectDemo from "./Main/te";
+import SparklesPreview from "./Main/te";
 
 export default function Main() {
   return (
@@ -16,9 +16,10 @@ export default function Main() {
       
       <Navbar />
       <Hero />
-      {/* <TextGenerateEffectDemo/> */}
+      
       <Exams />
       <Reviews />
+      <SparklesPreview/>
       <Footer />
     </div>
   );

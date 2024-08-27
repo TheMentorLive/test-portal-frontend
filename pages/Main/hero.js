@@ -1,16 +1,47 @@
 "use client";
+import { useEffect, useRef } from "react";
 import Link from "next/link";
 import { Button } from "@/public/ui/button";
 import { Card, CardHeader, CardTitle, CardContent, CardFooter } from "@/public/ui/card";
 import { Input } from "@/public/ui/input";
 import { Label } from "@/public/ui/label";
 import { TextGenerateEffect } from "@/public/ui/text-generate-effect"; // Ensure the path is correct
+import { motion, useAnimation } from 'framer-motion';
 
 export default function Hero() {
+  const heroRef = useRef(null);
+  const controls = useAnimation();
+
+  useEffect(() => {
+    const handleScroll = () => {
+      const element = heroRef.current;
+      if (!element) return;
+
+      const rect = element.getBoundingClientRect();
+      const windowHeight = window.innerHeight;
+
+      if (rect.top <= windowHeight && rect.bottom >= 0) {
+        controls.start({ opacity: 1, y: 0 });
+      } else {
+        controls.start({ opacity: 0, y: 50 });
+      }
+    };
+
+    window.addEventListener('scroll', handleScroll);
+    handleScroll(); // Trigger scroll effect on initial render
+
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, [controls]);
+
   return (
     <div className="flex-1 px-4 md:px-10 lg:px-20 xl:px-32 py-8 font-body">
-      <section className="w-full flex items-center min-h-[100dvh] justify-center">
-        <div className="container grid gap-6 px-4 mr-16 ml-16 -mt-48 md:px-6 lg:grid-cols-2 lg:gap-24">
+      <section ref={heroRef} className="w-full flex items-center min-h-[100dvh] justify-center">
+        <motion.div
+          initial={{ opacity: 0, y: 50 }}
+          animate={controls}
+          transition={{ duration: 0.5 }}
+          className="container grid gap-6 px-4 mr-16 ml-16 -mt-48 md:px-6 lg:grid-cols-2 lg:gap-24"
+        >
           <div className="space-y-4 pt-24">
             <h1 className="text-3xl font-heading font-bold text-black tracking-tighter sm:text-4xl md:text-5xl lg:text-6xl">
               <TextGenerateEffect
@@ -79,7 +110,7 @@ export default function Hero() {
               </CardFooter>
             </Card>
           </div>
-        </div>
+        </motion.div>
       </section>
     </div>
   );
