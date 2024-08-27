@@ -10,7 +10,8 @@ export default function SparklesPreview() {
         className="md:text-5xl text-3xl lg:text-9xl font-bold text-center text-black relative z-20">
         GenAI Learning
       </h1>
-      <div className="w-full h-40 ml-36 relative flex justify-center items-center mt-4">
+      <div className="y
+      w-full h-40 ml-36 relative flex justify-center items-center mt-4">
         {/* Gradients */}
         <div
           className="absolute inset-x-20 top-0 bg-gradient-to-r from-transparent via-indigo-500 to-transparent h-[2px] w-3/4 blur-sm" />
