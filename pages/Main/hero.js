@@ -95,11 +95,28 @@ export default function Hero() {
         >
           <div className="space-y-4 pt-28">
           <h1 className="text-3xl font-heading font-bold text-black tracking-tighter sm:text-4xl md:text-5xl lg:text-6xl">
-            Master the Future <br />
-            with <br />
-            <Cover>
-            GenAI Learning
-            </Cover>
+          <TextGenerateEffect
+                words="Master the Future"
+                className="inline"
+                duration={0.3}
+                delay={0}
+              />
+              <TextGenerateEffect
+                words="with"
+                className="inline"
+                duration={0.3}
+                delay={0.5}
+              />
+             <TextGenerateEffect
+  duration={0.3}
+  delay={0.5}
+>
+  <Cover>
+    GenAI Learning
+  </Cover>
+</TextGenerateEffect>
+
+
             </h1>
           
             <p className="max-w-full md:max-w-[600px] text-green-50 text-muted-foreground md:text-xl lg:text-base xl:text-lg">

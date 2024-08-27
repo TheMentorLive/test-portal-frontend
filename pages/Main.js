@@ -5,7 +5,7 @@ import Exams from "./Main/exams";
 import Reviews from "./Main/reviews";
 import Footer from "./Main/footer";
 import More from "./Main/more";
-import  CoverDemo  from "./Main/t1";
+
 
 
 
@@ -21,7 +21,7 @@ export default function Main() {
       <Hero />
       <Exams />
       <Reviews />
-      <CoverDemo/>
+     
       <More/>
       <Footer />
     </div>
