@@ -4,7 +4,7 @@ import Hero from "./Main/hero";
 import Exams from "./Main/exams";
 import Reviews from "./Main/reviews";
 import Footer from "./Main/footer";
-import SparklesPreview from "./Main/te";
+// import SparklesPreview from "./Main/te";
 
 export default function Main() {
   return (
@@ -19,7 +19,7 @@ export default function Main() {
       
       <Exams />
       <Reviews />
-      <SparklesPreview/>
+      {/* <SparklesPreview/> */}
       <Footer />
     </div>
   );
