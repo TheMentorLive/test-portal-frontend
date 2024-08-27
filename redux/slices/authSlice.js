@@ -78,6 +78,22 @@ export const logout = createAsyncThunk('/auth/logout', async () => {
   }
 });
 
+export const verifyOTP = createAsyncThunk('/auth/verifyOTP', async (data, { rejectWithValue }) => {
+  try {
+    const response = axiosInstance.post("/users/verify-otp", data);
+    toast.promise(response, {
+      loading: 'Verifying your account...',
+      success: 'Account verified successfully!',
+      error: 'Failed to verify account'
+    });
+    return true;
+  } catch (e) {
+    toast.error(e?.response?.data?.message || 'An error occurred');
+    return rejectWithValue(e?.response?.data || 'An error occurred');
+  }
+});
+
+
 export const updatePassword = createAsyncThunk('/auth/updatePassword', async (data, { rejectWithValue }) => {
   try {
     const response =  axiosInstance.put("/users/update-password", data);
@@ -192,10 +208,7 @@ const authSlice = createSlice({
         return initialState;
       })
       .addCase(createAccount.fulfilled, (state, action) => {
-        console.log("signup is",action.payload.data);
-        state.isLoggedIn = true;
-        state.role = action.payload.data.role || "";
-        state.data = action.payload.data || {};
+        
       })
   }
 });

@@ -12,7 +12,7 @@ import Layout from './layout';
 import { FcGoogle } from "react-icons/fc";
 import { FaLinkedin } from "react-icons/fa";
 import { isEmail } from '@/utils/validations/emailValidator';
-import { createAccount, googleSinup, linkedinSignup } from '@/redux/slices/authSlice';
+import { createAccount, googleSinup, linkedinSignup, verifyOTP } from '@/redux/slices/authSlice';
 import { useDispatch } from 'react-redux';
 import { useRouter } from 'next/navigation';
 
@@ -21,6 +21,8 @@ export default function Signup() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [name, setName] = useState('');
+  const [showOTP, setShowOTP] = useState(false);
+  const [otp, setOTP] = useState('');
   const router = useRouter();
 
   async function handleGoogleSignup(e) {
@@ -52,10 +54,32 @@ export default function Signup() {
     }
 
     const response = await dispatch(createAccount({ name, email, password }));
-    setEmail('');
-    setName('');
-    setPassword('');
-    router.push('/dash-admin/tests');
+    console.log(response.payload,"user data");
+    if (response.payload?.statusCode === 201) {
+      toast.success("OTP sent to your email. Please verify.");
+      setShowOTP(true);
+    } else {
+      toast.error("Failed to create account. Please try again.");
+    }
+  }
+
+  async function handleOTPVerification(e) {
+    e.preventDefault();
+    if (!otp) {
+      toast.error("Please enter the OTP");
+      return;
+    }
+
+    const response = await dispatch(verifyOTP({ otp }));
+    if (response) {
+      setEmail('');
+      setName('');
+      setPassword('');
+      setOTP('');
+      router.push('/Main/signin');
+    } else {
+      toast.error("Invalid OTP. Please try again.");
+    }
   }
 
   return (
@@ -91,75 +115,106 @@ export default function Signup() {
                   </Link>
                 </p>
               </div>
-              <form className="space-y-4" onSubmit={handleRegister} noValidate>
-                <div className="space-y-2">
-                  <Label htmlFor="name">Name</Label>
-                  <Input
-                    id="name"
-                    placeholder="Enter your name"
-                    value={name}
-                    onChange={(e) => setName(e.target.value)}
-                    required
-                    className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-primary"
-                  />
-                </div>
-                <div className="space-y-2">
-                  <Label htmlFor="email">Email</Label>
-                  <Input
-                    id="email"
-                    type="email"
-                    placeholder="Enter your email"
-                    value={email}
-                    onChange={(e) => setEmail(e.target.value)}
-                    required
-                    className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-primary"
-                  />
-                </div>
-                <div className="space-y-2">
-                  <Label htmlFor="password">Password</Label>
-                  <Input
-                    id="password"
-                    type="password"
-                    placeholder="Enter your password"
-                    value={password}
-                    onChange={(e) => setPassword(e.target.value)}
-                    required
-                    className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-primary"
-                  />
-                </div>
-                <Button
-                  type="submit"
-                  className="w-full bg-primary text-white hover:bg-primary-dark"
-                >
-                  Sign Up
-                </Button>
-              </form>
-              <div className="relative">
-                <div className="absolute inset-0 flex items-center">
-                  <div className="w-full border-t border-gray-300"></div>
-                </div>
-                <div className="relative flex justify-center text-sm">
-                  <span className="px-2 bg-white text-gray-500">Or Sign Up with</span>
-                </div>
-              </div>
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                <Button
-                  onClick={handleGoogleSignup}
-                  variant="outline"
-                  className="py-2 px-4 flex items-center justify-center gap-2 border border-gray-300 rounded-md hover:bg-gray-50 transition-colors"
-                >
-                  <FcGoogle className="text-xl" />
-                  <span>Google</span>
-                </Button>
-                <Button
-                  onClick={handleLinkedinSignup}
-                  variant="outline"
-                  className="py-2 px-4 flex items-center justify-center gap-2 border border-gray-300 rounded-md hover:bg-gray-50 transition-colors"
-                >
-                  <FaLinkedin className="text-xl text-[#0A66C2]" />
-                  <span>LinkedIn</span>
-                </Button>
-              </div>
+              {!showOTP ? (
+                <form className="space-y-4" onSubmit={handleRegister} noValidate>
+                  <div className="space-y-2">
+                    <Label htmlFor="name">Name</Label>
+                    <Input
+                      id="name"
+                      placeholder="Enter your name"
+                      value={name}
+                      onChange={(e) => setName(e.target.value)}
+                      required
+                      className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-primary"
+                    />
+                  </div>
+                  <div className="space-y-2">
+                    <Label htmlFor="email">Email</Label>
+                    <Input
+                      id="email"
+                      type="email"
+                      placeholder="Enter your email"
+                      value={email}
+                      onChange={(e) => setEmail(e.target.value)}
+                      required
+                      className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-primary"
+                    />
+                  </div>
+                  <div className="space-y-2">
+                    <Label htmlFor="password">Password</Label>
+                    <Input
+                      id="password"
+                      type="password"
+                      placeholder="Enter your password"
+                      value={password}
+                      onChange={(e) => setPassword(e.target.value)}
+                      required
+                      className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-primary"
+                    />
+                  </div>
+                  <Button
+                    type="submit"
+                    className="w-full bg-primary text-white hover:bg-primary-dark"
+                  >
+                    Sign Up
+                  </Button>
+                </form>
+              ) : (
+                <form className="space-y-4" onSubmit={handleOTPVerification} noValidate>
+                  <div className='text-center'>
+                    <p className="text-gray-600 text-sm sm:text-base text-center">
+                      OTP sent to your email. Please verify.
+                    </p>
+                  </div>
+                  <div className="space-y-2">
+                    <Label htmlFor="otp">Enter OTP</Label>
+                    <Input
+                      id="otp"
+                      placeholder="Enter the OTP sent to your email"
+                      value={otp}
+                      onChange={(e) => setOTP(e.target.value)}
+                      required
+                      className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-primary"
+                    />
+                  </div>
+                  <Button
+                    type="submit"
+                    className="w-full bg-primary text-white hover:bg-primary-dark"
+                  >
+                    Verify OTP
+                  </Button>
+                </form>
+              )}
+              {!showOTP && (
+                <>
+                  <div className="relative">
+                    <div className="absolute inset-0 flex items-center">
+                      <div className="w-full border-t border-gray-300"></div>
+                    </div>
+                    <div className="relative flex justify-center text-sm">
+                      <span className="px-2 bg-white text-gray-500">Or Sign Up with</span>
+                    </div>
+                  </div>
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                    <Button
+                      onClick={handleGoogleSignup}
+                      variant="outline"
+                      className="py-2 px-4 flex items-center justify-center gap-2 border border-gray-300 rounded-md hover:bg-gray-50 transition-colors"
+                    >
+                      <FcGoogle className="text-xl" />
+                      <span>Google</span>
+                    </Button>
+                    <Button
+                      onClick={handleLinkedinSignup}
+                      variant="outline"
+                      className="py-2 px-4 flex items-center justify-center gap-2 border border-gray-300 rounded-md hover:bg-gray-50 transition-colors"
+                    >
+                      <FaLinkedin className="text-xl text-[#0A66C2]" />
+                      <span>LinkedIn</span>
+                    </Button>
+                  </div>
+                </>
+              )}
             </div>
             <div className="w-full md:w-1/2 relative">
               <div className="absolute inset-0 bg-gradient-to-br from-blue-500 to-purple-600 opacity-15"></div>
@@ -172,8 +227,6 @@ export default function Signup() {
               />
               <div className="absolute inset-0 flex justify-center p-6">
                 <div className="text-white text-center">
-                  <h2 className="text-3xl font-bold mb-2 text-blue-800">Join Our Community</h2>
-                  <p className="text-lg text-blue-700">Sign up to get started on your journey</p>
                 </div>
               </div>
             </div>

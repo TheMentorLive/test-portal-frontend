@@ -77,7 +77,7 @@ const TestCard = ({ test = {}, isAdmin = false }) => {
     };
 
     function isEligible() {
-        return allowedTests.some((allowedTest) => allowedTest.testId === test._id);
+        return allowedTests?.some((allowedTest) => allowedTest.testId === test._id);
     }
 
     const handleDelete = async(id) => {
