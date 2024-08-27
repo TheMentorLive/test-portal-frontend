@@ -123,15 +123,20 @@ export default function Re1() {
 
   return (
     <motion.div
-      initial={{ opacity: 0, y: -50 }}
-      animate={{ opacity: 1, y: 0 }}
+      initial={{ opacity: 0, x: 100 }} // Start off-screen to the right
+      animate={{ opacity: 1, x: 0 }} // Slide in to the center
       transition={{ duration: 0.5 }}
       style={{ fontFamily: 'Inter, sans-serif' }}
-      className="flex flex-col items-center justify-center mt-32 p-20  bg-[#eaeaea]  sm:px-6 lg:px-8"
+      className="flex flex-col items-center justify-center mt-32 p-20 bg-[#eaeaea] sm:px-6 lg:px-8"
     >
-      <h2 className="text-2xl sm:text-3xl  mb-16 md:text-4xl font-bold  sm:mb-10 text-[#000000]">
+      <motion.h2
+        initial={{ opacity: 0, x: -100 }} // Slide in from left
+        animate={{ opacity: 1, x: 0 }} // Slide to the center
+        transition={{ duration: 0.5 }}
+        className="text-2xl sm:text-3xl mb-16 md:text-4xl font-bold sm:mb-10 text-[#000000]"
+      >
         Testimonials
-      </h2>
+      </motion.h2>
       <div className="flex items-center justify-between w-full max-w-2xl sm:max-w-4xl lg:max-w-6xl gap-4">
         <button
           onClick={handlePrev}
@@ -144,8 +149,8 @@ export default function Re1() {
             {displayReviews.map((review, index) => (
               <motion.div
                 key={index}
-                initial={{ opacity: 0, y: -50 }}
-                animate={{ opacity: 1, y: 0 }}
+                initial={{ opacity: 0, x: 100 }} // Slide in from right
+                animate={{ opacity: 1, x: 0 }} // Slide to the center
                 transition={{ duration: 0.5, delay: index * 0.2 }}
               >
                 <Card

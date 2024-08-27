@@ -13,7 +13,12 @@ export default function Footer() {
     >
       <footer className="bg-[#e3e6f1] text-black py-6 px-4 sm:px-6 md:px-10">
         <div className="container mx-auto grid grid-cols-1 ml-10 sm:grid-cols-2 md:grid-cols-4 gap-6 md:gap-8">
-          <div className="flex flex-col items-center space-y-6">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }} // Start with opacity 0 and slightly below the original position
+            animate={{ opacity: 1, y: 0 }} // Animate to full opacity and original position
+            transition={{ duration: 0.5, delay: 0.1 }} // Set the transition duration and delay
+            className="flex flex-col items-center space-y-6"
+          >
             <Link href="/" className="flex items-center" prefetch={false}>
               <Image
                 src="/logo.png"
@@ -25,21 +30,46 @@ export default function Footer() {
               />
             </Link>
             <div className="flex space-x-4">
-              <Link href="#" prefetch={false}>
-                <FacebookIcon className="h-6 w-6 text-black hover:text-blue-600 transition-colors" />
-              </Link>
-              <Link href="#" prefetch={false}>
-                <TwitterIcon className="h-6 w-6 text-black hover:text-blue-400 transition-colors" />
-              </Link>
-              <Link href="#" prefetch={false}>
-                <InstagramIcon className="h-6 w-6 text-black hover:text-pink-600 transition-colors" />
-              </Link>
-              <Link href="#" prefetch={false}>
-                <LinkedinIcon className="h-6 w-6 text-black hover:text-blue-800 transition-colors" />
-              </Link>
+              <motion.div
+                whileHover={{ scale: 1.1 }} // Scale up on hover
+                transition={{ type: "spring", stiffness: 300 }}
+              >
+                <Link href="#" prefetch={false}>
+                  <FacebookIcon className="h-6 w-6 text-black hover:text-blue-600 transition-colors" />
+                </Link>
+              </motion.div>
+              <motion.div
+                whileHover={{ scale: 1.1 }} // Scale up on hover
+                transition={{ type: "spring", stiffness: 300 }}
+              >
+                <Link href="#" prefetch={false}>
+                  <TwitterIcon className="h-6 w-6 text-black hover:text-blue-400 transition-colors" />
+                </Link>
+              </motion.div>
+              <motion.div
+                whileHover={{ scale: 1.1 }} // Scale up on hover
+                transition={{ type: "spring", stiffness: 300 }}
+              >
+                <Link href="#" prefetch={false}>
+                  <InstagramIcon className="h-6 w-6 text-black hover:text-pink-600 transition-colors" />
+                </Link>
+              </motion.div>
+              <motion.div
+                whileHover={{ scale: 1.1 }} // Scale up on hover
+                transition={{ type: "spring", stiffness: 300 }}
+              >
+                <Link href="#" prefetch={false}>
+                  <LinkedinIcon className="h-6 w-6 text-black hover:text-blue-800 transition-colors" />
+                </Link>
+              </motion.div>
             </div>
-          </div>
-          <div className="flex flex-col space-y-2">
+          </motion.div>
+          <motion.div
+            initial={{ opacity: 0, x: -20 }} // Start with opacity 0 and slightly to the left
+            animate={{ opacity: 1, x: 0 }} // Animate to full opacity and original position
+            transition={{ duration: 0.5, delay: 0.2 }} // Set the transition duration and delay
+            className="flex flex-col space-y-2"
+          >
             <h3 className="font-bold text-lg">Company</h3>
             <Link href="#" className="text-gray-900 hover:text-black transition-colors" prefetch={false}>
               About us
@@ -50,8 +80,13 @@ export default function Footer() {
             <Link href="#" className="text-gray-900 hover:text-black transition-colors" prefetch={false}>
               Careers
             </Link>
-          </div>
-          <div className="flex flex-col space-y-2">
+          </motion.div>
+          <motion.div
+            initial={{ opacity: 0, x: -20 }} // Start with opacity 0 and slightly to the left
+            animate={{ opacity: 1, x: 0 }} // Animate to full opacity and original position
+            transition={{ duration: 0.5, delay: 0.3 }} // Set the transition duration and delay
+            className="flex flex-col space-y-2"
+          >
             <h3 className="font-bold text-lg">Help</h3>
             <Link href="#" className="text-gray-900 hover:text-black transition-colors" prefetch={false}>
               Support
@@ -62,8 +97,13 @@ export default function Footer() {
             <Link href="#" className="text-gray-900 hover:text-black transition-colors" prefetch={false}>
               Contact us
             </Link>
-          </div>
-          <div className="flex flex-col space-y-2">
+          </motion.div>
+          <motion.div
+            initial={{ opacity: 0, x: 20 }} // Start with opacity 0 and slightly to the right
+            animate={{ opacity: 1, x: 0 }} // Animate to full opacity and original position
+            transition={{ duration: 0.5, delay: 0.4 }} // Set the transition duration and delay
+            className="flex flex-col space-y-2"
+          >
             <h3 className="font-bold text-lg">Explore</h3>
             <Link href="#" className="text-gray-900 hover:text-black transition-colors" prefetch={false}>
               Services
@@ -74,7 +114,7 @@ export default function Footer() {
             <Link href="#" className="text-gray-900 hover:text-black transition-colors" prefetch={false}>
               Blog
             </Link>
-          </div>
+          </motion.div>
         </div>
         <div className="text-center mt-6">
           <p className="text-sm text-gray-700">{`\u00A9 2024 Your Company. All rights reserved.`}</p>
