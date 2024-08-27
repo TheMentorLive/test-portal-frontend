@@ -8,6 +8,7 @@ import More from "./Main/more";
 
 
 
+
 export default function Main() {
   return (
     <div style={{ fontFamily: 'Inter, sans-serif' }}>
@@ -20,6 +21,7 @@ export default function Main() {
       <Hero />
       <Exams />
       <Reviews />
+     
       <More/>
       <Footer />
     </div>
