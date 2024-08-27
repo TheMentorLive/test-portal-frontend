@@ -6,7 +6,7 @@ import { Card, CardHeader, CardTitle, CardContent } from "@/public/ui/card";
 import { Cover } from "../../components/ui/cover";
 import { Input } from "@/public/ui/input";
 import { Label } from "@/public/ui/label";
-import { TextGenerateEffect } from "@/public/ui/text-generate-effect"; // Ensure the path is correct
+import { TextGenerateEffect } from "@/components/ui/text-generate-effect"; // Ensure the path is correct
 import { motion, useAnimation } from 'framer-motion';
 import { Loader2, Send } from "lucide-react";
 import toast from "react-hot-toast";
@@ -107,14 +107,11 @@ export default function Hero() {
                 duration={0.3}
                 delay={0.5}
               />
-             <TextGenerateEffect
-  duration={0.3}
-  delay={0.5}
->
+              
   <Cover>
     GenAI Learning
   </Cover>
-</TextGenerateEffect>
+
 
 
             </h1>
