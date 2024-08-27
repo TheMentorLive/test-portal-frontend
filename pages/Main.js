@@ -4,6 +4,7 @@ import Hero from "./Main/hero";
 import Exams from "./Main/exams";
 import Reviews from "./Main/reviews";
 import Footer from "./Main/footer";
+import More from "./Main/more";
 
 
 
@@ -19,7 +20,7 @@ export default function Main() {
       <Hero />
       <Exams />
       <Reviews />
-    
+      <More/>
       <Footer />
     </div>
   );

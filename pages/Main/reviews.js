@@ -127,7 +127,7 @@ export default function Re1() {
       animate={{ opacity: 1, x: 0 }} // Slide in to the center
       transition={{ duration: 0.5 }}
       style={{ fontFamily: 'Inter, sans-serif' }}
-      className="flex flex-col items-center justify-center mt-32 p-20 bg-[#eaeaea] sm:px-6 lg:px-8"
+      className="flex flex-col items-center justify-center mt-32 p-20  sm:px-6 lg:px-8"
     >
       <motion.h2
         initial={{ opacity: 0, x: -100 }} // Slide in from left

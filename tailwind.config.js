@@ -75,6 +75,8 @@ module.exports = {
         "accordion-down": "accordion-down 0.2s ease-out",
         "accordion-up": "accordion-up 0.2s ease-out",
         "rotate-border": "rotate-border 2s linear infinite",
+        shimmer: "shimmer 2s linear infinite",
+        
       },
     },
   },
