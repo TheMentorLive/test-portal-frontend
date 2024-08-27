@@ -8,7 +8,7 @@ import { Label } from "@/public/ui/label";
 import { TextGenerateEffect } from "@/public/ui/text-generate-effect"; // Ensure the path is correct
 import { motion, useAnimation } from 'framer-motion';
 import { Loader2, Send } from "lucide-react";
-
+import toast from "react-hot-toast";
 import { isEmail } from '@/utils/validations/emailValidator';
 import { BACKENDURL } from '@/utils/validations/contants';
 
@@ -53,34 +53,34 @@ export default function Hero() {
       setIsSubmitting(false);
       return;
     }
-
-    try {
-      const response = await fetch(`${BACKENDURL}/mislenious/get-in-touch`, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
-          fullName: event.target.fullName.value,
-          email: event.target.email.value,
-          message: event.target.message.value,
-        }),
+    fetch(`${BACKENDURL}/mislenious/get-in-touch`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        fullName: event.target.fullName.value,
+        email: event.target.email.value,
+        message: event.target.message.value,
+      }),
+    })
+      .then(response => {
+        if (response.ok) {
+          toast.success('We get in touch soon!');
+          event.target.reset();
+        } else {
+          toast.error('Failed to send message');
+          throw new Error('Failed to send message');
+        }
+      })
+      .catch(error => {
+        toast.error(`Failed to send message: ${error.message}`);
+      })
+      .finally(() => {
+        event.target.reset();
+        setIsSubmitting(false);
       });
 
-      if (response.ok) {
-        console.log('Submission successful');
-        
-        event.target.reset();
-      } else {
-        console.log('Submission failed');
-        alert('Submission failed. Please try again.');
-      }
-    } catch (error) {
-      console.log('Network error');
-      alert('Network error. Please try again.');
-    } finally {
-      setIsSubmitting(false);
-    }
   };
 
   return (
