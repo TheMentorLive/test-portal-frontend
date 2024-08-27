@@ -1,19 +1,38 @@
+"use client";
 import Link from "next/link";
 import { Button } from "@/public/ui/button";
 import { Card, CardHeader, CardTitle, CardContent, CardFooter } from "@/public/ui/card";
 import { Input } from "@/public/ui/input";
 import { Label } from "@/public/ui/label";
+import { TextGenerateEffect } from "@/public/ui/text-generate-effect"; // Ensure the path is correct
 
 export default function Hero() {
   return (
-    <div 
-    style={{ fontFamily: 'Inter, sans-serif' }}
-    className="flex-1 px-4 md:px-10 lg:px-20 xl:px-32 py-8 font-body">
+    <div className="flex-1 px-4 md:px-10 lg:px-20 xl:px-32 py-8 font-body">
       <section className="w-full flex items-center min-h-[100dvh] justify-center">
-        <div className="container grid gap-6 px-4 mr-16 ml-16 -mt-32 md:px-6 lg:grid-cols-2 lg:gap-24">
+        <div className="container grid gap-6 px-4 mr-16 ml-16 -mt-48 md:px-6 lg:grid-cols-2 lg:gap-24">
           <div className="space-y-4 pt-24">
-            <h1 className="text-3xl font-heading font-bold text-black tracking-tighter sm:text-4xl md:text-5xl lg:text-6xl/none">
-              Master the Future <br /> with <br /> GenAI Learning
+            <h1 className="text-3xl font-heading font-bold text-black tracking-tighter sm:text-4xl md:text-5xl lg:text-6xl">
+              <TextGenerateEffect
+                words="Master the Future"
+                className="inline" // Ensure text stays inline
+                duration={0.3} // Updated duration
+                delay={0} // Start immediately
+              />
+              
+              <TextGenerateEffect
+                words="with"
+                className="inline " // Ensure text stays inline
+                duration={0.3} // Updated duration
+                delay={0.5} // Start after the previous text
+              />
+              
+              <TextGenerateEffect
+                words="GenAI Learning"
+                className="inline" // Ensure text stays inline
+                duration={0.3} // Updated duration
+                delay={1.0} // Start after the previous text
+              />
             </h1>
             <p className="max-w-full md:max-w-[600px] text-green-50 text-muted-foreground md:text-xl lg:text-base xl:text-lg">
               GenAI Learning offers world-class online courses and programs to help you achieve your career goals. Learn from
