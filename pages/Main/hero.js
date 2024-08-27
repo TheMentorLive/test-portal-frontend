@@ -1,117 +1,257 @@
-"use client";
-import { useEffect, useRef } from "react";
-import Link from "next/link";
-import { Button } from "@/public/ui/button";
-import { Card, CardHeader, CardTitle, CardContent, CardFooter } from "@/public/ui/card";
-import { Input } from "@/public/ui/input";
-import { Label } from "@/public/ui/label";
-import { TextGenerateEffect } from "@/public/ui/text-generate-effect"; // Ensure the path is correct
-import { motion, useAnimation } from 'framer-motion';
+'use client'
 
-export default function Hero() {
-  const heroRef = useRef(null);
-  const controls = useAnimation();
+import React, { useEffect, useState, useCallback } from 'react'
+import Link from "next/link"
+import { motion } from 'framer-motion'
+import { Button } from "@/public/ui/button"
+import { Card, CardHeader, CardTitle, CardContent } from "@/public/ui/card"
+import { Input } from "@/public/ui/input"
+import { Label } from "@/public/ui/label"
+import { Loader2, Send, ArrowRight, Play, Sparkles } from "lucide-react"
+import confetti from 'canvas-confetti'
+import { isEmail } from '@/utils/validations/emailValidator'
+import { BACKENDURL } from '@/utils/validations/contants'
+
+const words = ["GenAI Learning", "AI Mastery", "Future Skills", "Tech Innovation"]
+
+const TypingAnimation = () => {
+  const [text, setText] = useState('')
+  const [wordIndex, setWordIndex] = useState(0)
+  const [isDeleting, setIsDeleting] = useState(false)
+
+  const typeText = useCallback(() => {
+    const currentWord = words[wordIndex]
+    const shouldDelete = isDeleting ? 1 : -1
+    setText(current => currentWord.substring(0, current.length - shouldDelete))
+
+    if (!isDeleting && text === currentWord) {
+      setTimeout(() => setIsDeleting(true), 1500)
+    } else if (isDeleting && text === '') {
+      setIsDeleting(false)
+      setWordIndex((current) => (current + 1) % words.length)
+    }
+  }, [wordIndex, isDeleting, text])
 
   useEffect(() => {
-    const handleScroll = () => {
-      const element = heroRef.current;
-      if (!element) return;
-
-      const rect = element.getBoundingClientRect();
-      const windowHeight = window.innerHeight;
-
-      if (rect.top <= windowHeight && rect.bottom >= 0) {
-        controls.start({ opacity: 1, y: 0 });
-      } else {
-        controls.start({ opacity: 0, y: 50 });
-      }
-    };
-
-    window.addEventListener('scroll', handleScroll);
-    handleScroll(); // Trigger scroll effect on initial render
-
-    return () => window.removeEventListener('scroll', handleScroll);
-  }, [controls]);
+    const timer = setTimeout(typeText, isDeleting ? 50 : 100)
+    return () => clearTimeout(timer)
+  }, [typeText, isDeleting])
 
   return (
-    <div className="flex-1 px-4 md:px-10 lg:px-20 xl:px-32 py-8 font-body">
-      <section ref={heroRef} className="w-full flex items-center min-h-[100dvh] justify-center">
+    <span className="inline-block min-w-[200px]">
+      {text}
+      <span className="inline-block w-0.5 h-[1em] bg-current ml-1 animate-blink"></span>
+    </span>
+  )
+}
+
+const FloatingElement = ({ children, yOffset = 5, duration = 4 }) => (
+  <motion.div
+    animate={{
+      y: [-yOffset, yOffset],
+      transition: {
+        duration,
+        repeat: Infinity,
+        repeatType: "reverse",
+        ease: "easeInOut"
+      }
+    }}
+  >
+    {children}
+  </motion.div>
+)
+
+const BackgroundAnimation = () => (
+  <div className="absolute inset-0 overflow-hidden pointer-events-none">
+    <div className="absolute w-full h-full">
+      {[...Array(15)].map((_, i) => (
         <motion.div
-          initial={{ opacity: 0, y: 50 }}
-          animate={controls}
-          transition={{ duration: 0.5 }}
-          className="container grid gap-6 px-4 mr-16 ml-16 -mt-48 md:px-6 lg:grid-cols-2 lg:gap-24"
-        >
-          <div className="space-y-4 pt-24">
-            <h1 className="text-3xl font-heading font-bold text-black tracking-tighter sm:text-4xl md:text-5xl lg:text-6xl">
-              <TextGenerateEffect
-                words="Master the Future"
-                className="inline" // Ensure text stays inline
-                duration={0.3} // Updated duration
-                delay={0} // Start immediately
-              />
-              
-              <TextGenerateEffect
-                words="with"
-                className="inline " // Ensure text stays inline
-                duration={0.3} // Updated duration
-                delay={0.5} // Start after the previous text
-              />
-              
-              <TextGenerateEffect
-                words="GenAI Learning"
-                className="inline" // Ensure text stays inline
-                duration={0.3} // Updated duration
-                delay={1.0} // Start after the previous text
-              />
+          key={i}
+          className="absolute rounded-full bg-gradient-to-r from-blue-400 to-purple-500 mix-blend-multiply filter blur-xl opacity-20"
+          style={{
+            width: Math.random() * 200 + 50,
+            height: Math.random() * 200 + 50,
+            top: `${Math.random() * 100}%`,
+            left: `${Math.random() * 100}%`,
+          }}
+          animate={{
+            scale: [1, 1.5, 1.5, 1, 1],
+            rotate: [0, 0, 180, 180, 0],
+            opacity: [0.2, 0.3, 0.3, 0.3, 0.2],
+            borderRadius: ["20%", "20%", "50%", "50%", "20%"],
+          }}
+          transition={{
+            duration: Math.random() * 10 + 10,
+            ease: "easeInOut",
+            repeat: Infinity,
+            repeatType: "reverse",
+          }}
+        />
+      ))}
+    </div>
+  </div>
+)
+
+export default function ModernAnimatedHero() {
+  const [isSubmitting, setIsSubmitting] = useState(false)
+
+  const handleSubmit = async (event) => {
+    event.preventDefault()
+    setIsSubmitting(true)
+    if((event.target).fullName.vale?.length<3){
+      alert('Please enter Correct Name')
+      setIsSubmitting(false)
+      return
+    }
+    if(!isEmail((event.target).email.value)) {
+      alert('Please enter a valid email address')
+      setIsSubmitting(false)
+      return
+    }
+    // Simulate API call
+    fetch(`${BACKENDURL}/mislenious/get-in-touch`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({
+        fullName: event.target.fullName.value,
+        email: event.target.email.value,
+        message: event.target.message.value
+      })
+    })
+      .then(response => {
+        if (response.ok) {
+          // Handle successful response
+          console.log('Submission successful');
+          setIsSubmitting(false)
+          confetti({
+            particleCount: 100,
+            spread: 70,
+            origin: { y: 0.6 },
+            colors: ['#60A5FA', '#3B82F6', '#2563EB']
+          });
+          // Clear form values
+          event.target.reset();
+        } else {
+          // Handle error response
+          console.log('Submission failed');
+          setIsSubmitting(false)
+          alert('Submission failed. Please try again.');
+        }
+      })
+      .catch(error => {
+        // Handle network error
+        console.log('Network error');
+        setIsSubmitting(false)
+        alert('Network error. Please try again.');
+      });
+
+  }
+
+  return (
+    <div className="relative flex-1 px-4 md:px-10 lg:px-20 xl:px-32 py-12 font-serif min-h-screen overflow-hidden bg-gradient-to-br from-gray-900 via-blue-900 to-purple-900 text-white">
+      <BackgroundAnimation />
+      <div className="relative w-full flex items-center min-h-[calc(100vh-6rem)] justify-center z-10">
+        <div className="container grid gap-12 px-4 md:px-6 lg:grid-cols-2 lg:gap-24">
+          <div className="space-y-6">
+            <h1 className="text-3xl font-bold tracking-tight sm:text-4xl md:text-5xl lg:text-6xl">
+              <span className="block">
+                Master the Future
+              </span>
+              <span className="block text-blue-400">
+                with
+              </span>
+              <span className="block bg-clip-text text-transparent bg-gradient-to-r from-blue-400 via-purple-400 to-pink-400">
+                <TypingAnimation />
+              </span>
             </h1>
-            <p className="max-w-full md:max-w-[600px] text-green-50 text-muted-foreground md:text-xl lg:text-base xl:text-lg">
-              GenAI Learning offers world-class online courses and programs to help you achieve your career goals. Learn from
-              industry experts and transform your future.
+            <p className="max-w-[600px] text-gray-300 text-lg leading-relaxed">
+              Unlock the power of Generative AI with our cutting-edge courses. Transform your skills, boost your career, and shape the future of technology.
             </p>
-            <div className="flex flex-col gap-6 md:flex-row">
-              <Link
-                href=""
-                className="inline-flex h-10 items-center justify-center rounded-md bg-primary px-8 text-sm font-medium text-primary-foreground shadow transition-colors hover:bg-primary/90 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50"
-                prefetch={false}
-              >
-                Explore Courses
-              </Link>
-              <Link
-                href="#"
-                className="inline-flex h-10 items-center justify-center rounded-md border border-input bg-background px-8 text-sm font-medium shadow-sm transition-colors hover:bg-accent hover:text-accent-foreground focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50"
-                prefetch={false}
-              >
-                Contact Us
-              </Link>
+            <div className="flex flex-col sm:flex-row gap-4">
+              <FloatingElement yOffset={3} duration={3}>
+                <Button asChild className="bg-gradient-to-r from-blue-500 to-purple-500 hover:from-blue-600 hover:to-purple-600 text-white transition-all duration-300 rounded-md px-4 py-2 text-base font-semibold shadow-md hover:shadow-lg">
+                  <Link href="#" className="flex items-center">
+                    <Sparkles className="mr-2 h-4 w-4" />
+                    Explore Courses
+                    <ArrowRight className="ml-2 h-4 w-4" />
+                  </Link>
+                </Button>
+              </FloatingElement>
+              <FloatingElement yOffset={3} duration={4}>
+                <Button asChild variant="outline" className="border-blue-400 text-blue-400 hover:bg-blue-900/50 transition-all duration-300 rounded-md px-4 py-2 text-base font-semibold">
+                  <Link href="#" className="flex items-center">
+                    <Play className="mr-2 h-4 w-4" />
+                    Watch Demo
+                  </Link>
+                </Button>
+              </FloatingElement>
             </div>
           </div>
-          <div className="flex flex-col items-center justify-center mt-10 md:mt-14 space-y-8">
-            <Card className="w-full max-w-md border-opacity-40 border-blue-400">
+          <div className="flex items-center justify-center">
+            <Card className="w-full max-w-md border-none shadow-xl bg-white/10 backdrop-blur-md">
               <CardHeader>
-                <CardTitle className="text-xl md:text-[29px] font-heading">Get in Touch</CardTitle>
+                <CardTitle className="text-xl font-bold text-center text-white">
+                  Get In Touch with Us
+                </CardTitle>
               </CardHeader>
-              <CardContent className="space-y-4">
-                <div className="space-y-2">
-                  <Label htmlFor="full-name" className="text-sm font-body">Full Name</Label>
-                  <Input id="full-name" placeholder="Full Name" className="border-opacity-40 border-blue-400 focus:border-blue-700 font-body" />
-                </div>
-                <div className="space-y-2">
-                  <Label htmlFor="email" className="text-sm font-body">Email</Label>
-                  <Input id="email" placeholder="Email" type="email" className="border-opacity-40 border-blue-400 focus:border-blue-700 font-body" />
-                </div>
-                <div className="space-y-2">
-                  <Label htmlFor="contact" className="text-sm font-body">Contact</Label>
-                  <Input id="contact" placeholder="Contact" className="border-opacity-40 border-blue-400 focus:border-blue-700 font-body" />
-                </div>
+              <CardContent>
+                <form onSubmit={handleSubmit} className="space-y-4" noValidate>
+                  <div className="space-y-2">
+                    <Label htmlFor="full-name" className="text-sm font-medium text-gray-200">Full Name</Label>
+                    <Input 
+                      id="full-name" 
+                      name="fullName" 
+                      placeholder="John Doe" 
+                      required
+                      className="border-gray-600 focus:border-blue-400 bg-white/5 backdrop-blur-sm transition-all duration-300 text-white placeholder-gray-400"
+                    />
+                  </div>
+                  <div className="space-y-2">
+                    <Label htmlFor="email" className="text-sm font-medium text-gray-200">Email</Label>
+                    <Input 
+                      id="email" 
+                      name="email" 
+                      placeholder="john@example.com" 
+                      type="email" 
+                      required
+                      className="border-gray-600 focus:border-blue-400 bg-white/5 backdrop-blur-sm transition-all duration-300 text-white placeholder-gray-400"
+                    />
+                  </div>
+                  <div className="space-y-2">
+                    <Label htmlFor="message" className="text-sm font-medium text-gray-200">Message</Label>
+                    <textarea 
+                      id="message" 
+                      name="message" 
+                      placeholder="Your message" 
+                      required
+                      className="w-full min-h-[100px] rounded-md border border-gray-600 focus:border-blue-400 bg-white/5 backdrop-blur-sm transition-all duration-300 p-2 text-white placeholder-gray-400"
+                    />
+                  </div>
+                  <Button 
+                    type="submit" 
+                    className="w-full bg-gradient-to-r from-blue-500 to-purple-500 hover:from-blue-600 hover:to-purple-600 text-white transition-all duration-300 rounded-md py-2 text-base font-semibold shadow-md hover:shadow-lg" 
+                    disabled={isSubmitting}
+                  >
+                    {isSubmitting ? (
+                      <>
+                        <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+                        Submitting...
+                      </>
+                    ) : (
+                      <>
+                        <Send className="mr-2 h-4 w-4" />
+                        Start Learning
+                      </>
+                    )}
+                  </Button>
+                </form>
               </CardContent>
-              <CardFooter>
-                <Button className="w-full bg-blue-500 text-white font-body">Start Learning</Button>
-              </CardFooter>
             </Card>
           </div>
-        </motion.div>
-      </section>
+        </div>
+      </div>
     </div>
-  );
+  )
 }

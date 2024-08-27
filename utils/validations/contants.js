@@ -1,0 +1,1 @@
+export const BACKENDURL = "https://test-platform-backend.onrender.com/api/v1";

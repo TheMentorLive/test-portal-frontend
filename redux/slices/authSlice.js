@@ -4,6 +4,7 @@ import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import  toast  from "react-hot-toast";
 import axiosInstance from '../../config/axiosInstance.js';
 import axios from "axios";
+import { BACKENDURL } from "@/utils/validations/contants.js";
 
 // Initialize state with default values, check for client-side access
 const initialState = {
@@ -45,7 +46,7 @@ export const googleSinup = createAsyncThunk('/auth/google', async () => {
   try {
     // window.location.href = "http://localhost:8000/api/v1/users/auth/google";
     // window.location.href = "http://localhost:8000/api/v1/users/auth/google";
-    window.location.href = "https://test-platform-backend.onrender.com/api/v1/users/auth/google";
+    window.location.href = `${BACKENDURL}/users/auth/google`;
 
   } catch (e) {
     toast.error("An error occurred");
@@ -55,7 +56,7 @@ export const googleSinup = createAsyncThunk('/auth/google', async () => {
 export const linkedinSignup = createAsyncThunk('/auth/linkedin', async () => {
   try {
     // window.location.href = "http://localhost:8000/api/v1/users/auth/linkedin";
-    window.location.href = "https://test-platform-backend.onrender.com/api/v1/users/auth/linkedin";
+    window.location.href = `${BACKENDURL}/users/auth/linkedin`;
   } catch (e) {
     toast.error("An error occurred");
   }
