@@ -1,13 +1,11 @@
-import { useState, useEffect, useRef } from 'react';
+import { useState } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
-import { motion, useAnimation } from 'framer-motion';
+import { motion } from 'framer-motion';
 
 export default function Exams() {
   const [modalIsOpen, setModalIsOpen] = useState(false);
   const [selectedExam, setSelectedExam] = useState(null);
-  const containerRef = useRef(null);
-  const controls = useAnimation();
 
   const openModal = (exam) => {
     setSelectedExam(exam);
@@ -19,29 +17,8 @@ export default function Exams() {
     setSelectedExam(null);
   };
 
-  useEffect(() => {
-    const handleScroll = () => {
-      const element = containerRef.current;
-      if (!element) return;
-
-      const rect = element.getBoundingClientRect();
-      const windowHeight = window.innerHeight;
-
-      if (rect.top <= windowHeight && rect.bottom >= 0) {
-        controls.start({ opacity: 1, y: 0 });
-      } else {
-        controls.start({ opacity: 0, y: 50 });
-      }
-    };
-
-    window.addEventListener('scroll', handleScroll);
-    handleScroll(); // Trigger scroll effect on initial render
-
-    return () => window.removeEventListener('scroll', handleScroll);
-  }, [controls]);
-
   return (
-    <div style={{ fontFamily: 'Inter, sans-serif' }} className="flex flex-col items-center px-4 py-6 space-y-6 font-body">
+    <div style={{ fontFamily: 'Inter, sans-serif' }} className="flex flex-col  items-center px-4 py-6 space-y-6 font-body">
       <div className="text-center">
         <h1 className="text-3xl md:text-4xl font-heading font-bold">We cover all Exams and Classes</h1>
         <p className="mt-2 text-base md:text-lg text-muted-foreground">
@@ -49,13 +26,7 @@ export default function Exams() {
         </p>
       </div>
       <br />
-      <motion.div
-        ref={containerRef}
-        initial={{ opacity: 0, y: 50 }}
-        animate={controls}
-        transition={{ duration: 0.5 }}
-        className="w-full max-w-4xl p-6 bg-white rounded-lg border border-opacity-40 border-blue-400"
-      >
+      <div className="w-full max-w-4xl p-6 bg-white rounded-lg border border-opacity-40 border-blue-400">
         <div className="flex items-center mb-6 md:mb-8 justify-between">
           <h2 className="text-xl md:text-2xl font-semibold">50+ Entrance Exams</h2>
           <a href="#" className="text-blue-500 hover:underline">
@@ -103,15 +74,10 @@ export default function Exams() {
             </div>
           ))}
         </div>
-      </motion.div>
+      </div>
       <br />
       <br />
-      <motion.div
-        initial={{ opacity: 0, y: 50 }}
-        animate={controls}
-        transition={{ duration: 0.5 }}
-        className="w-full max-w-4xl p-6 mt-6 bg-white rounded-lg border border-opacity-40 border-blue-400"
-      >
+      <div className="w-full max-w-4xl p-6 mt-6 bg-white rounded-lg border border-opacity-40 border-blue-400">
         <div className="flex items-center justify-between mb-6 md:mb-8">
           <h2 className="text-xl md:text-2xl font-semibold">All School Classes</h2>
           <a href="#" className="text-blue-500 hover:underline">
@@ -149,7 +115,7 @@ export default function Exams() {
             </div>
           ))}
         </div>
-      </motion.div>
+      </div>
 
       {/* Modal */}
       {modalIsOpen && selectedExam && (
