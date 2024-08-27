@@ -37,7 +37,7 @@ export default function More() {
       <br/>
       <br/>
       <div className="flex flex-col md:flex-row space-y-4 md:space-y-0 space-x-0 md:space-x-4">
-        <button className="w-40 h-10 rounded-xl bg-black border dark:border-black border-black text-blue-500 text-sm">
+        <button className="w-40 h-10 rounded-xl bg-gray-100 border dark:border-black border-black text-blue-500 text-sm">
           Contact Us
         </button>
         <Link href="/Main/signup">
