@@ -27,7 +27,7 @@ export default function More() {
   ];
   
   return (
-    <div className="flex flex-col items-center justify-center h-[40rem]">
+    <div className="flex flex-col items-center justify-center h-[50rem]">
       <p className="text-neutral-900 dark:text-neutral-900 text-xs sm:text-base">
       Your journey to a brighter future begins here
       </p>

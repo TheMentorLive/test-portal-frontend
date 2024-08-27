@@ -68,7 +68,7 @@ export const TypewriterEffect = ({
           opacity: 1,
         }}
         transition={{
-          duration: 0.2,
+          duration: 0.8,
           repeat: Infinity,
           repeatType: "reverse",
         }}
@@ -130,7 +130,7 @@ export const TypewriterEffectSmooth = ({
         <div
           className="text-xs sm:text-base md:text-xl lg:text:3xl xl:text-5xl font-bold"
           style={{
-            whiteSpace: "nowrap",
+             whiteSpace: "nowrap",
           }}>
           {renderWords()}{" "}
         </div>{" "}
