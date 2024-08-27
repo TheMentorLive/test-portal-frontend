@@ -1,19 +1,24 @@
 import Image from 'next/image';
 import Link from "next/link";
-import { motion } from "framer-motion"; // Import Framer Motion
+import { motion } from "framer-motion";
 
 export default function Footer() {
   return (
     <motion.div 
-      initial={{ opacity: 0, y: 50 }} // Start with opacity 0 and slightly below the original position
-      animate={{ opacity: 1, y: 0 }} // Animate to full opacity and original position
-      transition={{ duration: 0.5 }} // Set the transition duration
+      initial={{ opacity: 0, y: 50 }} 
+      animate={{ opacity: 1, y: 0 }} 
+      transition={{ duration: 0.5 }} 
       style={{ fontFamily: 'Inter, sans-serif' }} 
       className='align-middle border-t border-gray-500 justify-center'
     >
-      <footer className="bg-[#e3e6f1] text-black py-6 px-4 sm:px-6 md:px-10">
+      <footer className="bg-[#fcfcfe] text-black py-6 px-4 sm:px-6 md:px-10">
         <div className="container mx-auto grid grid-cols-1 ml-10 sm:grid-cols-2 md:grid-cols-4 gap-6 md:gap-8">
-          <div className="flex flex-col items-center space-y-6">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }} 
+            animate={{ opacity: 1, y: 0 }} 
+            transition={{ duration: 0.5, delay: 0.1 }} 
+            className="flex flex-col items-center space-y-6"
+          >
             <Link href="/" className="flex items-center" prefetch={false}>
               <Image
                 src="/logo.png"
@@ -25,21 +30,46 @@ export default function Footer() {
               />
             </Link>
             <div className="flex space-x-4">
-              <Link href="#" prefetch={false}>
-                <FacebookIcon className="h-6 w-6 text-black hover:text-blue-600 transition-colors" />
-              </Link>
-              <Link href="#" prefetch={false}>
-                <TwitterIcon className="h-6 w-6 text-black hover:text-blue-400 transition-colors" />
-              </Link>
-              <Link href="#" prefetch={false}>
-                <InstagramIcon className="h-6 w-6 text-black hover:text-pink-600 transition-colors" />
-              </Link>
-              <Link href="#" prefetch={false}>
-                <LinkedinIcon className="h-6 w-6 text-black hover:text-blue-800 transition-colors" />
-              </Link>
+              <motion.div
+                whileHover={{ scale: 1.1 }} 
+                transition={{ type: "spring", stiffness: 300 }}
+              >
+                <Link href="#" prefetch={false}>
+                  <FacebookIcon className="h-6 w-6 text-black hover:text-blue-600 transition-colors" />
+                </Link>
+              </motion.div>
+              <motion.div
+                whileHover={{ scale: 1.1 }} 
+                transition={{ type: "spring", stiffness: 300 }}
+              >
+                <Link href="#" prefetch={false}>
+                  <TwitterIcon className="h-6 w-6 text-black hover:text-blue-400 transition-colors" />
+                </Link>
+              </motion.div>
+              <motion.div
+                whileHover={{ scale: 1.1 }} 
+                transition={{ type: "spring", stiffness: 300 }}
+              >
+                <Link href="#" prefetch={false}>
+                  <InstagramIcon className="h-6 w-6 text-black hover:text-pink-600 transition-colors" />
+                </Link>
+              </motion.div>
+              <motion.div
+                whileHover={{ scale: 1.1 }} 
+                transition={{ type: "spring", stiffness: 300 }}
+              >
+                <Link href="#" prefetch={false}>
+                  <LinkedinIcon className="h-6 w-6 text-black hover:text-blue-800 transition-colors" />
+                </Link>
+              </motion.div>
             </div>
-          </div>
-          <div className="flex flex-col space-y-2">
+          </motion.div>
+          <motion.div
+            initial={{ opacity: 0, x: -20 }} 
+            animate={{ opacity: 1, x: 0 }} 
+            transition={{ duration: 0.5, delay: 0.2 }} 
+            className="flex flex-col space-y-2"
+          >
             <h3 className="font-bold text-lg">Company</h3>
             <Link href="#" className="text-gray-900 hover:text-black transition-colors" prefetch={false}>
               About us
@@ -50,8 +80,13 @@ export default function Footer() {
             <Link href="#" className="text-gray-900 hover:text-black transition-colors" prefetch={false}>
               Careers
             </Link>
-          </div>
-          <div className="flex flex-col space-y-2">
+          </motion.div>
+          <motion.div
+            initial={{ opacity: 0, x: -20 }} 
+            animate={{ opacity: 1, x: 0 }} 
+            transition={{ duration: 0.5, delay: 0.3 }} 
+            className="flex flex-col space-y-2"
+          >
             <h3 className="font-bold text-lg">Help</h3>
             <Link href="#" className="text-gray-900 hover:text-black transition-colors" prefetch={false}>
               Support
@@ -62,8 +97,13 @@ export default function Footer() {
             <Link href="#" className="text-gray-900 hover:text-black transition-colors" prefetch={false}>
               Contact us
             </Link>
-          </div>
-          <div className="flex flex-col space-y-2">
+          </motion.div>
+          <motion.div
+            initial={{ opacity: 0, x: 20 }} 
+            animate={{ opacity: 1, x: 0 }} 
+            transition={{ duration: 0.5, delay: 0.4 }} 
+            className="flex flex-col space-y-2"
+          >
             <h3 className="font-bold text-lg">Explore</h3>
             <Link href="#" className="text-gray-900 hover:text-black transition-colors" prefetch={false}>
               Services
@@ -74,7 +114,7 @@ export default function Footer() {
             <Link href="#" className="text-gray-900 hover:text-black transition-colors" prefetch={false}>
               Blog
             </Link>
-          </div>
+          </motion.div>
         </div>
         <div className="text-center mt-6">
           <p className="text-sm text-gray-700">{`\u00A9 2024 Your Company. All rights reserved.`}</p>
@@ -151,7 +191,7 @@ function TwitterIcon(props) {
       strokeLinecap="round"
       strokeLinejoin="round"
     >
-      <path d="M22 4s-.7 2.1-2 3.4c1.6 10-9.4 17.3-18 11.6 2.2.1 4.4-.6 6-2C3 15.5.5 9.6 3 5c2.2 2.6 5.6 4.1 9 4-.9-4.2 4-6.6 7-3.8 1.1 0 3-1.2 3-1.2z" />
+      <path d="M23 3a10.9 10.9 0 0 1-3.14 1.53 4.48 4.48 0 0 0-2-.56 4.48 4.48 0 0 0-4.42 5.46A12.94 12.94 0 0 1 3 4.92a4.48 4.48 0 0 0-.61 2.25 4.48 4.48 0 0 0 2 3.74 4.48 4.48 0 0 1-2-.55v.06a4.48 4.48 0 0 0 3.6 4.4 4.48 4.48 0 0 1-2 .08 4.48 4.48 0 0 0 4.18 3.11 9 9 0 0 1-5.57 1.92A9 9 0 0 1 2 20.87 12.8 12.8 0 0 0 7 22c8.44 0 13-7 13-13.11 0-.2 0-.41-.02-.61A9.27 9.27 0 0 0 23 3z" />
     </svg>
   );
 }

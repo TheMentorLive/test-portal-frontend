@@ -92,7 +92,7 @@ export default function Hero() {
           transition={{ duration: 0.5 }}
           className="container grid gap-6 px-4 mr-16 ml-16 -mt-48 md:px-6 lg:grid-cols-2 lg:gap-24"
         >
-          <div className="space-y-4 pt-24">
+          <div className="space-y-4 pt-28">
             <h1 className="text-3xl font-heading font-bold text-black tracking-tighter sm:text-4xl md:text-5xl lg:text-6xl">
               <TextGenerateEffect
                 words="Master the Future"
@@ -135,46 +135,46 @@ export default function Hero() {
             </div>
           </div>
           <div className="flex flex-col items-center justify-center mt-10 md:mt-14 space-y-8">
-            <Card className="w-full max-w-md border-opacity-40 border-blue-400">
-              <CardHeader>
-                <CardTitle className="text-xl md:text-[29px] font-heading">Get in Touch</CardTitle>
-              </CardHeader>
-              <CardContent className="space-y-4">
-                <form onSubmit={handleSubmit} className="space-y-4" noValidate>
-                  <div className="space-y-2">
-                    <Label htmlFor="full-name" className="text-sm font-medium text-gray-900">Full Name</Label>
-                    <Input 
-                      id="full-name" 
-                      name="fullName" 
-                      placeholder="John Doe" 
-                      required
-                      className="border-gray-300 focus:border-blue-400 bg-white transition-all duration-300 text-black placeholder-gray-400"
-                    />
-                  </div>
-                  <div className="space-y-2">
-                    <Label htmlFor="email" className="text-sm font-medium text-gray-900">Email</Label>
-                    <Input 
-                      id="email" 
-                      name="email" 
-                      placeholder="john@example.com" 
-                      type="email" 
-                      required
-                      className="border-gray-300 focus:border-blue-400 bg-white transition-all duration-300 text-black placeholder-gray-400"
-                    />
-                  </div>
-                  <div className="space-y-2">
-                    <Label htmlFor="message" className="text-sm font-medium text-gray-900">Message</Label>
-                    <textarea 
-                      id="message" 
-                      name="message" 
-                      placeholder="Your message" 
-                      required
-                      className="w-full min-h-[100px] rounded-md border border-gray-300 focus:border-blue-400 bg-white transition-all duration-300 p-2 text-black placeholder-gray-400"
-                    />
-                  </div>
-                  <Button 
+          <Card className="relative w-full max-w-md p-[3px] rounded-xl overflow-hidden bg-slate-950 shadow-lg border border-opacity-40">
+      <span className="absolute inset-[-1000%] animate-[spin_2s_linear_infinite] bg-[conic-gradient(from_90deg_at_50%_50%,#E2CBFF_0%,#393BB2_50%,#E2CBFF_100%)]" />
+      <CardContent className="relative w-full p-6 bg-white rounded-xl shadow-md backdrop-blur-3xl space-y-4">
+        <h2 className="text-xl md:text-[29px] font-heading justify-center items-center flex font-bold mb-9">Get in Touch</h2>
+        
+        <form onSubmit={handleSubmit} className="space-y-4 " noValidate>
+          <div className="space-y-2">
+            <Label htmlFor="full-name" className="text-sm  font-medium text-gray-900">Full Name</Label>
+            <Input
+              id="full-name"
+              name="fullName"
+              placeholder="John Doe"
+              required
+              className="block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-slate-400 focus:border-transparent bg-white transition-all duration-300 text-black placeholder-gray-400"
+            />
+          </div>
+          <div className="space-y-2">
+            <Label htmlFor="email" className="text-sm font-medium text-gray-900">Email</Label>
+            <Input
+              id="email"
+              name="email"
+              placeholder="john@example.com"
+              type="email"
+              required
+              className="block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-slate-400 focus:border-transparent bg-white transition-all duration-300 text-black placeholder-gray-400"
+            />
+          </div>
+          <div className="space-y-2 ">
+            <Label htmlFor="message" className="text-sm font-medium text-gray-900">Message</Label>
+            <textarea
+              id="message"
+              name="message"
+              placeholder="Your message"
+              required
+              className="w-full min-h-[100px] rounded-md border border-gray-300 focus:border-blue-400 bg-white transition-all duration-300 p-2 text-black placeholder-gray-400"
+            />
+          </div>
+          <Button 
                     type="submit" 
-                    className="w-full bg-gradient-to-r from-blue-500 to-purple-500 hover:from-blue-600 hover:to-purple-600 text-white transition-all duration-300 rounded-md py-2 text-base font-semibold shadow-md hover:shadow-lg" 
+                    className="w-full bg-gradient-to-r from-blue-500  hover:from-blue-600 hover:to-purple-600 text-white transition-all duration-300 rounded-md py-2 text-base font-semibold shadow-md hover:shadow-lg" 
                     disabled={isSubmitting}
                   >
                     {isSubmitting ? (
@@ -189,9 +189,9 @@ export default function Hero() {
                       </>
                     )}
                   </Button>
-                </form>
-              </CardContent>
-            </Card>
+        </form>
+      </CardContent>
+    </Card>
           </div>
         </motion.div>
       </section>

@@ -4,7 +4,9 @@ import Hero from "./Main/hero";
 import Exams from "./Main/exams";
 import Reviews from "./Main/reviews";
 import Footer from "./Main/footer";
-// import SparklesPreview from "./Main/te";
+import More from "./Main/more";
+
+
 
 export default function Main() {
   return (
@@ -16,10 +18,9 @@ export default function Main() {
       
       <Navbar />
       <Hero />
-      
       <Exams />
       <Reviews />
-      {/* <SparklesPreview/> */}
+      <More/>
       <Footer />
     </div>
   );
