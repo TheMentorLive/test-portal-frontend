@@ -1,7 +1,6 @@
 'use client'
 
 import Link from "next/link"
-import Image from "next/image"
 import { useState } from 'react'
 import { toast } from "react-toastify"
 import { Label } from "@/public/ui/label"
@@ -39,12 +38,12 @@ export default function Component() {
     console.log(response)
     setEmail("")
     setPassword("")
-    console.log("response", response)
-    console.log("response", response.payload)
-    if (response) {
+    if (response.payload?.data?.statusCode === 200) {
       if(response.payload?.data?.data?.user?.role === 'admin'){
+        console.log("admin")
         router.push("/dash-admin/DashboardPage")
-      } else if(response.payload?.data?.data?.user?.role === 'user') {
+      } else {
+        console.log("user")
         router.push("/dash-admin/tests")
       }
     }
@@ -56,8 +55,8 @@ export default function Component() {
         <title>Sign In</title>
       </Head>
       <div className="flex items-center justify-center min-h-screen bg-gradient-to-br from-blue-100 to-purple-100 p-4">
-        <div className="w-full max-w-4xl bg-white rounded-lg shadow-xl overflow-hidden flex flex-col md:flex-row">
-          <div className="w-full md:w-1/2 p-8 space-y-6">
+        <div className="w-full max-w-md bg-white rounded-lg shadow-xl overflow-hidden">
+          <div className="p-8 space-y-6">
             <div className="flex flex-col items-center space-y-4">
               <Link href="/Main" className="self-start flex items-center text-primary hover:underline" prefetch={false}>
                 <svg
@@ -142,15 +141,6 @@ export default function Component() {
                 <span>LinkedIn</span>
               </Button>
             </div>
-          </div>
-          <div className="hidden md:block w-1/2 relative">
-            <Image
-              src="/icons/signup.jpg"
-              alt="Modern design illustration"
-              layout="fill"
-              objectFit="cover"
-            />
-            <div className="absolute inset-0 bg-gradient-to-br from-blue-500 to-purple-600 opacity-10"></div>
           </div>
         </div>
       </div>
