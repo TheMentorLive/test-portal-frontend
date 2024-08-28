@@ -1,19 +1,62 @@
-import Layout from './layout/layout';
-import Head from 'next/head';
+/**
+ * v0 by Vercel.
+ * @see https://v0.dev/t/IuzULvnkLMA
+ * Documentation: https://v0.dev/docs#integrating-generated-code-into-your-nextjs-app
+ */
 import Link from "next/link"
-import { Input } from "@/public/ui/input"
-import { Button } from "@/public/ui/button"
-import { Card, CardHeader, CardTitle, CardContent } from "@/public/ui/card"
-import { Table, TableHeader, TableRow, TableHead, TableBody, TableCell } from "@/public/ui/table"
+import { Input } from "@/components/ui/input"
+import { Button } from "@/components/ui/button"
+import { Card, CardHeader, CardTitle, CardContent } from "@/components/ui/card"
+import { Table, TableHeader, TableRow, TableHead, TableBody, TableCell } from "@/components/ui/table"
 import { ResponsiveBar } from "@nivo/bar"
 import { ResponsiveLine } from "@nivo/line"
 
-export default function Users() {
+export default function Component() {
   return (
-    <Layout>
-      <Head>
-        <title>Dashboard</title>
-      </Head>
+    <div className="flex flex-col w-full min-h-screen bg-background">
+      <header className="flex items-center h-16 px-4 border-b shrink-0 md:px-6">
+        <nav className="flex-col hidden gap-6 text-lg font-medium md:flex md:flex-row md:items-center md:gap-5 md:text-sm lg:gap-6">
+          <Link href="#" className="flex items-center gap-2 text-lg font-semibold md:text-base" prefetch={false}>
+            <Package2Icon className="w-6 h-6" />
+            <span className="sr-only">Dashboard</span>
+          </Link>
+          <Link href="#" className="font-bold" prefetch={false}>
+            Dashboard
+          </Link>
+          <Link href="#" className="text-muted-foreground" prefetch={false}>
+            Tests
+          </Link>
+          <Link href="#" className="text-muted-foreground" prefetch={false}>
+            Achievements
+          </Link>
+          <Link href="#" className="text-muted-foreground" prefetch={false}>
+            Profile
+          </Link>
+        </nav>
+        <div className="flex items-center w-full gap-4 md:ml-auto md:gap-2 lg:gap-4">
+          <form className="flex-1 ml-auto sm:flex-initial">
+            <div className="relative">
+              <SearchIcon className="absolute left-2.5 top-2.5 h-4 w-4 text-muted-foreground" />
+              <Input
+                type="search"
+                placeholder="Search tests..."
+                className="pl-8 sm:w-[300px] md:w-[200px] lg:w-[300px]"
+              />
+            </div>
+          </form>
+          <Button variant="ghost" size="icon" className="rounded-full">
+            <img
+              src="/placeholder.svg"
+              width="32"
+              height="32"
+              className="rounded-full"
+              alt="Avatar"
+              style={{ aspectRatio: "32/32", objectFit: "cover" }}
+            />
+            <span className="sr-only">Toggle user menu</span>
+          </Button>
+        </div>
+      </header>
       <main className="flex flex-1 flex-col gap-4 p-4 md:gap-8 md:p-10">
         <div className="grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-4">
           <Card>
@@ -170,10 +213,8 @@ export default function Users() {
           </div>
         </div>
       </main>
-  
-
-    </Layout>
-  );
+    </div>
+  )
 }
 
 function BarChart(props) {
