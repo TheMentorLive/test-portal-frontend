@@ -123,9 +123,11 @@ export default function Hero() {
           <div className="flex flex-col items-center justify-center mt-8 sm:mt-10 md:mt-12 lg:mt-14 space-y-8">
             <Card className="relative w-full max-w-md p-[3px] rounded-xl overflow-hidden bg-slate-950 shadow-lg border border-opacity-40">
               <span className="absolute inset-[-1000%] animate-[spin_2s_linear_infinite] bg-[conic-gradient(from_90deg_at_50%_50%,#E2CBFF_0%,#393BB2_50%,#E2CBFF_100%)]" />
-              <CardContent className="relative w-full p-4 sm:p-6 bg-white rounded-xl shadow-md backdrop-blur-3xl space-y-4">
-                <h2 className="text-xl sm:text-2xl md:text-[29px] font-heading justify-center items-center flex font-bold mb-6 sm:mb-9">Get in Touch</h2>
-                
+              <CardContent className="relative w-full p-4 sm:p-6 bg-white rounded-xl shadow-md space-y-4">
+                <h2 className="text-xl sm:text-2xl md:text-[29px] font-heading justify-center items-center flex font-bold mb-6 sm:mb-9">
+                  Get in Touch
+                </h2>
+
                 <form onSubmit={handleSubmit} className="space-y-4" noValidate>
                   <div className="space-y-2">
                     <Label htmlFor="full-name" className="text-sm font-medium text-gray-900">Full Name</Label>
@@ -158,9 +160,9 @@ export default function Hero() {
                       className="w-full min-h-[100px] rounded-md border border-gray-300 focus:border-blue-400 bg-white transition-all duration-300 p-2 text-black placeholder-gray-400"
                     />
                   </div>
-                  <Button 
-                    type="submit" 
-                    className="w-full bg-gradient-to-r from-blue-500 hover:from-blue-600 hover:to-purple-600 text-white transition-all duration-300 rounded-md py-2 text-base font-semibold shadow-md hover:shadow-lg" 
+                  <Button
+                    type="submit"
+                    className="w-full bg-gradient-to-r from-blue-500 hover:from-blue-600 hover:to-purple-600 text-white transition-all duration-300 rounded-md py-2 text-base font-semibold shadow-md hover:shadow-lg"
                     disabled={isSubmitting}
                   >
                     {isSubmitting ? (
@@ -178,6 +180,7 @@ export default function Hero() {
                 </form>
               </CardContent>
             </Card>
+
           </div>
         </motion.div>
       </section>

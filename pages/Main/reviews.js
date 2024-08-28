@@ -1,10 +1,10 @@
-import { useState, useEffect, useCallback } from "react";
+import { useState, useEffect, useCallback, memo } from "react";
 import { Card } from "@/public/ui/card";
 import { Avatar, AvatarImage, AvatarFallback } from "@/public/ui/avatar";
 import { Button } from "@/public/ui/button";
 import { motion, AnimatePresence } from "framer-motion";
 
-function ChevronLeftIcon(props) {
+const ChevronLeftIcon = memo(function ChevronLeftIcon(props) {
   return (
     <svg
       {...props}
@@ -21,9 +21,9 @@ function ChevronLeftIcon(props) {
       <path d="m15 18-6-6 6-6" />
     </svg>
   );
-}
+});
 
-function ChevronRightIcon(props) {
+const ChevronRightIcon = memo(function ChevronRightIcon(props) {
   return (
     <svg
       {...props}
@@ -40,7 +40,7 @@ function ChevronRightIcon(props) {
       <path d="m9 18 6-6-6-6" />
     </svg>
   );
-}
+});
 
 const reviews = [
   {
@@ -92,14 +92,14 @@ export default function ModernTestimonials() {
     <motion.div
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
-      transition={{ duration: 0.5 }}
+      transition={{ duration: 0.3 }}
       className="flex flex-col items-center justify-center py-16 px-4 sm:px-6 lg:px-8 bg-gradient-to-br from-blue-50 to-indigo-100"
     >
       <motion.h2
-        initial={{ opacity: 0, y: -20 }}
+        initial={{ opacity: 0, y: -10 }}
         animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.5, delay: 0.2 }}
-        className="text-3xl sm:text-4xl md:text-5xl font-bold mb-12 text-indigo-900"
+        transition={{ duration: 0.4, delay: 0.1 }}
+        className="text-3xl sm:text-4xl md:text-5xl font-bold mb-8 text-indigo-900"
       >
         What Our Clients Say
       </motion.h2>
@@ -107,20 +107,20 @@ export default function ModernTestimonials() {
         <AnimatePresence mode="wait">
           <motion.div
             key={currentIndex}
-            initial={{ opacity: 0, x: 50 }}
+            initial={{ opacity: 0, x: 20 }}
             animate={{ opacity: 1, x: 0 }}
-            exit={{ opacity: 0, x: -50 }}
-            transition={{ duration: 0.5 }}
+            exit={{ opacity: 0, x: -20 }}
+            transition={{ duration: 0.4 }}
             className="flex flex-col items-center"
           >
             <Card className="w-full max-w-2xl bg-white shadow-xl rounded-2xl overflow-hidden">
               <div className="flex flex-col md:flex-row items-center p-6 md:p-8">
-                <Avatar className="w-24 h-24 md:w-32 md:h-32 mb-4 md:mb-0 md:mr-8">
+                <Avatar className="w-20 h-20 md:w-28 md:h-28 mb-4 md:mb-0 md:mr-6">
                   <AvatarImage src={reviews[currentIndex].image} alt={`${reviews[currentIndex].name}'s avatar`} />
                   <AvatarFallback>{reviews[currentIndex].name[0]}</AvatarFallback>
                 </Avatar>
                 <div className="flex-1 text-center md:text-left">
-                  <h3 className="text-xl md:text-2xl font-bold text-indigo-700">{reviews[currentIndex].name}</h3>
+                  <h3 className="text-lg md:text-xl font-bold text-indigo-700">{reviews[currentIndex].name}</h3>
                   <p className="text-sm md:text-base text-gray-600 mb-2">{reviews[currentIndex].designation}</p>
                   <p className="text-gray-800 italic">&ldquo;{reviews[currentIndex].feedback}&rdquo;</p>
                 </div>
@@ -133,7 +133,7 @@ export default function ModernTestimonials() {
             onClick={() => { handlePrev(); setIsPaused(true); }}
             onMouseEnter={() => setIsPaused(true)}
             onMouseLeave={() => setIsPaused(false)}
-            className="bg-white text-indigo-700 hover:bg-indigo-100 rounded-full p-2 shadow-md transition-colors duration-200"
+            className="bg-white text-indigo-700 hover:bg-indigo-100 rounded-full p-2 shadow-md transition-colors duration-150"
           >
             <ChevronLeftIcon className="w-6 h-6" />
             <span className="sr-only">Previous testimonial</span>
@@ -142,7 +142,7 @@ export default function ModernTestimonials() {
             onClick={() => { handleNext(); setIsPaused(true); }}
             onMouseEnter={() => setIsPaused(true)}
             onMouseLeave={() => setIsPaused(false)}
-            className="bg-white text-indigo-700 hover:bg-indigo-100 rounded-full p-2 shadow-md transition-colors duration-200"
+            className="bg-white text-indigo-700 hover:bg-indigo-100 rounded-full p-2 shadow-md transition-colors duration-150"
           >
             <ChevronRightIcon className="w-6 h-6" />
             <span className="sr-only">Next testimonial</span>
@@ -156,7 +156,7 @@ export default function ModernTestimonials() {
             onClick={() => setCurrentIndex(index)}
             className={`w-3 h-3 rounded-full ${
               index === currentIndex ? 'bg-indigo-700' : 'bg-indigo-300'
-            } transition-colors duration-200`}
+            } transition-colors duration-150`}
             aria-label={`Go to testimonial ${index + 1}`}
           />
         ))}
