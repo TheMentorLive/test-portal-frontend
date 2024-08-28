@@ -71,12 +71,13 @@ export default function Signup() {
     }
 
     const response = await dispatch(verifyOTP({ otp }));
-    if (response) {
+    console.log(response.payload,"otp data");
+    if (response.payload?.data.statusCode === 200) {
       setEmail('');
       setName('');
       setPassword('');
       setOTP('');
-      router.push('/Main/signin');
+      router.push('/dash-admin/tests');
     } else {
       toast.error("Invalid OTP. Please try again.");
     }
@@ -113,6 +114,11 @@ export default function Signup() {
                   <Link href="/Main/signin" className="text-primary hover:underline" prefetch={false}>
                     Sign in
                   </Link>
+                </p>
+                <p className="text-gray-600 text-sm sm:text-base text-center mt-2">
+                      <Link href="/Main/verifyotp" className="text-primary hover:underline">
+                        Go to Verify OTP
+                      </Link>
                 </p>
               </div>
               {!showOTP ? (

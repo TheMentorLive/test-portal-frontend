@@ -84,14 +84,30 @@ export const verifyOTP = createAsyncThunk('/auth/verifyOTP', async (data, { reje
     toast.promise(response, {
       loading: 'Verifying your account...',
       success: 'Account verified successfully!',
-      error: 'Failed to verify account'
+      error: 'OTP is invalid'
     });
-    return true;
+    return (await response);
   } catch (e) {
     toast.error(e?.response?.data?.message || 'An error occurred');
     return rejectWithValue(e?.response?.data || 'An error occurred');
   }
 });
+
+export const resendOTP = createAsyncThunk('/auth/resendOTP', async (data, { rejectWithValue }) => {
+  try {
+    const response = axiosInstance.post("/users/resend-otp", data);
+    toast.promise(response, {
+      loading: 'Resending OTP...',
+      success: 'OTP resent successfully!',
+      error: 'Failed to resend OTP'
+    });
+    return (await response);
+  } catch (e) {
+    toast.error(e?.response?.data?.message || 'An error occurred');
+    return rejectWithValue(e?.response?.data || 'An error occurred');
+  }
+});
+
 
 
 export const updatePassword = createAsyncThunk('/auth/updatePassword', async (data, { rejectWithValue }) => {
@@ -209,6 +225,18 @@ const authSlice = createSlice({
       })
       .addCase(createAccount.fulfilled, (state, action) => {
         
+      })
+      .addCase(verifyOTP.fulfilled, (state, action) => {
+        if(typeof window !== 'undefined'){
+          localStorage.setItem('isLoggedIn',true);
+          console.log("role is",action.payload.data.data?.user?.role);
+          console.log("data is",action.payload.data.data?.user);
+          localStorage.setItem('role',action.payload.data.data?.user?.role);
+          localStorage.setItem('data',JSON.stringify(action.payload.data.data?.user));
+        }
+        state.isLoggedIn = true;
+        state.role = action.payload.data?.user?.role || "";
+        state.data = action.payload.data?.user || {};
       })
   }
 });
