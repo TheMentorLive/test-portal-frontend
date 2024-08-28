@@ -8,116 +8,71 @@ export default function Footer() {
       initial={{ opacity: 0, y: 50 }} 
       animate={{ opacity: 1, y: 0 }} 
       transition={{ duration: 0.5 }} 
-      style={{ fontFamily: 'Inter, sans-serif' }} 
-      className='align-middle border-t border-gray-500 justify-center'
+      className='align-middle border-t border-gray-500 justify-center font-sans'
     >
       <footer className="bg-[#fcfcfe] text-black py-6 px-4 sm:px-6 md:px-10">
-        <div className="container mx-auto grid grid-cols-1 ml-10 sm:grid-cols-2 md:grid-cols-4 gap-6 md:gap-8">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }} 
-            animate={{ opacity: 1, y: 0 }} 
-            transition={{ duration: 0.5, delay: 0.1 }} 
-            className="flex flex-col items-center space-y-6"
-          >
-            <Link href="/" className="flex items-center" prefetch={false}>
-              <Image
-                src="/logo.png"
-                alt="Company Logo"
-                width={150}
-                height={150}
-                className="mx-2"
-                href="/"
-              />
-            </Link>
-            <div className="flex space-x-4">
+        <div className="container mx-auto">
+          <div className="flex flex-col items-center mb-8">
+            <motion.div
+              initial={{ opacity: 0, y: 20 }} 
+              animate={{ opacity: 1, y: 0 }} 
+              transition={{ duration: 0.5, delay: 0.1 }} 
+              className="mb-6"
+            >
+              <Link href="/" className="flex items-center" prefetch={false}>
+                <Image
+                  src="/logo.png"
+                  alt="GenAI Learning Logo"
+                  width={150}
+                  height={150}
+                  className="mx-2"
+                />
+              </Link>
+            </motion.div>
+            <motion.div
+              initial={{ opacity: 0, y: 20 }} 
+              animate={{ opacity: 1, y: 0 }} 
+              transition={{ duration: 0.5, delay: 0.2 }} 
+              className="flex space-x-4"
+            >
+              {[FacebookIcon, TwitterIcon, InstagramIcon, LinkedinIcon].map((Icon, index) => (
+                <motion.div
+                  key={index}
+                  whileHover={{ scale: 1.1 }} 
+                  transition={{ type: "spring", stiffness: 300 }}
+                >
+                  <Link href="#" prefetch={false}>
+                    <Icon className="h-6 w-6 text-black hover:text-blue-600 transition-colors" />
+                  </Link>
+                </motion.div>
+              ))}
+            </motion.div>
+          </div>
+          <div className="grid grid-cols-2 sm:grid-cols-3 gap-8 ml-5">
+            {[
+              { title: "Company", links: ["About us", "Our team", "Careers"] },
+              { title: "Help", links: ["Support", "FAQs", "Contact us"] },
+              { title: "Explore", links: ["Services", "Products", "Blog"] }
+            ].map((section, index) => (
               <motion.div
-                whileHover={{ scale: 1.1 }} 
-                transition={{ type: "spring", stiffness: 300 }}
+                key={section.title}
+                initial={{ opacity: 0, y: 20 }} 
+                animate={{ opacity: 1, y: 0 }} 
+                transition={{ duration: 0.5, delay: 0.3 + (index * 0.1) }} 
+                className="flex flex-col space-y-2"
               >
-                <Link href="#" prefetch={false}>
-                  <FacebookIcon className="h-6 w-6 text-black hover:text-blue-600 transition-colors" />
-                </Link>
+                <h3 className="font-bold text-lg">{section.title}</h3>
+                {section.links.map((link) => (
+                  <Link key={link} href="#" className="text-gray-900 hover:text-black transition-colors" prefetch={false}>
+                    {link}
+                  </Link>
+                ))}
               </motion.div>
-              <motion.div
-                whileHover={{ scale: 1.1 }} 
-                transition={{ type: "spring", stiffness: 300 }}
-              >
-                <Link href="#" prefetch={false}>
-                  <TwitterIcon className="h-6 w-6 text-black hover:text-blue-400 transition-colors" />
-                </Link>
-              </motion.div>
-              <motion.div
-                whileHover={{ scale: 1.1 }} 
-                transition={{ type: "spring", stiffness: 300 }}
-              >
-                <Link href="#" prefetch={false}>
-                  <InstagramIcon className="h-6 w-6 text-black hover:text-pink-600 transition-colors" />
-                </Link>
-              </motion.div>
-              <motion.div
-                whileHover={{ scale: 1.1 }} 
-                transition={{ type: "spring", stiffness: 300 }}
-              >
-                <Link href="#" prefetch={false}>
-                  <LinkedinIcon className="h-6 w-6 text-black hover:text-blue-800 transition-colors" />
-                </Link>
-              </motion.div>
-            </div>
-          </motion.div>
-          <motion.div
-            initial={{ opacity: 0, x: -20 }} 
-            animate={{ opacity: 1, x: 0 }} 
-            transition={{ duration: 0.5, delay: 0.2 }} 
-            className="flex flex-col space-y-2"
-          >
-            <h3 className="font-bold text-lg">Company</h3>
-            <Link href="#" className="text-gray-900 hover:text-black transition-colors" prefetch={false}>
-              About us
-            </Link>
-            <Link href="#" className="text-gray-900 hover:text-black transition-colors" prefetch={false}>
-              Our team
-            </Link>
-            <Link href="#" className="text-gray-900 hover:text-black transition-colors" prefetch={false}>
-              Careers
-            </Link>
-          </motion.div>
-          <motion.div
-            initial={{ opacity: 0, x: -20 }} 
-            animate={{ opacity: 1, x: 0 }} 
-            transition={{ duration: 0.5, delay: 0.3 }} 
-            className="flex flex-col space-y-2"
-          >
-            <h3 className="font-bold text-lg">Help</h3>
-            <Link href="#" className="text-gray-900 hover:text-black transition-colors" prefetch={false}>
-              Support
-            </Link>
-            <Link href="#" className="text-gray-900 hover:text-black transition-colors" prefetch={false}>
-              FAQs
-            </Link>
-            <Link href="#" className="text-gray-900 hover:text-black transition-colors" prefetch={false}>
-              Contact us
-            </Link>
-          </motion.div>
-          <motion.div
-            initial={{ opacity: 0, x: 20 }} 
-            animate={{ opacity: 1, x: 0 }} 
-            transition={{ duration: 0.5, delay: 0.4 }} 
-            className="flex flex-col space-y-2"
-          >
-            <h3 className="font-bold text-lg">Explore</h3>
-            <Link href="#" className="text-gray-900 hover:text-black transition-colors" prefetch={false}>
-              Services
-            </Link>
-            <Link href="#" className="text-gray-900 hover:text-black transition-colors" prefetch={false}>
-              Products
-            </Link>
-            <Link href="#" className="text-gray-900 hover:text-black transition-colors" prefetch={false}>
-              Blog
-            </Link>
-          </motion.div>
+            ))}
+          </div>
         </div>
-        <div className="text-center mt-6">
-          <p className="text-sm text-gray-700">{`\u00A9 2024 Your Company. All rights reserved.`}</p>
+        <div className="text-center mt-8">
+          <p className="text-sm text-gray-700">{`© ${new Date().getFullYear()} GenAI Learning. All rights reserved.`}</p>
         </div>
       </footer>
     </motion.div>
