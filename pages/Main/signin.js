@@ -81,11 +81,7 @@ export default function Component() {
                   Create one
                 </Link>
               </p>
-              <p className="text-gray-600 text-sm sm:text-base text-center mt-2">
-                      <Link href="/Main/verifyotp" className="text-primary hover:underline">
-                        Go to Verify OTP
-                      </Link>
-                </p>
+              
             </div>
             <form className="space-y-4" onSubmit={handleSubmit}>
               <div className="space-y-2">
@@ -147,6 +143,11 @@ export default function Component() {
                 <span>LinkedIn</span>
               </Button>
             </div>
+            <p className="text-gray-600 text-sm sm:text-base text-center mt-2">
+                      <Link href="/Main/verifyotp" className="text-primary hover:underline">
+                        Go to Verify OTP
+                      </Link>
+                </p>
           </div>
           <div className="hidden md:block w-1/2 relative">
             <Image

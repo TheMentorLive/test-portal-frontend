@@ -115,11 +115,7 @@ export default function Signup() {
                     Sign in
                   </Link>
                 </p>
-                <p className="text-gray-600 text-sm sm:text-base text-center mt-2">
-                      <Link href="/Main/verifyotp" className="text-primary hover:underline">
-                        Go to Verify OTP
-                      </Link>
-                </p>
+               
               </div>
               {!showOTP ? (
                 <form className="space-y-4" onSubmit={handleRegister} noValidate>
@@ -219,6 +215,11 @@ export default function Signup() {
                       <span>LinkedIn</span>
                     </Button>
                   </div>
+                  <p className="text-gray-600 text-sm sm:text-base text-center mt-2">
+                      <Link href="/Main/verifyotp" className="text-primary hover:underline">
+                        Go to Verify OTP
+                      </Link>
+                </p>
                 </>
               )}
             </div>

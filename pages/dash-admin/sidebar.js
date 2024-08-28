@@ -42,6 +42,7 @@ function Sidebar({ handleLinkClick, sidebarOpen, toggleSidebar }) {
   ];
 
   const commonLinks = [
+    { href: "/dash-admin/Dash-User", icon: <HomeIcon className="ml-4 h-5 w-5" />, label: "Dashboard", section: "Dashboard" },
     { href: "/dash-admin/tests", icon: <FilePenIcon className="ml-4 h-5 w-5" />, label: "Quiz", section: "Quiz" },
     { href: "/dash-admin/results", icon: <LineChartIcon className="ml-4 h-5 w-5" />, label: "Results", section: "Results" }
   ];

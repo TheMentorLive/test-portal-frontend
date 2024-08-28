@@ -9,6 +9,7 @@ import toast from "react-hot-toast";
 import { Loader2, CheckCircle2 } from 'lucide-react'
 import Layout from './layout'
 import { useDispatch } from 'react-redux'
+import Head from 'next/head'
 import { verifyOTP, resendOTP } from '@/redux/slices/authSlice'
 
 export default function OtpVerificationForm() {
@@ -68,6 +69,9 @@ export default function OtpVerificationForm() {
 
   return (
     <Layout>
+      <Head>
+        <title>Verify OTP</title>
+      </Head>
       <div className="flex items-center justify-center min-h-screen bg-gray-100">
         <div className="w-full max-w-md p-6 bg-white rounded-md shadow-md">
           <h2 className="text-2xl font-semibold text-center text-gray-700">OTP Verification</h2>
