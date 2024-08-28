@@ -113,11 +113,11 @@ export default function Hero() {
                 Explore Courses
               </Link>
               <Link
-                href="#"
+                href="/Main/signup"
                 className="inline-flex h-10 items-center justify-center rounded-md border border-input bg-background px-8 text-sm font-medium shadow-sm transition-colors hover:bg-accent hover:text-accent-foreground focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50"
                 prefetch={false}
               >
-                Contact Us
+                Sign up
               </Link>
             </div>
           </div>
@@ -160,22 +160,23 @@ export default function Hero() {
             />
           </div>
           <Button 
-                    type="submit" 
-                    className="w-full bg-gradient-to-r from-blue-500  hover:from-blue-600 hover:to-purple-600 text-white transition-all duration-300 rounded-md py-2 text-base font-semibold shadow-md hover:shadow-lg" 
-                    disabled={isSubmitting}
-                  >
-                    {isSubmitting ? (
-                      <>
-                        <Loader2 className="mr-2 h-4 w-4 animate-spin" />
-                        Submitting...
-                      </>
-                    ) : (
-                      <>
-                        <Send className="mr-2 h-4 w-4" />
-                        Start Learning
-                      </>
-                    )}
-                  </Button>
+  type="submit" 
+  className="inline-flex h-12 animate-shimmer items-center justify-center rounded-md border border-slate-800 bg-black bg-gradient-to-r from-black via-[#376af7] to-black bg-[length:200%_100%] px-6 font-medium text-slate-100 transition-colors focus:outline-none focus:ring-2 focus:ring-slate-100 focus:ring-offset-2 focus:ring-offset-slate-100 w-full" 
+  disabled={isSubmitting}
+>
+  {isSubmitting ? (
+    <>
+      <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+      Submitting...
+    </>
+  ) : (
+    <>
+      <Send className="mr-2 h-4 w-4" />
+      Start Learning
+    </>
+  )}
+</Button>
+
         </form>
       </CardContent>
     </Card>
