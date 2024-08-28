@@ -22,7 +22,7 @@ export default function More() {
     },
     {
       text: "GenAi Learning.",
-      className: "text-blue-500 dark:text-blue-500 sm:text-5xl",
+      className: "text-blue-500 dark:text-blue-500 text-xl sm:text-5xl",
     },
   ];
   
